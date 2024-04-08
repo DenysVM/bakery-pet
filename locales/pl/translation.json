@@ -1,0 +1,11 @@
+{
+  "home": "Strona główna",
+  "products": "Produkty",
+  "account": "Konto",
+  "cart": "Koszyk",
+  "logout": "Wyloguj się",
+  "catalog": {
+    "title": "Katalog Produktów",
+    "description": "Zapoznaj się z naszym asortymentem artyzanalnych wypieków, wykonanych z miłością i dbałością o każdego klienta."
+  }
+}

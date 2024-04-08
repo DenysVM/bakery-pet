@@ -1,0 +1,11 @@
+{
+  "home": "Home",
+  "products": "Products",
+  "account": "Account",
+  "cart": "Cart",
+  "logout": "Logout",
+  "catalog": {
+    "title": "Product Catalog",
+    "description": "Discover our assortment of artisanal baked goods, made with love and care for every customer."
+  }
+}
