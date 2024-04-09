@@ -37,7 +37,7 @@ const Navigation = () => {
           onClick={onToggle}
         />
         <HStack spacing={8} alignItems={'center'}>
-          <Image src="/images/logo.png" alt={t('logo')} boxSize={{ base: "50px", md: "40px" }} objectFit="contain" />
+          <Image src={`${process.env.PUBLIC_URL}/images/logo.png`} alt={t('logo')} boxSize={{ base: "50px", md: "40px" }} objectFit="contain" />
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             <Text as={RouterLink} to="/">{t('home')}</Text>
             <Text as={RouterLink} to="/catalog">{t('products')}</Text>

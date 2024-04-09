@@ -11,7 +11,7 @@ const CatalogPage = () => {
       name: { en: "Sourdough Bread", ru: "Хлеб на закваске", uk: "Хліб на заквасці", pl: "Chleb na zakwasie" },
       description: { en: "Artisan sourdough bread.", ru: "Артизанский хлеб на закваске.", uk: "Артизанський хліб на заквасці.", pl: "Rzemieślniczy chleb na zakwasie." },
       price: 5.99,
-      imageUrl: "/images/bread.png"
+      imageUrl: `${process.env.PUBLIC_URL}/images/bread.png`
     },
     // Добавьте ещё продукты для демонстрации
   ];

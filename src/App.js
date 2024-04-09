@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider store={store}>
       <ChakraProvider>
-        <Router>
+        <Router basename="/bakery-pet">
           <Navigation />
           <Routes>
             <Route path="/" element={<HomePage />} />
