@@ -7,5 +7,9 @@
   "catalog": {
     "title": "Katalog Produktów",
     "description": "Zapoznaj się z naszym asortymentem artyzanalnych wypieków, wykonanych z miłością i dbałością o każdego klienta."
+  },
+  "story": {
+    "title": "Nasza Historia",
+    "description": "Nasza piekarnia została założona w 2010 roku z jedną prostą misją: dzielić się radością domowego pieczenia z każdym. Od tego czasu używamy tylko naturalnych składników i tradycyjnych metod przygotowania, aby każdy kawałek był wypełniony ciepłem i troską. Rozkoszuj się aromatem świeżego chleba, kolorowych ciastek i słodkich przysmaków, stworzonych z miłością przez naszych rzemieślników."
   }
 }

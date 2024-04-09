@@ -7,5 +7,9 @@
   "catalog": {
     "title": "Product Catalog",
     "description": "Discover our assortment of artisanal baked goods, made with love and care for every customer."
+  },
+  "story": {
+    "title": "Our Story",
+    "description": "Our bakery was founded in 2010 with one simple mission: to share the joy of homemade baking with everyone. Since then, we've been using only natural ingredients and traditional methods of preparation so that each piece was filled with warmth and care. Enjoy the aroma of fresh bread, colorful pastries, and sweet treats created with love by our craftsmen."
   }
 }
