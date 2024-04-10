@@ -1,12 +1,13 @@
 import React from 'react';
 import { VStack } from '@chakra-ui/react';
-import BakeryStory from '../components/Home/BakeryStory'; // Убедитесь, что путь к компоненту верный
-
+import BakeryStory from '../components/Home/BakeryStory'; 
+import Contacts from '../components/Home/Contacts';
 const HomePage = () => {
   return (
     <VStack spacing={8}>
       <BakeryStory />
-      {/* Здесь могут быть другие компоненты главной страницы */}
+      <Contacts />
+
     </VStack>
   );
 };

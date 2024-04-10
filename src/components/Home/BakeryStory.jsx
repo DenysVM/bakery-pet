@@ -9,8 +9,8 @@ const BakeryStory = () => {
 
   return (
     <Box bg={bgColor} p={5} borderRadius="lg" boxShadow="lg">
-      <Heading mb={4} color={textColor}>{t('story.title')}</Heading>
-      <Text color={textColor}>{t('story.description')}</Text>
+      <Heading mb={4} color={textColor} textAlign="center"> {t('story.title')}</Heading>
+      <Text color={textColor} textAlign="justify">{t('story.description')}</Text>
     </Box>
   );
 };
