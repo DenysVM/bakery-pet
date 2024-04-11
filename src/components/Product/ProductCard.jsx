@@ -6,10 +6,11 @@ const ProductCard = ({ product }) => {
   const { t, i18n } = useTranslation();
   const bg = useColorModeValue('white', 'gray.800');
   const color = useColorModeValue('gray.800', 'white');
+  const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`; // Измененная строка
 
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" bg={bg} color={color}>
-      <Image src={product.imageUrl} alt={`Picture of ${product.name[i18n.language]}`} />
+      <Image src={imageUrl} alt={`Picture of ${product.name[i18n.language]}`} />
 
       <Box p="6">
         <Box d="flex" alignItems="baseline">
