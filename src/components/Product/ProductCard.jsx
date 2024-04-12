@@ -1,30 +1,37 @@
 import React from 'react';
-import { Box, Image, Text, Button, useColorModeValue } from '@chakra-ui/react';
+import { Box, Image, Text, Button, useColorModeValue, useDisclosure, Flex } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import ProductModal from '../common/Modal/ProductModal';
 
 const ProductCard = ({ product }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t, i18n } = useTranslation();
   const bg = useColorModeValue('white', 'gray.800');
   const color = useColorModeValue('gray.800', 'white');
-  const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`; // Измененная строка
+  const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`;
 
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" bg={bg} color={color}>
-      <Image src={imageUrl} alt={`Picture of ${product.name[i18n.language]}`} />
-
-      <Box p="6">
-        <Box d="flex" alignItems="baseline">
-          <Text fontWeight="semibold" letterSpacing="wide" fontSize="xs" textTransform="uppercase">
-            {t('price')}: ${product.price}
-          </Text>
+    <>
+      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" bg={bg} color={color}>
+        <Image src={imageUrl} alt={t(`Picture of ${product.name[i18n.language]}`)} />
+        <Box p="3">
+          <Box display="flex" alignItems="baseline">
+            <Text fontWeight="semibold" letterSpacing="wide">
+              {t('price')}: ${product.price}
+            </Text>
+          </Box>
+          <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+            {product.name[i18n.language]}
+          </Box>
+          <Text mt="2">{product.description[i18n.language]}</Text>
+          <Flex justifyContent="space-between">
+          <Button mt="4" colorScheme="teal">{t('addToCart')}</Button>
+          <Button mt="4" colorScheme="teal" onClick={onOpen}>{t('details')}</Button>
+          </Flex>
         </Box>
-        <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-          {product.name[i18n.language]}
-        </Box>
-        <Text mt="2">{product.description[i18n.language]}</Text>
-        <Button mt="4" colorScheme="teal">{t('addToCart')}</Button>
       </Box>
-    </Box>
+      <ProductModal isOpen={isOpen} product={product} onClose={onClose} />
+    </>
   );
 };
 

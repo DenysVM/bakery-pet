@@ -18,5 +18,13 @@
   "phone": "Phone",
   "email": "Email"
 },
-"addToCart": "Add to Cart"
+  "addToCart": "Add to Cart",
+  "details": "Product Details",
+  "composition": "Composition",
+  "calories": "Calories",
+  "carbohydrates": "Carbohydrates",
+  "protein": "Protein",
+  "fat": "Fat",
+  "price": "Price",
+  "close": "Close"
 }
