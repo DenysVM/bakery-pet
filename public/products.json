@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "category": "bread", 
     "name": { "en": "Sourdough Bread", "ru": "Хлеб на закваске", "uk": "Хліб на заквасці", "pl": "Chleb na zakwasie" },
     "description": { "en": "Artisan sourdough bread.", "ru": "Артизанский хлеб на закваске.", "uk": "Артизанський хліб на заквасці.", "pl": "Rzemieślniczy chleb na zakwasie." },
     "composition": { "en": "Flour, water, salt.", "ru": "Мука, вода, соль.", "uk": "Борошно, вода, сіль.", "pl": "Mąka, woda, sól." },

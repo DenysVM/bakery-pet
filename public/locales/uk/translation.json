@@ -26,5 +26,27 @@
   "protein": "Білки",
   "fat": "Жири",
   "price": "Ціна",
-  "close": "Зачинити"
+  "close": "Зачинити",
+
+  "filters": {
+  "priceRange": "Ціновий діапазон",
+  "minPrice": "Мін. ціна",
+  "maxPrice": "Макс. ціна",
+  "calorieRange": "Калорійність",
+  "minCalories": "Мін. калор.",
+  "maxCalories": "Макс. калор.",
+  "category": "Категорія",
+  "all": "Всі",
+  "bread": "Хліб",
+  "pastry": "Випічка",
+  "cake": "Торт",
+  "resetFilters": "Скинути фільтри"
+},
+
+  "sort": {
+    "sortBy": "Сортувати за",
+    "selectOption": "Оберіть опцію",
+    "price": "Ціна",
+    "calories": "Калорії"
+  }
 }

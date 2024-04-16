@@ -26,5 +26,28 @@
   "protein": "Protein",
   "fat": "Fat",
   "price": "Price",
-  "close": "Close"
+  "close": "Close",
+
+  "filters": {
+    "priceRange": "Price Range",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "calorieRange": "Calorie Range",
+    "minCalories": "Min Calories",
+    "maxCalories": "Max Calories",
+    "category": "Category",
+    "all": "All",
+    "bread": "Bread",
+    "pastry": "Pastry",
+    "cake": "Cake",
+    "resetFilters": "Reset Filters"
+  },
+
+    "sort": {
+    "sortBy": "Sort By",
+    "selectOption": "Select option",
+    "price": "Price",
+    "calories": "Calories"
+  }
+
 }
