@@ -18,5 +18,35 @@
   "phone": "Телефон",
   "email": "Електронна пошта"
 },
-"addToCart": "Додати до кошика"
+  "addToCart": "Додати до кошика",
+  "details": "Деталі продукту",
+  "composition": "Склад",
+  "calories": "Калорії",
+  "carbohydrates": "Вуглеводи",
+  "protein": "Білки",
+  "fat": "Жири",
+  "price": "Ціна",
+  "close": "Зачинити",
+
+  "filters": {
+  "priceRange": "Ціновий діапазон",
+  "minPrice": "Мін. ціна",
+  "maxPrice": "Макс. ціна",
+  "calorieRange": "Калорійність",
+  "minCalories": "Мін. калор.",
+  "maxCalories": "Макс. калор.",
+  "category": "Категорія",
+  "all": "Всі",
+  "bread": "Хліб",
+  "pastry": "Випічка",
+  "cake": "Торт",
+  "resetFilters": "Скинути фільтри"
+},
+
+  "sort": {
+    "sortBy": "Сортувати за",
+    "selectOption": "Оберіть опцію",
+    "price": "Ціна",
+    "calories": "Калорії"
+  }
 }

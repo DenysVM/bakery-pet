@@ -18,5 +18,36 @@
   "phone": "Telefon",
   "email": "E-mail"
 },
-"addToCart": "Dodaj do koszyka"
+  "addToCart": "Dodaj do koszyka",
+  "details": "Szczegóły produktu",
+  "composition": "Skład",
+  "calories": "Kalorie",
+  "carbohydrates": "Węglowodany",
+  "protein": "Białka",
+  "fat": "Tłuszcze",
+  "price": "Cena",
+  "close": "Zamknij",
+
+  "filters": {
+  "priceRange": "Zakres cenowy",
+  "minPrice": "Cena min.",
+  "maxPrice": "Cena maks.",
+  "calorieRange": "Zakres kaloryczności",
+  "minCalories": "Kalorie min.",
+  "maxCalories": "Kalorie maks.",
+  "category": "Kategoria",
+  "all": "Wszystkie",
+  "bread": "Chleb",
+  "pastry": "Ciastka",
+  "cake": "Ciasto",
+  "resetFilters": "Resetuj filtry"
+},
+
+  "sort": {
+    "sortBy": "Sortuj według",
+    "selectOption": "Wybierz opcję",
+    "price": "Cena",
+    "calories": "Kalorie"
+  }
+
 }

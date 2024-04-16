@@ -18,5 +18,37 @@
   "phone": "Телефон",
   "email": "Электронная почта"
 },
-"addToCart": "Добавить в корзину"
+  "addToCart": "Добавить в корзину",
+
+  "details": "Детали продукта",
+  "composition": "Состав",
+  "calories": "Калории",
+  "carbohydrates": "Углеводы",
+  "protein": "Белки",
+  "fat": "Жиры",
+  "price": "Цена",
+  "close": "Закрыть",
+
+  "filters": {
+    "priceRange": "Ценовой диапазон",
+    "minPrice": "Мин. цена",
+    "maxPrice": "Макс. цена",
+    "calorieRange": "Калорийность",
+    "minCalories": "Мин. калор.",
+    "maxCalories": "Макс. калор.",
+    "category": "Категория",
+    "all": "Все",
+    "bread": "Хлеб",
+    "pastry": "Выпечка",
+    "cake": "Торт",
+    "resetFilters": "Сбросить фильтры"
+},
+
+  "sort": {
+    "sortBy": "Сортировать по",
+    "selectOption": "Выберите опцию",
+    "price": "Цена",
+    "calories": "Калории"
+  }
+  
 }
