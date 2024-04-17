@@ -7,6 +7,12 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortCriteria, setSortCriteria] = useState('');
+  const [filterParams, setFilterParams] = useState({
+    minPrice: null,
+    maxPrice: null,
+    minCalories: null,
+    maxCalories: null,
+  });
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/products.json`)
@@ -21,25 +27,27 @@ const Catalog = () => {
   const handleFiltersChange = ({ type, value }) => {
     if (type === 'reset') {
       setFilteredProducts(products);
-      setSortCriteria(''); 
+      setSortCriteria('');
+      setFilterParams({
+        minPrice: null,
+        maxPrice: null,
+        minCalories: null,
+        maxCalories: null,
+      });
       return;
     }
 
+    const newFilterParams = { ...filterParams, [type]: Number(value) || null };
+    setFilterParams(newFilterParams);
+
     let updatedFilteredProducts = products.filter(product => {
-      switch (type) {
-        case 'minPrice':
-          return product.price >= Number(value);
-        case 'maxPrice':
-          return product.price <= Number(value);
-        case 'minCalories':
-          return product.calories >= Number(value);
-        case 'maxCalories':
-          return product.calories <= Number(value);
-        case 'category':
-          return value === '' || product.category === value;
-        default:
-          return true;
-      }
+      return (
+        (!newFilterParams.minPrice || product.price >= newFilterParams.minPrice) &&
+        (!newFilterParams.maxPrice || product.price <= newFilterParams.maxPrice) &&
+        (!newFilterParams.minCalories || product.calories >= newFilterParams.minCalories) &&
+        (!newFilterParams.maxCalories || product.calories <= newFilterParams.maxCalories) &&
+        (type !== 'category' || value === '' || product.category === value)
+      );
     });
 
     if (sortCriteria) {

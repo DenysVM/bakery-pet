@@ -25,8 +25,12 @@ const ProductCard = ({ product }) => {
           </Box>
           <Text mt="2">{product.description[i18n.language]}</Text>
           <Flex justifyContent="space-between">
-          <Button mt="4" colorScheme="teal">{t('addToCart')}</Button>
-          <Button mt="4" colorScheme="teal" onClick={onOpen}>{t('details')}</Button>
+          <Button mt="4" colorScheme="teal"><Text fontSize="sm" isTruncated>
+        {t('addToCart')}
+      </Text></Button>
+          <Button mt="4" colorScheme="teal" onClick={onOpen}> <Text fontSize="sm" isTruncated>
+        {t('details')}
+      </Text></Button>
           </Flex>
         </Box>
       </Box>

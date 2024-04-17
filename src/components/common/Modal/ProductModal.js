@@ -17,12 +17,9 @@ function ProductModal({ isOpen, product, onClose }) {
                 <ModalCloseButton />
                 <ModalBody ref={modalRef}>
                     <Image src={`${process.env.PUBLIC_URL}${product.imageUrl}`} alt={t(`Picture of ${product.name[i18n.language]}`)} mb="4" />
-                    {/* Подробности продукта */}
                     <Text mb="2">{t('price')}: ${product.price}</Text>
-                    {/* Дополнительная информация, например, состав */}
                     <Text>{t('composition')}: {product.composition[i18n.language]}</Text>
                     <Text>{t('calories')}: {product.calories} kcal</Text>
-                    {/* Другие поля... */}
                 </ModalBody>
             </ModalContent>
         </Modal>,
