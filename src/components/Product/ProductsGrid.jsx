@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 
 const ProductsGrid = ({ products }) => {
   return (
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing="40px">
+    <SimpleGrid columns={{ base: 1, md: 3 }} spacing="40px" justifyItems="center">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

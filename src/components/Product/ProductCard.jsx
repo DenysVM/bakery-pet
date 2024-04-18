@@ -1,14 +1,20 @@
 import React from 'react';
-import { Box, Image, Text, Button, useColorModeValue, useDisclosure, Flex } from '@chakra-ui/react';
+import { Box, Image, Text, Button, useColorModeValue, useDisclosure, Flex, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import ProductModal from '../common/Modal/ProductModal';
+import BottomSheet from '../common/BottomSheet/BottomSheet'; 
 
 const ProductCard = ({ product }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { t, i18n } = useTranslation();
   const bg = useColorModeValue('white', 'gray.800');
   const color = useColorModeValue('gray.800', 'white');
   const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`;
+
+  const handleModalOpening = () => {
+    onOpen();
+  };
 
   return (
     <>
@@ -25,16 +31,16 @@ const ProductCard = ({ product }) => {
           </Box>
           <Text mt="2">{product.description[i18n.language]}</Text>
           <Flex justifyContent="space-between">
-          <Button mt="4" colorScheme="teal"><Text fontSize="sm" isTruncated>
-        {t('addToCart')}
-      </Text></Button>
-          <Button mt="4" colorScheme="teal" onClick={onOpen}> <Text fontSize="sm" isTruncated>
-        {t('details')}
-      </Text></Button>
+            <Button mt="4" colorScheme="teal">{t('addToCart')}</Button>
+            <Button mt="4" colorScheme="teal" onClick={handleModalOpening}>{t('details')}</Button>
           </Flex>
         </Box>
       </Box>
-      <ProductModal isOpen={isOpen} product={product} onClose={onClose} />
+      {isLargerThan768 ? (
+        <ProductModal isOpen={isOpen} product={product} onClose={onClose} />
+      ) : (
+        <BottomSheet isOpen={isOpen} product={product} onClose={onClose} />
+      )}
     </>
   );
 };
