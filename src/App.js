@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { store } from './store/store';
@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider store={store}>
       <ChakraProvider>
-        <Router basename="/bakery-pet">
+        <Router>
           <Navigation />
           <Routes>
             <Route path="/" element={<HomePage />} />
