@@ -16,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import useOutsideClick from '../hooks/useOutsideClick';
 import LanguageSelector from './LanguageSelector';
 import UserSection from './UserSection';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 const Navigation = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -26,23 +26,26 @@ const Navigation = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation(); 
 
+  const logoImage = colorMode === 'light' ? '/images/logo/logo-light.png' : '/images/logo/logo-dark.png';
+
   return (
     <Box ref={menuRef} px={4} bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} color={colorMode === 'light' ? 'gray.600' : 'white'}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
           size={'md'}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label={t('openMenu')} 
+          aria-label={t('openMenu')}
           display={{ md: 'none' }}
           onClick={onToggle}
         />
         <HStack spacing={8} alignItems={'center'}>
-          <Image src={`${process.env.PUBLIC_URL}/images/logo.png`} alt={t('logo')} boxSize={{ base: "50px", md: "40px" }} objectFit="contain" />
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             <Text as={RouterLink} to="/">{t('home')}</Text>
             <Text as={RouterLink} to="/catalog">{t('products')}</Text>
           </HStack>
         </HStack>
+        <Image src={`${process.env.PUBLIC_URL}${logoImage}`} alt={t('logo')} boxSize={{ base: "200px", md: "275px" }} objectFit="contain" />
+
         <Flex alignItems={'center'}>
           <IconButton icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} isRound='true' onClick={toggleColorMode} mr={4} />
           <LanguageSelector />
@@ -55,7 +58,7 @@ const Navigation = () => {
           <Stack as={'nav'} spacing={4}>
             <Text as={RouterLink} to="/">{t('home')}</Text>
             <Text as={RouterLink} to="/catalog">{t('products')}</Text>
-           {isMobile && <UserSection />}
+            {isMobile && <UserSection />}
           </Stack>
         </Box>
       )}
