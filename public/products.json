@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "category": "bread", 
+    "category": "bread",
     "name": { "en": "Sourdough Bread", "ru": "Хлеб на закваске", "uk": "Хліб на заквасці", "pl": "Chleb na zakwasie" },
     "description": { "en": "Artisan sourdough bread.", "ru": "Артизанский хлеб на закваске.", "uk": "Артизанський хліб на заквасці.", "pl": "Rzemieślniczy chleb na zakwasie." },
     "composition": { "en": "Flour, water, salt.", "ru": "Мука, вода, соль.", "uk": "Борошно, вода, сіль.", "pl": "Mąka, woda, sól." },
@@ -11,6 +11,7 @@
   },
   {
     "id": 2,
+    "category": "cake",
     "name": { "en": "Chocolate Cake", "ru": "Шоколадный торт", "uk": "Шоколадний торт", "pl": "Tort czekoladowy" },
     "description": { "en": "Rich chocolate layered cake.", "ru": "Насыщенный шоколадный торт.", "uk": "Насичений шоколадний торт.", "pl": "Bogaty tort czekoladowy." },
     "composition": { "en": "Chocolate, flour, sugar, eggs.", "ru": "Шоколад, мука, сахар, яйца.", "uk": "Шоколад, борошно, цукор, яйця.", "pl": "Czekolada, mąka, cukier, jajka." },
@@ -20,6 +21,7 @@
   },
   {
     "id": 3,
+    "category": "pastry",
     "name": { "en": "Croissant", "ru": "Круассан", "uk": "Круасан", "pl": "Rogalik" },
     "description": { "en": "Buttery flaky pastry.", "ru": "Слоеное масляное тесто.", "uk": "Листкове масляне тісто.", "pl": "Maślane, kruche ciasto." },
     "composition": { "en": "Flour, butter, yeast, milk.", "ru": "Мука, масло, дрожжи, молоко.", "uk": "Борошно, масло, дріжджі, молоко.", "pl": "Mąka, masło, drożdże, mleko." },
@@ -29,6 +31,7 @@
   },
   {
     "id": 4,
+    "category": "bread",
     "name": { "en": "Bagel", "ru": "Бублик", "uk": "Бейгл", "pl": "Bajgiel" },
     "description": { "en": "Classic New York-style bagel.", "ru": "Классический бублик по-нью-йоркски.", "uk": "Класичний бейгл по-нью-йоркськи.", "pl": "Klasyczny bajgiel w stylu nowojorskim." },
     "composition": { "en": "Flour, water, yeast, malt.", "ru": "Мука, вода, дрожжи, солод.", "uk": "Борошно, вода, дріжджі, солод.", "pl": "Mąka, woda, drożdże, słód." },
@@ -38,6 +41,7 @@
   },
   {
     "id": 5,
+    "category": "pastry",
     "name": { "en": "Apple Pie", "ru": "Яблочный пирог", "uk": "Яблучний пиріг", "pl": "Szarlotka" },
     "description": { "en": "Homemade apple pie with cinnamon.", "ru": "Домашний яблочный пирог с корицей.", "uk": "Домашній яблучний пиріг з корицею.", "pl": "Domowa szarlotka z cynamonem." },
     "composition": { "en": "Apples, flour, butter, sugar, cinnamon.", "ru": "Яблоки, мука, масло, сахар, корица.", "uk": "Яблука, борошно, масло, цукор, кориця.", "pl": "Jabłka, mąka, masło, cukier, cynamon." },
@@ -47,6 +51,7 @@
   },
   {
     "id": 6,
+    "category": "cake",
     "name": { "en": "Cheese Cake", "ru": "Чизкейк", "uk": "Чізкейк", "pl": "Sernik" },
     "description": { "en": "Creamy cheesecake with a graham cracker crust.", "ru": "Кремовый чизкейк с коркой из печенья грэм.", "uk": "Кремовий чізкейк з коржем з печива греєм.", "pl": "Kremowy sernik z kruchym spodem." },
     "composition": { "en": "Cream cheese, sugar, eggs, graham crackers.", "ru": "Крем-сыр, сахар, яйца, печенье грэм.", "uk": "Крем-сир, цукор, яйця, печиво греєм.", "pl": "Ser kremowy, cukier, jajka, herbatniki graham." },
@@ -56,6 +61,7 @@
   },
   {
     "id": 7,
+    "category": "pastry",
     "name": { "en": "Cupcake", "ru": "Капкейк", "uk": "Капкейк", "pl": "Babeczka" },
     "description": { "en": "Sweet and fluffy cupcake.", "ru": "Сладкий и пышный капкейк.", "uk": "Солодкий і пухкий капкейк.", "pl": "Słodka i puszysta babeczka." },
     "composition": { "en": "Flour, sugar, butter, eggs, frosting.", "ru": "Мука, сахар, масло, яйца, крем.", "uk": "Борошно, цукор, масло, яйця, крем.", "pl": "Mąka, cukier, masło, jajka, lukier." },
@@ -65,6 +71,7 @@
   },
   {
     "id": 8,
+    "category": "pastry",
     "name": { "en": "Macaron", "ru": "Макарон", "uk": "Макарон", "pl": "Makaron" },
     "description": { "en": "Colorful and delicate French macarons.", "ru": "Яркие и нежные французские макароны.", "uk": "Яскраві та ніжні французькі макарони.", "pl": "Kolorowe i delikatne francuskie makaroniki." },
     "composition": { "en": "Almond flour, sugar, eggs, filling.", "ru": "Миндальная мука, сахар, яйца, начинка.", "uk": "Мигдальне борошно, цукор, яйця, начинка.", "pl": "Mąka migdałowa, cukier, jajka, nadzienie." },
@@ -74,6 +81,7 @@
   },
   {
     "id": 9,
+    "category": "pastry",
     "name": { "en": "Muffin", "ru": "Маффин", "uk": "Мафін", "pl": "Muffinka" },
     "description": { "en": "Blueberry muffin with crumble topping.", "ru": "Маффин с черникой и хрустящей корочкой.", "uk": "Мафін з чорницею та хрусткою скоринкою.", "pl": "Muffinka z borówkami i kruszonką." },
     "composition": { "en": "Flour, blueberries, sugar, butter, eggs.", "ru": "Мука, черника, сахар, масло, яйца.", "uk": "Борошно, чорниця, цукор, масло, яйця.", "pl": "Mąka, borówki, cukier, masło, jajka." },
@@ -83,6 +91,7 @@
   },
   {
     "id": 10,
+    "category": "pastry",
     "name": { "en": "Pumpkin Pie", "ru": "Тыквенный пирог", "uk": "Гарбузовий пиріг", "pl": "Ciasto dyniowe" },
     "description": { "en": "Seasonal pumpkin pie with spices.", "ru": "Сезонный тыквенный пирог со специями.", "uk": "Сезонний гарбузовий пиріг зі спеціями.", "pl": "Sezonowe ciasto dyniowe z przyprawami." },
     "composition": { "en": "Pumpkin, flour, butter, sugar, spices.", "ru": "Тыква, мука, масло, сахар, специи.", "uk": "Гарбуз, борошно, масло, цукор, спеції.", "pl": "Dynia, mąka, masło, cukier, przyprawy." },
