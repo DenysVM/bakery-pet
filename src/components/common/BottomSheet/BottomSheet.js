@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Box, Image, Text, Button, useColorModeValue } from '@chakra-ui/react';
+import { Box, Image, Text, useColorModeValue, CloseButton } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
@@ -41,7 +41,6 @@ function BottomSheet({ isOpen, product, onClose }) {
         transform: y.to(y => `translateY(${y}px)`),
         touchAction: 'none',
         position: 'fixed',
-        top: 'auto',
         left: '5px',
         right: '5px',
         bottom: 0,
@@ -67,12 +66,28 @@ function BottomSheet({ isOpen, product, onClose }) {
         borderTopRightRadius: '16px',
         boxShadow: '0px -2px 10px rgba(0, 0, 0, 0.4)',
         p: "6",
-        maxW: "500px",
+        maxW: "95vh",
         m: "auto",
-        minHeight: "95vh",
-        position: "relative"
+        position: "relative",
+        border: '0.1px solid',
+        borderBottom: "none",
+        borderColor: useColorModeValue('#A0AEC0', '#CBD5E0')
     };
 
+    const closeIconStyle = {
+        position: 'absolute',
+        right: '1rem',
+        top: '1rem',
+        zIndex: 1600,
+        borderRadius: '50%',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
+        backgroundColor: useColorModeValue('rgba(237, 242, 247, 0.8)', 'rgba(74, 85, 104, 0.8)'),
+        color: useColorModeValue('#A0AEC0', '#CBD5E0'), 
+        border: '1px solid',
+        borderColor: useColorModeValue('#A0AEC0', '#CBD5E0') 
+    };
+    
+      
     if (!isOpen || !product) return null;
 
     return ReactDOM.createPortal(
@@ -80,6 +95,7 @@ function BottomSheet({ isOpen, product, onClose }) {
             <div className="bottom-sheet-backdrop" onClick={onClose}></div>
             <animated.div className="bottom-sheet" ref={ref} {...bind()} style={bottomSheetStyle}>
                 <Box {...boxStyle}>
+                    <CloseButton style={closeIconStyle} onClick={onClose} />
                     <div style={gripIndicatorStyle}></div>
                     <Image src={`${process.env.PUBLIC_URL}${product.imageUrl}`} borderRadius="lg" alt={t(`Picture of ${product.name[i18n.language]}`)} />
                     <Text fontWeight="bold" mt="2">
@@ -89,7 +105,6 @@ function BottomSheet({ isOpen, product, onClose }) {
                     <Text mt="2">{t('price')}: ${product.price}</Text>
                     <Text>{t('composition')}: {product.composition[i18n.language]}</Text>
                     <Text>{t('calories')}: {product.calories} kcal</Text>
-                    <Button colorScheme="blue" mt="4" position="absolute" bottom="auto" right="1.5rem" onClick={onClose}>{t('close')}</Button>
                 </Box>
             </animated.div>
         </>,
