@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
     <>
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" bg={bg} color={color}>
         <Image src={imageUrl} alt={t(`Picture of ${product.name[i18n.language]}`)} />
-        <Box p="3">
+        <Box p="2">
           <Box display="flex" alignItems="baseline">
             <Text fontWeight="semibold" letterSpacing="wide">
               {t('price')}: ${product.price}
@@ -31,8 +31,8 @@ const ProductCard = ({ product }) => {
           </Box>
           <Text mt="2">{product.description[i18n.language]}</Text>
           <Flex justifyContent="space-between">
-            <Button mt="4" colorScheme="teal">{t('addToCart')}</Button>
-            <Button mt="4" colorScheme="teal" onClick={handleModalOpening}>{t('details')}</Button>
+            <Button mt="4" p="2" colorScheme="teal">{t('addToCart')}</Button>
+            <Button mt="4" p="2" colorScheme="teal" onClick={handleModalOpening}>{t('details')}</Button>
           </Flex>
         </Box>
       </Box>
