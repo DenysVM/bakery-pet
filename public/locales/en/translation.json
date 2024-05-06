@@ -48,6 +48,19 @@
     "selectOption": "Select option",
     "price": "Price",
     "calories": "Calories"
+  },
+  "user": {
+    "profile": "Profile",
+    "orders": "Orders",
+    "orderHistory": "Order History",
+    "saveChanges": "Save Changes",
+    "name": "Name",
+    "email": "Email",
+    "currentOrders": "Current Orders",
+    "deliveredOrders": "Delivered Orders",
+    "tabProfile": "Profile",
+    "tabOrders": "Orders",
+    "tabOrderHistory": "Order History"
   }
 
 }

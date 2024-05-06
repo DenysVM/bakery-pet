@@ -48,6 +48,18 @@
     "selectOption": "Wybierz opcję",
     "price": "Cena",
     "calories": "Kalorie"
+  },
+  "user": {
+    "profile": "Profil",
+    "orders": "Zamówienia",
+    "orderHistory": "Historia zamówień",
+    "saveChanges": "Zapisz zmiany",
+    "name": "Imię",
+    "email": "Email",
+    "currentOrders": "Bieżące zamówienia",
+    "deliveredOrders": "Dostarczone zamówienia",
+    "tabProfile": "Profil",
+    "tabOrders": "Zamówienia",
+    "tabOrderHistory": "Historia zamówień"
   }
-
 }
