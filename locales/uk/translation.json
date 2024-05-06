@@ -48,5 +48,18 @@
     "selectOption": "Оберіть опцію",
     "price": "Ціна",
     "calories": "Калорії"
+  },
+  "user": {
+    "profile": "Профіль",
+    "orders": "Замовлення",
+    "orderHistory": "Історія замовлень",
+    "saveChanges": "Зберегти зміни",
+    "name": "Ім'я",
+    "email": "Електронна пошта",
+    "currentOrders": "Поточні замовлення",
+    "deliveredOrders": "Доставлені замовлення",
+    "tabProfile": "Профіль",
+    "tabOrders": "Замовлення",
+    "tabOrderHistory": "Історія замовлень"
   }
 }

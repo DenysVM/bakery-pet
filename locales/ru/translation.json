@@ -49,6 +49,18 @@
     "selectOption": "Выберите опцию",
     "price": "Цена",
     "calories": "Калории"
+  },
+  "user": {
+    "profile": "Профиль",
+    "orders": "Заказы",
+    "orderHistory": "История заказов",
+    "saveChanges": "Сохранить изменения",
+    "name": "Имя",
+    "email": "Электронная почта",
+    "currentOrders": "Текущие заказы",
+    "deliveredOrders": "Доставленные заказы",
+    "tabProfile": "Профиль",
+    "tabOrders": "Заказы",
+    "tabOrderHistory": "История заказов"
   }
-  
 }
