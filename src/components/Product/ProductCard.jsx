@@ -2,7 +2,8 @@ import React from 'react';
 import { Box, Image, Text, Button, useColorModeValue, useDisclosure, Flex, useMediaQuery } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import ProductModal from '../common/Modal/ProductModal';
-import BottomSheet from '../common/BottomSheet/BottomSheet'; 
+import BottomSheet from '../common/BottomSheet/BottomSheet';
+import { useCart } from '../Cart';
 
 const ProductCard = ({ product }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -11,6 +12,11 @@ const ProductCard = ({ product }) => {
   const bg = useColorModeValue('white', 'gray.800');
   const color = useColorModeValue('gray.800', 'white');
   const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`;
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
 
   const handleModalOpening = () => {
     onOpen();
@@ -31,7 +37,7 @@ const ProductCard = ({ product }) => {
           </Box>
           <Text mt="2">{product.description[i18n.language]}</Text>
           <Flex justifyContent="space-between">
-            <Button mt="4" p="2" colorScheme="teal">{t('addToCart')}</Button>
+            <Button mt="4" p="2" colorScheme="teal" onClick={handleAddToCart}>{t('addToCart')}</Button>
             <Button mt="4" p="2" colorScheme="teal" onClick={handleModalOpening}>{t('details')}</Button>
           </Flex>
         </Box>

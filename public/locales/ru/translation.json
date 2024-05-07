@@ -2,7 +2,6 @@
   "home": "Главная",
   "products": "Продукты",
   "account": "Аккаунт",
-  "cart": "Корзина",
   "logout": "Выйти",
   "catalog": {
     "title": "Каталог Продуктов",
@@ -62,5 +61,16 @@
     "tabProfile": "Профиль",
     "tabOrders": "Заказы",
     "tabOrderHistory": "История заказов"
+  },
+  "cart": {
+    "cart": "Корзина",
+    "addToCart": "В корзину",
+    "details": "Подробнее",
+    "price": "Цена",
+    "cartSummary": "Итог по корзине",
+    "totalItems": "Всего товаров",
+    "totalPrice": "Общая стоимость",
+    "proceedToCheckout": "Перейти к оформлению",
+    "emptyCart": "Ваша корзина пуста."
   }
 }

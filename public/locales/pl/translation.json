@@ -2,7 +2,6 @@
   "home": "Strona główna",
   "products": "Produkty",
   "account": "Konto",
-  "cart": "Koszyk",
   "logout": "Wyloguj się",
   "catalog": {
     "title": "Katalog Produktów",
@@ -61,5 +60,16 @@
     "tabProfile": "Profil",
     "tabOrders": "Zamówienia",
     "tabOrderHistory": "Historia zamówień"
+  },
+  "cart": {
+    "cart": "Koszyk",
+    "addToCart": "Dodaj do koszyka",
+    "details": "Szczegóły",
+    "price": "Cena",
+    "cartSummary": "Podsumowanie koszyka",
+    "totalItems": "Łączna liczba przedmiotów",
+    "totalPrice": "Całkowita cena",
+    "proceedToCheckout": "Przejdź do realizacji zamówienia",
+    "emptyCart": "Twój koszyk jest pusty."
   }
 }

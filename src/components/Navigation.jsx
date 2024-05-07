@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import useOutsideClick from '../hooks/useOutsideClick';
 import LanguageSelector from './LanguageSelector';
 import UserSection from './UserSection';
-import ProductCart from './Product/ProductCart'; 
+import CartIcon from './Cart/CartIcon'; 
 import Logo from './common/Logo';
 import NavLinks from './common/NavLinks';
 import BurgerMenu from './common/BurgerMenu';
@@ -40,7 +40,7 @@ const Navigation = () => {
         <Flex alignItems={'center'}>
           <IconButton icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} isRound='true' onClick={toggleColorMode} mr={4} />
           <LanguageSelector />
-          <ProductCart />
+          <CartIcon />
           <UserSection />
           </Flex>
       </Flex>

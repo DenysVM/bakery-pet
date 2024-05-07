@@ -2,7 +2,6 @@
   "home": "Головна",
   "products": "Продукти",
   "account": "Акаунт",
-  "cart": "Кошик",
   "logout": "Вийти",
   "catalog": {
     "title": "Каталог Продукції",
@@ -61,5 +60,16 @@
     "tabProfile": "Профіль",
     "tabOrders": "Замовлення",
     "tabOrderHistory": "Історія замовлень"
+  },
+  "cart": {
+    "cart": "Кошик",
+    "addToCart": "Додати в кошик",
+    "details": "Деталі",
+    "price": "Ціна",
+    "cartSummary": "Підсумок кошика",
+    "totalItems": "Загалом товарів",
+    "totalPrice": "Загальна вартість",
+    "proceedToCheckout": "Перейти до оформлення",
+    "emptyCart": "Ваш кошик порожній."
   }
 }
