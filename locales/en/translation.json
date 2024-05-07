@@ -2,7 +2,6 @@
   "home": "Home",
   "products": "Products",
   "account": "Account",
-  "cart": "Cart",
   "logout": "Logout",
   "catalog": {
     "title": "Product Catalog",
@@ -61,6 +60,16 @@
     "tabProfile": "Profile",
     "tabOrders": "Orders",
     "tabOrderHistory": "Order History"
+  },
+  "cart": {
+    "cart": "Cart",
+    "addToCart": "Add to Cart",
+    "details": "Details",
+    "price": "Price",
+    "proceedToCheckout": "Proceed to Checkout",
+    "cartSummary": "Cart Summary",
+    "totalItems": "Total Items",
+    "totalPrice": "Total Price",
+    "emptyCart": "Your cart is empty."
   }
-
 }
