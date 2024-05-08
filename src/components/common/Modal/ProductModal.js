@@ -16,10 +16,10 @@ function ProductModal({ isOpen, product, onClose }) {
                 <ModalHeader>{product.name[i18n.language]}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody ref={modalRef}>
-                    <Image src={`${process.env.PUBLIC_URL}${product.imageUrl}`} alt={t(`Picture of ${product.name[i18n.language]}`)} mb="4" />
-                    <Text mb="2">{t('price')}: ${product.price}</Text>
-                    <Text>{t('composition')}: {product.composition[i18n.language]}</Text>
-                    <Text>{t('calories')}: {product.calories} kcal</Text>
+                    <Image src={`${process.env.PUBLIC_URL}${product.imageUrl}`} borderRadius="lg" alt={t(`productCard.pictureOf ${product.name[i18n.language]}`)} mb="4" />
+                    <Text mb="2">{t('productCard.price')}: ${product.price}</Text>
+                    <Text>{t('productCard.composition')}: {product.composition[i18n.language]}</Text>
+                    <Text>{t('productCard.calories')}: {product.calories} kcal</Text>
                 </ModalBody>
             </ModalContent>
         </Modal>,

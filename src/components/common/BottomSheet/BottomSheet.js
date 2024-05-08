@@ -102,9 +102,9 @@ function BottomSheet({ isOpen, product, onClose }) {
                         {product.name[i18n.language]}
                     </Text>
                     <Text fontSize="md">{product.description[i18n.language]}</Text>
-                    <Text mt="2">{t('price')}: ${product.price}</Text>
-                    <Text>{t('composition')}: {product.composition[i18n.language]}</Text>
-                    <Text>{t('calories')}: {product.calories} kcal</Text>
+                    <Text mt="2">{t('productCard.price')}: ${product.price}</Text>
+                    <Text>{t('productCard.composition')}: {product.composition[i18n.language]}</Text>
+                    <Text>{t('productCard.calories')}: {product.calories} kcal</Text>
                 </Box>
             </animated.div>
         </>,

@@ -9,6 +9,8 @@ const CartIcon = () => {
   const { cartItems } = useCart();
   const { t } = useTranslation();
 
+  const itemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <IconButton
       as={RouterLink}
@@ -17,9 +19,11 @@ const CartIcon = () => {
       icon={
         <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
           <MdShoppingCart />
-          <Badge colorScheme="green" variant="solid" borderRadius="full" ml="-1" mb="-3" fontSize="0.8em">
-            {cartItems.length}
-          </Badge>
+          {itemCount > 0 && (
+            <Badge colorScheme="green" variant="solid" borderRadius="full" ml="-1" mb="-3" fontSize="0.8em">
+              {itemCount}
+            </Badge>
+          )}
         </span>
       }
       aria-label={t('cart.cart')}

@@ -17,15 +17,20 @@
   "phone": "Телефон",
   "email": "Електронна пошта"
 },
+
+"productCard": {
   "addToCart": "Додати до кошика",
-  "details": "Деталі продукту",
+  "inCart": "У кошику",
+  "details": "Деталі...",
+  "pictureOf": "Зображення {{name}}",
+  "price": "Ціна",
   "composition": "Склад",
-  "calories": "Калорії",
+  "calories": "Калорійність",
   "carbohydrates": "Вуглеводи",
   "protein": "Білки",
   "fat": "Жири",
-  "price": "Ціна",
-  "close": "Зачинити",
+  "close": "Закрити"
+},
 
   "filters": {
   "priceRange": "Ціновий діапазон",

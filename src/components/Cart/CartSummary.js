@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Text, useColorModeValue } from '@chakra-ui/react';
-import { useCart } from '../Cart'; // Импорт через index.js
+import { useCart } from '../Cart'; 
 import { useTranslation } from 'react-i18next';
 
 const CartSummary = () => {
@@ -13,14 +13,15 @@ const CartSummary = () => {
   const totalPrice = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
   return (
-    <Box p="4" bg={bg} color={color} mb="4" rounded="md" boxShadow="base">
-      <Text fontSize="2xl" mb="4">{t('cart.cartSummary')}</Text>
-      <Text fontSize="xl">{t('cart.totalItems')}: <strong>{totalItems}</strong></Text>
-      <Text fontSize="xl" mb="4">{t('cart.totalPrice')}: <strong>${totalPrice.toFixed(2)}</strong></Text>
-      <Button colorScheme="blue" width="full" onClick={() => alert(t('cart.proceedToCheckout'))}>
-        {t('cart.proceedToCheckout')}
-      </Button>
-    </Box>
+<Box p="4" bg={bg} color={color} mb="4" rounded="md" boxShadow="base">
+  <Text fontSize="lg" mb="4">{t('cart.cartSummary')}</Text>  
+  <Text fontSize="md">{t('cart.totalItems')}: <strong>{totalItems}</strong></Text>  
+  <Text fontSize="md" mb="4">{t('cart.totalPrice')}: <strong>${totalPrice.toFixed(2)}</strong></Text>  
+  <Button colorScheme="blue" width="full" onClick={() => alert(t('cart.proceedToCheckout'))}>
+    {t('cart.proceedToCheckout')}
+  </Button>
+</Box>
+
   );
 };
 
