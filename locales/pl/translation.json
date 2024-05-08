@@ -17,15 +17,20 @@
   "phone": "Telefon",
   "email": "E-mail"
 },
+
+"productCard": {
   "addToCart": "Dodaj do koszyka",
-  "details": "Szczegóły produktu",
+  "inCart": "W koszyku",
+  "details": "Szczegóły...",
+  "pictureOf": "Zdjęcie {{name}}",
+  "price": "Cena",
   "composition": "Skład",
   "calories": "Kalorie",
   "carbohydrates": "Węglowodany",
-  "protein": "Białka",
-  "fat": "Tłuszcze",
-  "price": "Cena",
-  "close": "Zamknij",
+  "protein": "Białko",
+  "fat": "Tłuszcz",
+  "close": "Zamknij"
+},
 
   "filters": {
   "priceRange": "Zakres cenowy",

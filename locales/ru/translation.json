@@ -17,16 +17,20 @@
   "phone": "Телефон",
   "email": "Электронная почта"
 },
-  "addToCart": "Добавить в корзину",
 
-  "details": "Детали продукта",
+"productCard": {
+  "addToCart": "Добавить в корзину",
+  "inCart": "В корзине",
+  "details": "Подробнее...",
+  "pictureOf": "Изображение {{name}}",
+  "price": "Цена",
   "composition": "Состав",
-  "calories": "Калории",
+  "calories": "Калорийность",
   "carbohydrates": "Углеводы",
   "protein": "Белки",
   "fat": "Жиры",
-  "price": "Цена",
-  "close": "Закрыть",
+  "close": "Закрыть"
+},
 
   "filters": {
     "priceRange": "Ценовой диапазон",

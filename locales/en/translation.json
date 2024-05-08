@@ -17,15 +17,19 @@
   "phone": "Phone",
   "email": "Email"
 },
-  "addToCart": "Add to Cart",
-  "details": "Product Details",
-  "composition": "Composition",
-  "calories": "Calories",
-  "carbohydrates": "Carbohydrates",
-  "protein": "Protein",
-  "fat": "Fat",
-  "price": "Price",
-  "close": "Close",
+
+  "productCard": {
+    "addToCart": "Add to Cart",
+    "inCart": "In Cart",
+    "details": "Product Details",
+    "composition": "Composition",
+    "calories": "Calories",
+    "carbohydrates": "Carbohydrates",
+    "protein": "Protein",
+    "fat": "Fat",
+    "price": "Price",
+    "close": "Close"
+  },
 
   "filters": {
     "priceRange": "Price Range",
