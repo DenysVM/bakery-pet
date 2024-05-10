@@ -7,9 +7,10 @@ import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import AccountPage from './pages/AccountPage';
-import { CartProvider, CartPage } from './components/Cart';
+import { CartProvider } from './components/Cart';
 
 import './i18n/i18n';
+import CartPage from './pages/CartPage';
 
 function App() {
   return (

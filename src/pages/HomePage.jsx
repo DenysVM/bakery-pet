@@ -1,14 +1,14 @@
 import React from 'react';
-import { VStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import BakeryStory from '../components/Home/BakeryStory'; 
 import Contacts from '../components/Home/Contacts';
+
 const HomePage = () => {
   return (
-    <VStack spacing={8}>
-      <BakeryStory />
+    <Box mt="4em" p="1">
+      <BakeryStory/>
       <Contacts />
-
-    </VStack>
+    </Box>
   );
 };
 

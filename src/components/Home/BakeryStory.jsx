@@ -8,7 +8,7 @@ const BakeryStory = () => {
   const textColor = useColorModeValue('gray.700', 'gray.100');
 
   return (
-    <Box bg={bgColor} p={5} borderRadius="lg" boxShadow="lg">
+    <Box bg={bgColor} p={5} borderRadius="lg" boxShadow="lg" mt={1}>
       <Heading mb={4} color={textColor} textAlign="center"> {t('story.title')}</Heading>
       <Text color={textColor} textAlign="justify">{t('story.description')}</Text>
     </Box>

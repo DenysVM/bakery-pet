@@ -20,7 +20,7 @@ const CartIcon = () => {
         <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
           <MdShoppingCart />
           {itemCount > 0 && (
-            <Badge colorScheme="green" variant="solid" borderRadius="full" ml="-1" mb="-3" fontSize="0.8em">
+            <Badge colorScheme="blue" variant="solid" borderRadius="full" ml="-1" mb="-3" fontSize="0.8em">
               {itemCount}
             </Badge>
           )}

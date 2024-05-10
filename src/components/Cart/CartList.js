@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { CartItem, useCart } from '../Cart';
+import { useTranslation } from 'react-i18next';
 
 const CartList = () => {
   const { cartItems } = useCart();
+  const { t } = useTranslation();
 
   return (
     <Box>
@@ -13,7 +15,7 @@ const CartList = () => {
         ))
       ) : (
         <Box textAlign="center" py="6">
-          Your cart is empty.
+          {t('cart.emptyCart')}
         </Box>
       )}
     </Box>

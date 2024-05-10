@@ -5,32 +5,47 @@ import {
   useColorMode,
   Stack,
   useDisclosure,
-  IconButton,
-  useBreakpointValue
+  useBreakpointValue,
+  Divider
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
 
 import useOutsideClick from '../hooks/useOutsideClick';
-import LanguageSelector from './LanguageSelector';
-import UserSection from './UserSection';
+import LanguageSelector from './common/LanguageSelector';
+import UserIcon from './User/UserIcon';
 import CartIcon from './Cart/CartIcon'; 
 import Logo from './common/Logo';
 import NavLinks from './common/NavLinks';
 import BurgerMenu from './common/BurgerMenu';
+import ColorSchemeSelector from '../components/common/ColorSchemaSelector';
 
 const Navigation = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const menuRef = useRef();
   useOutsideClick(menuRef, () => isOpen && onToggle());
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
+  const bgColor = { light: 'gray.100', dark: 'gray.700' };
+  const color = { light: 'gray.600', dark: 'white' };
   const { t } = useTranslation(); 
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
-    <Box ref={menuRef} px={4} bg={colorMode === 'light' ? 'gray.100' : 'gray.700'} color={colorMode === 'light' ? 'gray.600' : 'white'}>
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-      {!isMobile && (
+    <Box
+    ref={menuRef}
+    px={4}
+    bg={bgColor[colorMode]}
+    color={color[colorMode]}
+    position="fixed"
+    top={0}
+    left={0}
+    right={0}
+    zIndex={10}
+    boxShadow="0px 2px 5px rgba(0,0,0,0.1)"
+    width="full"
+    mb="1"
+  >  
+    <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        {!isMobile && (
           <Flex flexShrink={0}>
             <NavLinks onNavigate={onClose} />
           </Flex>
@@ -38,20 +53,29 @@ const Navigation = () => {
         <BurgerMenu isOpen={isOpen} toggleMenu={onToggle} label={t('openMenu')} />
         <Logo />
         <Flex alignItems={'center'}>
-          <IconButton icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} isRound='true' onClick={toggleColorMode} mr={4} />
-          <LanguageSelector />
+          {!isMobile && (
+            <>
+              <ColorSchemeSelector />
+              <LanguageSelector />
+            </>
+          )}
           <CartIcon />
-          <UserSection />
-          </Flex>
+          <UserIcon />
+        </Flex>
       </Flex>
 
       {isOpen && (
-        <Box pb={4} display={{ baseм: 'block', md: 'none' }}>
-          <Stack spacing={4} as="nav">
-            <NavLinks onNavigate={onClose} />
-          </Stack>
-        </Box>
-              )}
+         <Box pb={4} display={{ base: 'block', md: 'none' }}>
+         <Stack spacing={4} as="nav">
+           <NavLinks onNavigate={onClose} />
+           <Divider my={2} />
+           <Flex alignItems="center" justifyContent="left" width="100%">
+             <LanguageSelector />
+             <ColorSchemeSelector />
+           </Flex>
+         </Stack>
+       </Box>
+      )}
     </Box>
   );
 };

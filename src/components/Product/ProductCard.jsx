@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
   const isInCart = cartItems.some(item => item.id === product.id);
   const cartQuantity = cartItems.reduce((total, item) => (item.id === product.id ? total + item.quantity : total), 0);
   const buttonStyles = {
-    colorScheme: "teal",
+    colorScheme: "blue",
     variant: "outline",
     size: isLargerThan768 ? "md" : "sm",
     mt: "4",
@@ -79,17 +79,16 @@ const ProductCard = ({ product }) => {
 const AddToCartButton = ({ isInCart, cartQuantity, handleAddToCart, isLargerThan768, t, buttonStyles }) => (
   <Button
     onClick={handleAddToCart}
-    leftIcon={<Icon as={isInCart ? MdShoppingCart : MdAddShoppingCart} boxSize={6} />}
     {...buttonStyles} 
-  >
-    {isLargerThan768 ? (
+    ><Icon as={isInCart ? MdShoppingCart : MdAddShoppingCart} boxSize={6} />
+     {isLargerThan768 ? (
       <>
         {isInCart ? t('productCard.inCart') : t('productCard.addToCart')}
-        {cartQuantity > 0 && <Badge colorScheme="green" ml="2">{cartQuantity}</Badge>}
+        {cartQuantity > 0 && <Badge colorScheme="blue" ml="2">{cartQuantity}</Badge>}
       </>
     ) : (
       <>
-        {cartQuantity > 0 && <Badge colorScheme="green" ml="2">{cartQuantity}</Badge>}
+        {cartQuantity > 0 && <Badge colorScheme="blue" ml="2">{cartQuantity}</Badge>}
       </>
     )}
   </Button>

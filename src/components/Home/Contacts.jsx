@@ -27,9 +27,10 @@ const Contacts = () => {
           <Link href="https://www.instagram.com" isExternal><Icon as={FaInstagram} boxSize={6} /></Link>
           <Link href="https://www.twitter.com" isExternal><Icon as={FaTwitter} boxSize={6} /></Link>
         </HStack>
-        <Divider />
-        <Text fontSize="lg" textAlign="center" mb={2} cursor="pointer" onClick={openMapModal}>
-          {t('contacts.address')}: Wołoska 12, 02-675 Warszawa
+        <Divider/>
+        <Text fontSize="lg" textAlign="center" mb={2} >
+          {t('contacts.address')}: <Text as="span" _hover={{ textDecoration: "underline" }} cursor="pointer" onClick={openMapModal}>
+          Wołosка 12, 02-675 Warszawa</Text>
         </Text>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

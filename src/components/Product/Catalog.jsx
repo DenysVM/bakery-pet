@@ -77,14 +77,14 @@ const Catalog = () => {
   };
 
   return (
-    <Box padding="4" maxW="1200px" margin="auto" mt="5">
+    <Box padding="4" maxW="1200px" m="auto" mt="6">
       <CatalogFilters
         onFiltersChange={handleFiltersChange}
         onSortChange={handleSortChange}
         sortCriteria={sortCriteria}
         onResetFilters={() => handleFiltersChange({ type: 'reset' })}
       />
-      <Box mt="6">
+      <Box>
         <ProductsGrid products={filteredProducts} />
       </Box>
     </Box>
