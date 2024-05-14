@@ -1,10 +1,10 @@
 import React from 'react';
-import Catalog from '../components/User/Account';
+import Account from '../components/User/Account';
 
 const AccountPage = () => {
   return (
     <div>
-      <Catalog />
+      <Account />
     </div>
   );
 };

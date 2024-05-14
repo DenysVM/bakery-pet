@@ -3,13 +3,15 @@ import { IconButton } from '@chakra-ui/react';
 import { MdAccountCircle } from 'react-icons/md';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '..//../auth/AuthContext'
 
-const UserSection = React.forwardRef((props, ref) => {
+const UserIcon = React.forwardRef((props, ref) => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
   return (
     <IconButton
       as={RouterLink}
-      to="/account"
+      to={isAuthenticated ? "/account" : "/login"}
       icon={<MdAccountCircle size="24px" />}
       isRound='true'
       aria-label={t('account')}
@@ -19,4 +21,4 @@ const UserSection = React.forwardRef((props, ref) => {
   );
 });
 
-export default UserSection;
+export default UserIcon;
