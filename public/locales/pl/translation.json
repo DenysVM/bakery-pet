@@ -53,6 +53,39 @@
     "price": "Cena",
     "calories": "Kalorie"
   },
+
+  "auth": {
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "email": "E-mail",
+    "password": "Hasło",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "phone": "Telefon",
+    "address": {
+      "street": "Ulica",
+      "city": "Miasto",
+      "state": "Województwo",
+      "zip": "Kod pocztowy"
+    },
+    "loginPrompt": "Nie masz konta?",
+    "emailPlaceholder": "Wprowadź swój e-mail",
+    "passwordPlaceholder": "Wprowadź swoje hasło",
+    "firstNamePlaceholder": "Wprowadź swoje imię",
+    "lastNamePlaceholder": "Wprowadź swoje nazwisko",
+    "phonePlaceholder": "Wprowadź swój numer telefonu",
+    "addressPlaceholder": {
+      "street": "Wprowadź swoją ulicę",
+      "city": "Wprowadź swoje miasto",
+      "state": "Wprowadź swoje województwo",
+      "zip": "Wprowadź swój kod pocztowy"
+    },
+    "required": "To pole jest wymagane",
+    "invalidEmail": "Nieprawidłowy adres e-mail",
+    "passwordMin": "Hasło musi mieć co najmniej 8 znaków",
+    "invalidCredentials": "Nieprawidłowe dane uwierzytelniające"
+    },
+
   "user": {
     "profile": "Profil",
     "orders": "Zamówienia",
@@ -60,11 +93,15 @@
     "saveChanges": "Zapisz zmiany",
     "name": "Imię",
     "email": "Email",
+    "phone": "Telefon",
+    "address": "Adres",
     "currentOrders": "Bieżące zamówienia",
     "deliveredOrders": "Dostarczone zamówienia",
     "tabProfile": "Profil",
     "tabOrders": "Zamówienia",
-    "tabOrderHistory": "Historia zamówień"
+    "tabOrderHistory": "Historia zamówień",
+    "noData": "Brak danych użytkownika.",
+    "logout": "Wyloguj się"
   },
   "cart": {
     "cart": "Koszyk",

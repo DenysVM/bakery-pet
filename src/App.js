@@ -5,19 +5,19 @@ import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import AccountPage from './pages/AccountPage';
-import LoginForm from './auth/LoginForm';
-import SignupForm from './auth/SignupForm';
+import AuthPage from './pages/AuthPage';
+import SignupPage from './pages/SignupPage';
 import CartPage from './pages/CartPage';
 import './i18n/i18n';
 
 function App() {
   return (
-    <AppProviders> 
+    <AppProviders>
       <Router>
         <Navigation />
         <Routes>
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/account" element={<AccountPage />} />

@@ -53,6 +53,39 @@
     "price": "Ціна",
     "calories": "Калорії"
   },
+
+  "auth": {
+    "login": "Увійти",
+    "register": "Реєстрація",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "phone": "Телефон",
+    "address": {
+      "street": "Вулиця",
+      "city": "Місто",
+      "state": "Область",
+      "zip": "Поштовий індекс"
+    },
+    "loginPrompt": "Немає акаунту?",
+    "emailPlaceholder": "Введіть вашу електронну пошту",
+    "passwordPlaceholder": "Введіть ваш пароль",
+    "firstNamePlaceholder": "Введіть ваше ім'я",
+    "lastNamePlaceholder": "Введіть ваше прізвище",
+    "phonePlaceholder": "Введіть ваш номер телефону",
+    "addressPlaceholder": {
+      "street": "Введіть вашу вулицю",
+      "city": "Введіть ваше місто",
+      "state": "Введіть вашу область",
+      "zip": "Введіть ваш поштовий індекс"
+    },
+    "required": "Це поле обов'язкове для заповнення",
+    "invalidEmail": "Некоректна електронна пошта",
+    "passwordMin": "Пароль має бути не менше 8 символів",
+    "invalidCredentials": "Невірні облікові дані"
+  },
+
   "user": {
     "profile": "Профіль",
     "orders": "Замовлення",
@@ -60,11 +93,15 @@
     "saveChanges": "Зберегти зміни",
     "name": "Ім'я",
     "email": "Електронна пошта",
+    "phone": "Телефон",
+    "address": "Адреса",
     "currentOrders": "Поточні замовлення",
     "deliveredOrders": "Доставлені замовлення",
     "tabProfile": "Профіль",
     "tabOrders": "Замовлення",
-    "tabOrderHistory": "Історія замовлень"
+    "tabOrderHistory": "Історія замовлень",
+    "noData": "Немає даних користувача.",
+    "logout": "Вийти"
   },
   "cart": {
     "cart": "Кошик",

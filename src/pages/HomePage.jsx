@@ -5,7 +5,7 @@ import Contacts from '../components/Home/Contacts';
 
 const HomePage = () => {
   return (
-    <Box mt="4em" p="1">
+    <Box mt="3.7em" p="1">
       <BakeryStory/>
       <Contacts />
     </Box>

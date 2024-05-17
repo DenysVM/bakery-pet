@@ -1,19 +1,40 @@
-import React from 'react';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+// src/components/User/UserProfile.jsx
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../auth/AuthContext';
+import { Box, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { getUserProfile } from '../../services/authService';
 
 const UserProfile = () => {
+  const { user, token } = useAuth();
   const { t } = useTranslation();
+  const [profile, setProfile] = useState(user);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await getUserProfile(token);
+        setProfile(response);
+      } catch (error) {
+        console.error('Failed to fetch user profile', error);
+      }
+    };
+
+    if (token) {
+      fetchUserProfile();
+    }
+  }, [token]);
+
+  if (!profile) {
+    return <Text>{t('user.noData')}</Text>;
+  }
 
   return (
     <Box>
-      <FormControl>
-        <FormLabel>{t('user.name')}</FormLabel>
-        <Input placeholder={t('user.name')} />
-        <FormLabel>{t('user.email')}</FormLabel>
-        <Input placeholder={t('user.email')} type="email" />
-        <Button mt={4} colorScheme="blue">{t('user.saveChanges')}</Button>
-      </FormControl>
+      <Text fontSize="xl">{t('user.name')}: {profile.firstName} {profile.lastName}</Text>
+      <Text fontSize="xl">{t('user.email')}: {profile.email}</Text>
+      <Text fontSize="xl">{t('user.phone')}: {profile.phone}</Text>
+      <Text fontSize="xl">{t('user.address')}: {profile.address.street}, {profile.address.city}, {profile.address.state}, {profile.address.zip}</Text>
     </Box>
   );
 };

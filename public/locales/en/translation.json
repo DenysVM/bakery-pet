@@ -52,6 +52,39 @@
     "price": "Price",
     "calories": "Calories"
   },
+
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "address": {
+      "street": "Street",
+      "city": "City",
+      "state": "State",
+      "zip": "Zip"
+    },
+    "loginPrompt": "Don't have an account?",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNamePlaceholder": "Enter your last name",
+    "phonePlaceholder": "Enter your phone number",
+    "addressPlaceholder": {
+      "street": "Enter your street address",
+      "city": "Enter your city",
+      "state": "Enter your state",
+      "zip": "Enter your zip code"
+    },
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "passwordMin": "Password must be at least 8 characters long",
+    "invalidCredentials": "Invalid credentials"
+  },
+
   "user": {
     "profile": "Profile",
     "orders": "Orders",
@@ -63,7 +96,9 @@
     "deliveredOrders": "Delivered Orders",
     "tabProfile": "Profile",
     "tabOrders": "Orders",
-    "tabOrderHistory": "Order History"
+    "tabOrderHistory": "Order History",
+    "noData": "No user data available.",
+    "logout": "Logout"
   },
   "cart": {
     "cart": "Cart",

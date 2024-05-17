@@ -1,43 +1,61 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+// src/auth/AuthContext.jsx
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  const logout = useCallback((navigate) => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    setUser(null);
+    setToken(null);
+    delete axios.defaults.headers.common['Authorization'];
+    navigate('/auth');
+  }, []);
+
+  const fetchUserProfile = useCallback(async (token) => {
+    try {
+      const response = await axios.get('https://bakery-pet-backend.onrender.com/api/auth/profile', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setUser(response.data);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Failed to fetch user profile', error);
+      logout();
+    }
+  }, [logout]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Failed to parse user from localStorage', error);
-        localStorage.removeItem('user');
-      }
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+      setToken(storedToken);
+      fetchUserProfile(storedToken);
     }
-  }, []);
+  }, [fetchUserProfile]);
 
   const login = (userData) => {
     try {
-      localStorage.setItem('user', JSON.stringify(userData));
-      setIsAuthenticated(true);
+      localStorage.setItem('token', userData.token);
+      setToken(userData.token);
       setUser(userData);
+      setIsAuthenticated(true);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
     } catch (error) {
       console.error('Failed to save user to localStorage', error);
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
