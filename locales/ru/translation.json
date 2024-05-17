@@ -53,6 +53,39 @@
     "price": "Цена",
     "calories": "Калории"
   },
+
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "phone": "Телефон",
+    "address": {
+      "street": "Улица",
+      "city": "Город",
+      "state": "Область",
+      "zip": "Почтовый индекс"
+    },
+    "loginPrompt": "Нет аккаунта?",
+    "emailPlaceholder": "Введите вашу электронную почту",
+    "passwordPlaceholder": "Введите ваш пароль",
+    "firstNamePlaceholder": "Введите ваше имя",
+    "lastNamePlaceholder": "Введите вашу фамилию",
+    "phonePlaceholder": "Введите ваш номер телефона",
+    "addressPlaceholder": {
+      "street": "Введите вашу улицу",
+      "city": "Введите ваш город",
+      "state": "Введите вашу область",
+      "zip": "Введите ваш почтовый индекс"
+    },
+    "required": "Это поле обязательно для заполнения",
+    "invalidEmail": "Некорректный адрес электронной почты",
+    "passwordMin": "Пароль должен быть не менее 8 символов",
+    "invalidCredentials": "Неверные учетные данные"
+  },
+
   "user": {
     "profile": "Профиль",
     "orders": "Заказы",
@@ -60,11 +93,15 @@
     "saveChanges": "Сохранить изменения",
     "name": "Имя",
     "email": "Электронная почта",
+    "phone": "Телефон",
+    "address": "Адрес",
+    "noData": "Нет данных пользователя.",
     "currentOrders": "Текущие заказы",
     "deliveredOrders": "Доставленные заказы",
     "tabProfile": "Профиль",
     "tabOrders": "Заказы",
-    "tabOrderHistory": "История заказов"
+    "tabOrderHistory": "История заказов",
+    "logout": "Выйти"
   },
   "cart": {
     "cart": "Корзина",
