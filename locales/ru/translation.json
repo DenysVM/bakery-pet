@@ -54,37 +54,44 @@
     "calories": "Калории"
   },
 
-  "auth": {
-    "login": "Войти",
-    "register": "Регистрация",
-    "email": "Электронная почта",
-    "password": "Пароль",
-    "firstName": "Имя",
-    "lastName": "Фамилия",
-    "phone": "Телефон",
-    "address": {
-      "street": "Улица",
-      "city": "Город",
-      "state": "Область",
-      "zip": "Почтовый индекс"
+    "auth": {
+      "required": "Обязательно",
+      "invalidEmail": "Некорректный адрес электронной почты",
+      "passwordMin": "Пароль должен содержать не менее 8 символов",
+      "invalidPhone": "Некорректный номер телефона",
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "Электронная почта",
+      "password": "Пароль",
+      "phone": "Телефон",
+      "address": {
+        "street": "Улица",
+        "houseNumber": "Номер дома",
+        "apartmentNumber": "Номер квартиры",
+        "city": "Город"
+      },
+      "firstNamePlaceholder": "Введите ваше имя",
+      "lastNamePlaceholder": "Введите вашу фамилию",
+      "emailPlaceholder": "Введите вашу электронную почту",
+      "passwordPlaceholder": "Введите ваш пароль",
+      "phonePlaceholder": "Введите ваш номер телефона",
+      "addressPlaceholder": {
+        "street": "Введите вашу улицу",
+        "houseNumber": "Введите номер дома",
+        "apartmentNumber": "Введите номер квартиры",
+        "city": "Введите ваш город"
+      },
+      "register": "Регистрация",
+      "login": "Войти",
+      "loginPrompt": "Уже есть аккаунт?",
+      "loginError": "Ошибка входа",
+      "noSuchUser": "Пользователь не найден",
+      "invalidCredentials": "Неверный email или пароль",
+      "registrationSuccess": "Регистрация успешна",
+      "registrationSuccessMessage": "Вы успешно зарегистрированы!",
+      "registrationError": "Ошибка регистрации",
+      "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта."
     },
-    "loginPrompt": "Нет аккаунта?",
-    "emailPlaceholder": "Введите вашу электронную почту",
-    "passwordPlaceholder": "Введите ваш пароль",
-    "firstNamePlaceholder": "Введите ваше имя",
-    "lastNamePlaceholder": "Введите вашу фамилию",
-    "phonePlaceholder": "Введите ваш номер телефона",
-    "addressPlaceholder": {
-      "street": "Введите вашу улицу",
-      "city": "Введите ваш город",
-      "state": "Введите вашу область",
-      "zip": "Введите ваш почтовый индекс"
-    },
-    "required": "Это поле обязательно для заполнения",
-    "invalidEmail": "Некорректный адрес электронной почты",
-    "passwordMin": "Пароль должен быть не менее 8 символов",
-    "invalidCredentials": "Неверные учетные данные"
-  },
 
   "user": {
     "profile": "Профиль",
@@ -95,6 +102,9 @@
     "email": "Электронная почта",
     "phone": "Телефон",
     "address": "Адрес",
+    "street": "ул.",
+    "houseNumber": "д.",
+    "apartmentNumber": "кв.",
     "noData": "Нет данных пользователя.",
     "currentOrders": "Текущие заказы",
     "deliveredOrders": "Доставленные заказы",
