@@ -54,38 +54,45 @@
     "calories": "Калорії"
   },
 
-  "auth": {
-    "login": "Увійти",
-    "register": "Реєстрація",
-    "email": "Електронна пошта",
-    "password": "Пароль",
-    "firstName": "Ім'я",
-    "lastName": "Прізвище",
-    "phone": "Телефон",
-    "address": {
-      "street": "Вулиця",
-      "city": "Місто",
-      "state": "Область",
-      "zip": "Поштовий індекс"
+    "auth": {
+      "required": "Обов'язково",
+      "invalidEmail": "Некоректна адреса електронної пошти",
+      "passwordMin": "Пароль повинен містити не менше 8 символів",
+      "invalidPhone": "Некоректний номер телефону",
+      "firstName": "Ім'я",
+      "lastName": "Прізвище",
+      "email": "Електронна пошта",
+      "password": "Пароль",
+      "phone": "Телефон",
+      "address": {
+        "street": "Вулиця",
+        "houseNumber": "Номер будинку",
+        "apartmentNumber": "Номер квартири",
+        "city": "Місто"
+      },
+      "firstNamePlaceholder": "Введіть ваше ім'я",
+      "lastNamePlaceholder": "Введіть ваше прізвище",
+      "emailPlaceholder": "Введіть вашу електронну пошту",
+      "passwordPlaceholder": "Введіть ваш пароль",
+      "phonePlaceholder": "Введіть ваш номер телефону",
+      "addressPlaceholder": {
+        "street": "Введіть вашу вулицю",
+        "houseNumber": "Введіть номер будинку",
+        "apartmentNumber": "Введіть номер квартири",
+        "city": "Введіть ваше місто"
+      },
+      "register": "Реєстрація",
+      "login": "Увійти",
+      "loginPrompt": "Вже маєте акаунт?",
+      "loginError": "Помилка входу",
+      "noSuchUser": "Користувача не знайдено",
+      "invalidCredentials": "Некоректний email або пароль",
+      "registrationSuccess": "Реєстрація успішна",
+      "registrationSuccessMessage": "Ви успішно зареєстровані!",
+      "registrationError": "Помилка реєстрації",
+      "registrationErrorMessage": "Сталася помилка під час реєстрації вашого акаунта."
     },
-    "loginPrompt": "Немає акаунту?",
-    "emailPlaceholder": "Введіть вашу електронну пошту",
-    "passwordPlaceholder": "Введіть ваш пароль",
-    "firstNamePlaceholder": "Введіть ваше ім'я",
-    "lastNamePlaceholder": "Введіть ваше прізвище",
-    "phonePlaceholder": "Введіть ваш номер телефону",
-    "addressPlaceholder": {
-      "street": "Введіть вашу вулицю",
-      "city": "Введіть ваше місто",
-      "state": "Введіть вашу область",
-      "zip": "Введіть ваш поштовий індекс"
-    },
-    "required": "Це поле обов'язкове для заповнення",
-    "invalidEmail": "Некоректна електронна пошта",
-    "passwordMin": "Пароль має бути не менше 8 символів",
-    "invalidCredentials": "Невірні облікові дані"
-  },
-
+  
   "user": {
     "profile": "Профіль",
     "orders": "Замовлення",
@@ -95,6 +102,9 @@
     "email": "Електронна пошта",
     "phone": "Телефон",
     "address": "Адреса",
+    "street": "вул.",
+    "houseNumber": "буд.",
+    "apartmentNumber": "кв.",
     "currentOrders": "Поточні замовлення",
     "deliveredOrders": "Доставлені замовлення",
     "tabProfile": "Профіль",

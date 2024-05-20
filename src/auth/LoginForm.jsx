@@ -1,8 +1,7 @@
-// src/auth/LoginForm.jsx
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, Text, Link, VStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, Text, Link, VStack, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import { loginUser } from '../services/authService';
@@ -11,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const toast = useToast();
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -22,11 +22,28 @@ const LoginForm = () => {
     onSubmit: async (values) => {
       try {
         const data = await loginUser(values);
+        if (!data) {
+          toast({
+            title: t('auth.loginError'),
+            description: t('auth.noSuchUser'),
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          return;
+        }
+
         login(data);
         navigate('/account');
       } catch (error) {
+        toast({
+          title: t('auth.loginError'),
+          description: t('auth.invalidCredentials'),
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
         console.error('Error logging in:', error);
-        alert(t('auth.invalidCredentials'));
       }
     },
   });

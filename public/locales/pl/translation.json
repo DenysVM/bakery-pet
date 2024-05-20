@@ -54,36 +54,43 @@
     "calories": "Kalorie"
   },
 
-  "auth": {
-    "login": "Zaloguj się",
-    "register": "Zarejestruj się",
-    "email": "E-mail",
-    "password": "Hasło",
-    "firstName": "Imię",
-    "lastName": "Nazwisko",
-    "phone": "Telefon",
-    "address": {
-      "street": "Ulica",
-      "city": "Miasto",
-      "state": "Województwo",
-      "zip": "Kod pocztowy"
-    },
-    "loginPrompt": "Nie masz konta?",
-    "emailPlaceholder": "Wprowadź swój e-mail",
-    "passwordPlaceholder": "Wprowadź swoje hasło",
-    "firstNamePlaceholder": "Wprowadź swoje imię",
-    "lastNamePlaceholder": "Wprowadź swoje nazwisko",
-    "phonePlaceholder": "Wprowadź swój numer telefonu",
-    "addressPlaceholder": {
-      "street": "Wprowadź swoją ulicę",
-      "city": "Wprowadź swoje miasto",
-      "state": "Wprowadź swoje województwo",
-      "zip": "Wprowadź swój kod pocztowy"
-    },
-    "required": "To pole jest wymagane",
-    "invalidEmail": "Nieprawidłowy adres e-mail",
-    "passwordMin": "Hasło musi mieć co najmniej 8 znaków",
-    "invalidCredentials": "Nieprawidłowe dane uwierzytelniające"
+    "auth": {
+      "required": "Wymagane",
+      "invalidEmail": "Nieprawidłowy adres e-mail",
+      "passwordMin": "Hasło musi zawierać co najmniej 8 znaków",
+      "invalidPhone": "Nieprawidłowy numer telefonu",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "email": "E-mail",
+      "password": "Hasło",
+      "phone": "Telefon",
+      "address": {
+        "street": "Ulica",
+        "houseNumber": "Numer domu",
+        "apartmentNumber": "Numer mieszkania",
+        "city": "Miasto"
+      },
+      "firstNamePlaceholder": "Wpisz swoje imię",
+      "lastNamePlaceholder": "Wpisz swoje nazwisko",
+      "emailPlaceholder": "Wpisz swój e-mail",
+      "passwordPlaceholder": "Wpisz swoje hasło",
+      "phonePlaceholder": "Wpisz swój numer telefonu",
+      "addressPlaceholder": {
+        "street": "Wpisz swoją ulicę",
+        "houseNumber": "Wpisz numer domu",
+        "apartmentNumber": "Wpisz numer mieszkania",
+        "city": "Wpisz swoje miasto"
+      },
+      "register": "Rejestracja",
+      "login": "Zaloguj się",
+      "loginPrompt": "Masz już konto?",
+      "loginError": "Błąd logowania",
+      "noSuchUser": "Użytkownik nie znaleziony",
+      "invalidCredentials": "Nieprawidłowy email lub hasło",
+      "registrationSuccess": "Rejestracja zakończona sukcesem",
+      "registrationSuccessMessage": "Zostałeś pomyślnie zarejestrowany!",
+      "registrationError": "Błąd rejestracji",
+      "registrationErrorMessage": "Wystąpił błąd podczas rejestracji konta."
     },
 
   "user": {
@@ -95,6 +102,9 @@
     "email": "Email",
     "phone": "Telefon",
     "address": "Adres",
+    "street": "ul.",
+    "houseNumber": "nr",
+    "apartmentNumber": "m.",
     "currentOrders": "Bieżące zamówienia",
     "deliveredOrders": "Dostarczone zamówienia",
     "tabProfile": "Profil",

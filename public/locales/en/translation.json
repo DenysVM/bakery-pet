@@ -53,38 +53,45 @@
     "calories": "Calories"
   },
 
-  "auth": {
-    "login": "Login",
-    "register": "Register",
-    "email": "Email",
-    "password": "Password",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "phone": "Phone",
-    "address": {
-      "street": "Street",
-      "city": "City",
-      "state": "State",
-      "zip": "Zip"
+    "auth": {
+      "required": "Required",
+      "invalidEmail": "Invalid email address",
+      "passwordMin": "Password must be at least 8 characters long",
+      "invalidPhone": "Invalid phone number",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "phone": "Phone",
+      "address": {
+        "street": "Street",
+        "houseNumber": "House Number",
+        "apartmentNumber": "Apartment Number",
+        "city": "City"
+      },
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "phonePlaceholder": "Enter your phone number",
+      "addressPlaceholder": {
+        "street": "Enter your street",
+        "houseNumber": "Enter your house number",
+        "apartmentNumber": "Enter your apartment number",
+        "city": "Enter your city"
+      },
+      "register": "Register",
+      "login": "Login",
+      "loginPrompt": "Already have an account?",
+      "loginError": "Login Error",
+      "noSuchUser": "No such user found",
+      "invalidCredentials": "Invalid email or password",
+      "registrationSuccess": "Registration Successful",
+      "registrationSuccessMessage": "You have successfully registered!",
+      "registrationError": "Registration Error",
+      "registrationErrorMessage": "There was an error registering your account."
     },
-    "loginPrompt": "Don't have an account?",
-    "emailPlaceholder": "Enter your email",
-    "passwordPlaceholder": "Enter your password",
-    "firstNamePlaceholder": "Enter your first name",
-    "lastNamePlaceholder": "Enter your last name",
-    "phonePlaceholder": "Enter your phone number",
-    "addressPlaceholder": {
-      "street": "Enter your street address",
-      "city": "Enter your city",
-      "state": "Enter your state",
-      "zip": "Enter your zip code"
-    },
-    "required": "This field is required",
-    "invalidEmail": "Invalid email address",
-    "passwordMin": "Password must be at least 8 characters long",
-    "invalidCredentials": "Invalid credentials"
-  },
-
+  
   "user": {
     "profile": "Profile",
     "orders": "Orders",
@@ -92,6 +99,11 @@
     "saveChanges": "Save Changes",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "street": "St.",
+    "houseNumber": "No.",
+    "apartmentNumber": "Apt.",
     "currentOrders": "Current Orders",
     "deliveredOrders": "Delivered Orders",
     "tabProfile": "Profile",

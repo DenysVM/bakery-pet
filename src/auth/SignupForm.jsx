@@ -1,15 +1,17 @@
-// src/auth/SignupForm.jsx
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, VStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, VStack, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authService';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from './AuthContext';
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const toast = useToast();
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -20,9 +22,9 @@ const SignupForm = () => {
       phone: '',
       address: {
         street: '',
-        city: '',
-        state: '',
-        zip: ''
+        houseNumber: '',
+        apartmentNumber: '',
+        city: ''
       },
     },
     validationSchema: Yup.object({
@@ -30,20 +32,34 @@ const SignupForm = () => {
       lastName: Yup.string().required(t('auth.required')),
       email: Yup.string().email(t('auth.invalidEmail')).required(t('auth.required')),
       password: Yup.string().min(8, t('auth.passwordMin')).required(t('auth.required')),
-      phone: Yup.string().required(t('auth.required')),
+      phone: Yup.string().matches(/^\d{10}$/, t('auth.invalidPhone')).required(t('auth.required')),
       address: Yup.object().shape({
         street: Yup.string().required(t('auth.required')),
-        city: Yup.string().required(t('auth.required')),
-        state: Yup.string().required(t('auth.required')),
-        zip: Yup.string().required(t('auth.required'))
+        houseNumber: Yup.string().required(t('auth.required')),
+        apartmentNumber: Yup.string().required(t('auth.required')),
+        city: Yup.string().required(t('auth.required'))
       }),
     }),
     onSubmit: async (values) => {
       try {
         const data = await registerUser(values);
-        console.log('User registered:', data);
-        navigate('/login');
+        login(data); // Вызов login после регистрации
+        toast({
+          title: t('auth.registrationSuccess'),
+          description: t('auth.registrationSuccessMessage'),
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate('/account');
       } catch (error) {
+        toast({
+          title: t('auth.registrationError'),
+          description: error.response?.data?.message || t('auth.registrationErrorMessage'),
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
         console.error('There was an error registering the user:', error);
       }
     }
@@ -113,6 +129,26 @@ const SignupForm = () => {
             />
             <FormErrorMessage>{formik.errors.address?.street}</FormErrorMessage>
           </FormControl>
+          <FormControl isInvalid={formik.errors.address?.houseNumber && formik.touched.address?.houseNumber}>
+            <FormLabel htmlFor='houseNumber'>{t('auth.address.houseNumber')}</FormLabel>
+            <Input
+              id='houseNumber'
+              type='text'
+              placeholder={t('auth.addressPlaceholder.houseNumber')}
+              {...formik.getFieldProps('address.houseNumber')}
+            />
+            <FormErrorMessage>{formik.errors.address?.houseNumber}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={formik.errors.address?.apartmentNumber && formik.touched.address?.apartmentNumber}>
+            <FormLabel htmlFor='apartmentNumber'>{t('auth.address.apartmentNumber')}</FormLabel>
+            <Input
+              id='apartmentNumber'
+              type='text'
+              placeholder={t('auth.addressPlaceholder.apartmentNumber')}
+              {...formik.getFieldProps('address.apartmentNumber')}
+            />
+            <FormErrorMessage>{formik.errors.address?.apartmentNumber}</FormErrorMessage>
+          </FormControl>
           <FormControl isInvalid={formik.errors.address?.city && formik.touched.address?.city}>
             <FormLabel htmlFor='city'>{t('auth.address.city')}</FormLabel>
             <Input
@@ -122,26 +158,6 @@ const SignupForm = () => {
               {...formik.getFieldProps('address.city')}
             />
             <FormErrorMessage>{formik.errors.address?.city}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={formik.errors.address?.state && formik.touched.address?.state}>
-            <FormLabel htmlFor='state'>{t('auth.address.state')}</FormLabel>
-            <Input
-              id='state'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.state')}
-              {...formik.getFieldProps('address.state')}
-            />
-            <FormErrorMessage>{formik.errors.address?.state}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={formik.errors.address?.zip && formik.touched.address?.zip}>
-            <FormLabel htmlFor='zip'>{t('auth.address.zip')}</FormLabel>
-            <Input
-              id='zip'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.zip')}
-              {...formik.getFieldProps('address.zip')}
-            />
-            <FormErrorMessage>{formik.errors.address?.zip}</FormErrorMessage>
           </FormControl>
           <Button mt={4} colorScheme='teal' type='submit' width="full">{t('auth.register')}</Button>
         </VStack>
