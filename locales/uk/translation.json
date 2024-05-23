@@ -65,6 +65,7 @@
       "password": "Пароль",
       "phone": "Телефон",
       "address": {
+        "label":"Адреса",
         "street": "Вулиця",
         "houseNumber": "Номер будинку",
         "apartmentNumber": "Номер квартири",
@@ -83,7 +84,7 @@
       },
       "register": "Реєстрація",
       "login": "Увійти",
-      "loginPrompt": "Вже маєте акаунт?",
+      "loginPrompt": "Не маєте акаунт?",
       "loginError": "Помилка входу",
       "noSuchUser": "Користувача не знайдено",
       "invalidCredentials": "Некоректний email або пароль",
