@@ -1,17 +1,41 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, VStack, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  VStack,
+  useToast,
+  Grid,
+  GridItem,
+  useColorModeValue,
+  useColorMode,
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authService';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './AuthContext';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/semantic-ui.css';
+import '../styles/SignupForm.css';
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
   const { login } = useAuth();
+  const { colorMode } = useColorMode();
+  const inputBg = useColorModeValue('#ffffff', '#1a202c');
+  const inputTextColor = useColorModeValue('#000000', '#ffffff');
+  const inputHoverBg = useColorModeValue('#f7fafc', '#2d3748');
+  const inputBorderColor = useColorModeValue('#e2e8f0', '#4a5568');
+  const activeBorderColor = useColorModeValue('#4299e1', '#63b3ed');
+  const dropdownBg = useColorModeValue('#ffffff', '#1a202c');
+  const dropdownTextColor = useColorModeValue('#000000', '#ffffff');
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +56,7 @@ const SignupForm = () => {
       lastName: Yup.string().required(t('auth.required')),
       email: Yup.string().email(t('auth.invalidEmail')).required(t('auth.required')),
       password: Yup.string().min(8, t('auth.passwordMin')).required(t('auth.required')),
-      phone: Yup.string().matches(/^\d{10}$/, t('auth.invalidPhone')).required(t('auth.required')),
+      phone: Yup.string().required(t('auth.required')),
       address: Yup.object().shape({
         street: Yup.string().required(t('auth.required')),
         houseNumber: Yup.string().required(t('auth.required')),
@@ -43,7 +67,7 @@ const SignupForm = () => {
     onSubmit: async (values) => {
       try {
         const data = await registerUser(values);
-        login(data); // Вызов login после регистрации
+        login(data);
         toast({
           title: t('auth.registrationSuccess'),
           description: t('auth.registrationSuccessMessage'),
@@ -66,7 +90,16 @@ const SignupForm = () => {
   });
 
   return (
-    <Box p={4} mt="4em" maxW="md" mx="auto" borderWidth={1} borderRadius="lg" boxShadow="lg">
+    <Box
+      p={4}
+      mt="4em"
+      maxW="md"
+      mx="auto"
+      borderWidth={1}
+      borderRadius="lg"
+      boxShadow="lg"
+      className={colorMode === 'dark' ? 'dark-theme' : ''}
+    >
       <form onSubmit={formik.handleSubmit}>
         <VStack spacing={4}>
           <FormControl isInvalid={formik.errors.firstName && formik.touched.firstName}>
@@ -76,6 +109,11 @@ const SignupForm = () => {
               type='text'
               placeholder={t('auth.firstNamePlaceholder')}
               {...formik.getFieldProps('firstName')}
+              bg={inputBg}
+              color={inputTextColor}
+              _hover={{ bg: inputHoverBg }}
+              _focus={{ borderColor: activeBorderColor }}
+              autoComplete="given-name"
             />
             <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
           </FormControl>
@@ -86,6 +124,11 @@ const SignupForm = () => {
               type='text'
               placeholder={t('auth.lastNamePlaceholder')}
               {...formik.getFieldProps('lastName')}
+              bg={inputBg}
+              color={inputTextColor}
+              _hover={{ bg: inputHoverBg }}
+              _focus={{ borderColor: activeBorderColor }}
+              autoComplete="family-name"
             />
             <FormErrorMessage>{formik.errors.lastName}</FormErrorMessage>
           </FormControl>
@@ -96,6 +139,11 @@ const SignupForm = () => {
               type='email'
               placeholder={t('auth.emailPlaceholder')}
               {...formik.getFieldProps('email')}
+              bg={inputBg}
+              color={inputTextColor}
+              _hover={{ bg: inputHoverBg }}
+              _focus={{ borderColor: activeBorderColor }}
+              autoComplete="email"
             />
             <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
           </FormControl>
@@ -106,58 +154,112 @@ const SignupForm = () => {
               type='password'
               placeholder={t('auth.passwordPlaceholder')}
               {...formik.getFieldProps('password')}
+              bg={inputBg}
+              color={inputTextColor}
+              _hover={{ bg: inputHoverBg }}
+              _focus={{ borderColor: activeBorderColor }}
+              autoComplete="new-password"
             />
             <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
             <FormLabel htmlFor='phone'>{t('auth.phone')}</FormLabel>
-            <Input
-              id='phone'
-              type='text'
-              placeholder={t('auth.phonePlaceholder')}
-              {...formik.getFieldProps('phone')}
-            />
+            <Box
+              width="100%"
+              className="input-phone-number"
+              style={{
+                borderColor: inputBorderColor,
+                borderRadius: '5px',
+              }}
+            >
+              <PhoneInput
+                country={'ua'}
+                preferredCountries={['ua', 'pl']}
+                regions={'europe'}
+                value={formik.values.phone}
+                onChange={(phone) => formik.setFieldValue('phone', phone)}
+                inputProps={{
+                  name: 'phone',
+                  id: 'phone',
+                  placeholder: t('auth.phonePlaceholder'),
+                  required: true,
+                  autoComplete: 'tel'
+                }}
+                inputStyle={{
+                  width: '100%',
+                  backgroundColor: inputBg,
+                  color: inputTextColor,
+                  height: '40px',
+                }}
+                buttonStyle={{ 
+                  backgroundColor: inputBg, 
+                }}
+                dropdownStyle={{ backgroundColor: dropdownBg, color: dropdownTextColor }}
+                dropdownContainerStyle={{ zIndex: 9999 }}
+              />
+            </Box>
             <FormErrorMessage>{formik.errors.phone}</FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={formik.errors.address?.street && formik.touched.address?.street}>
-            <FormLabel htmlFor='street'>{t('auth.address.street')}</FormLabel>
-            <Input
-              id='street'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.street')}
-              {...formik.getFieldProps('address.street')}
-            />
-            <FormErrorMessage>{formik.errors.address?.street}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={formik.errors.address?.houseNumber && formik.touched.address?.houseNumber}>
-            <FormLabel htmlFor='houseNumber'>{t('auth.address.houseNumber')}</FormLabel>
-            <Input
-              id='houseNumber'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.houseNumber')}
-              {...formik.getFieldProps('address.houseNumber')}
-            />
-            <FormErrorMessage>{formik.errors.address?.houseNumber}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={formik.errors.address?.apartmentNumber && formik.touched.address?.apartmentNumber}>
-            <FormLabel htmlFor='apartmentNumber'>{t('auth.address.apartmentNumber')}</FormLabel>
-            <Input
-              id='apartmentNumber'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.apartmentNumber')}
-              {...formik.getFieldProps('address.apartmentNumber')}
-            />
-            <FormErrorMessage>{formik.errors.address?.apartmentNumber}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={formik.errors.address?.city && formik.touched.address?.city}>
-            <FormLabel htmlFor='city'>{t('auth.address.city')}</FormLabel>
-            <Input
-              id='city'
-              type='text'
-              placeholder={t('auth.addressPlaceholder.city')}
-              {...formik.getFieldProps('address.city')}
-            />
-            <FormErrorMessage>{formik.errors.address?.city}</FormErrorMessage>
+          <FormControl isInvalid={formik.errors.address && formik.touched.address}>
+            <FormLabel htmlFor='street'>{t('auth.address.label')}</FormLabel>
+            <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+              <GridItem colSpan={2}>
+                <Input
+                  id='street'
+                  type='text'
+                  placeholder={t('auth.addressPlaceholder.street')}
+                  {...formik.getFieldProps('address.street')}
+                  bg={inputBg}
+                  color={inputTextColor}
+                  _hover={{ bg: inputHoverBg }}
+                  _focus={{ borderColor: activeBorderColor }}
+                  autoComplete="street-address"
+                />
+                <FormErrorMessage>{formik.errors.address?.street}</FormErrorMessage>
+              </GridItem>
+              <GridItem colSpan={1}>
+                <Input
+                  id='houseNumber'
+                  type='text'
+                  placeholder={t('auth.addressPlaceholder.houseNumber')}
+                  {...formik.getFieldProps('address.houseNumber')}
+                  bg={inputBg}
+                  color={inputTextColor}
+                  _hover={{ bg: inputHoverBg }}
+                  _focus={{ borderColor: activeBorderColor }}
+                  autoComplete="address-line1"
+                />
+                <FormErrorMessage>{formik.errors.address?.houseNumber}</FormErrorMessage>
+              </GridItem>
+              <GridItem colSpan={1}>
+                <Input
+                  id='apartmentNumber'
+                  type='text'
+                  placeholder={t('auth.addressPlaceholder.apartmentNumber')}
+                  {...formik.getFieldProps('address.apartmentNumber')}
+                  bg={inputBg}
+                  color={inputTextColor}
+                  _hover={{ bg: inputHoverBg }}
+                  _focus={{ borderColor: activeBorderColor }}
+                  autoComplete="address-line2"
+                />
+                <FormErrorMessage>{formik.errors.address?.apartmentNumber}</FormErrorMessage>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <Input
+                  id='city'
+                  type='text'
+                  placeholder={t('auth.addressPlaceholder.city')}
+                  {...formik.getFieldProps('address.city')}
+                  bg={inputBg}
+                  color={inputTextColor}
+                  _hover={{ bg: inputHoverBg }}
+                  _focus={{ borderColor: activeBorderColor }}
+                  autoComplete="address-level2"
+                />
+                <FormErrorMessage>{formik.errors.address?.city}</FormErrorMessage>
+              </GridItem>
+            </Grid>
           </FormControl>
           <Button mt={4} colorScheme='teal' type='submit' width="full">{t('auth.register')}</Button>
         </VStack>

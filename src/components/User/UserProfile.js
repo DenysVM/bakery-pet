@@ -4,11 +4,13 @@ import { useAuth } from '../../auth/AuthContext';
 import { Box, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { getUserProfile } from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
   const { user, token } = useAuth();
   const { t } = useTranslation();
   const [profile, setProfile] = useState(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -22,8 +24,10 @@ const UserProfile = () => {
 
     if (token) {
       fetchUserProfile();
+    } else {
+      navigate('/login');
     }
-  }, [token]);
+  }, [token, navigate]);
 
   if (!profile) {
     return <Text>{t('user.noData')}</Text>;

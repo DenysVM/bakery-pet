@@ -1,4 +1,5 @@
-import React from 'react';
+// src/auth/LoginForm.jsx
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage, Text, Link, VStack, useToast } from '@chakra-ui/react';
@@ -10,8 +11,9 @@ import { useTranslation } from 'react-i18next';
 const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const toast = useToast();
   const { t } = useTranslation();
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: { email: '', password: '' },
@@ -20,21 +22,21 @@ const LoginForm = () => {
       password: Yup.string().required(t('auth.required')),
     }),
     onSubmit: async (values) => {
+      setIsLoading(true);
       try {
         const data = await loginUser(values);
-        if (!data) {
+        if (data) {
+          login(data);
+          navigate('/account');
+        } else {
           toast({
             title: t('auth.loginError'),
-            description: t('auth.noSuchUser'),
+            description: t('auth.userNotFound'),
             status: 'error',
             duration: 5000,
             isClosable: true,
           });
-          return;
         }
-
-        login(data);
-        navigate('/account');
       } catch (error) {
         toast({
           title: t('auth.loginError'),
@@ -44,6 +46,8 @@ const LoginForm = () => {
           isClosable: true,
         });
         console.error('Error logging in:', error);
+      } finally {
+        setIsLoading(false);
       }
     },
   });
@@ -59,6 +63,7 @@ const LoginForm = () => {
               type='email'
               placeholder={t('auth.emailPlaceholder')}
               {...formik.getFieldProps('email')}
+              autoComplete="email"
             />
             <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
           </FormControl>
@@ -69,10 +74,13 @@ const LoginForm = () => {
               type='password'
               placeholder={t('auth.passwordPlaceholder')}
               {...formik.getFieldProps('password')}
+              autoComplete="password"
             />
             <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
           </FormControl>
-          <Button mt={4} colorScheme='teal' type='submit' width="full">{t('auth.login')}</Button>
+          <Button mt={4} colorScheme='teal' type='submit' width="full" isLoading={isLoading}>
+            {t('auth.login')}
+          </Button>
         </VStack>
       </form>
       <Text mt={4}>

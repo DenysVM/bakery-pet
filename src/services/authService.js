@@ -1,4 +1,3 @@
-// src/services/authService.js
 import axios from 'axios';
 
 const API_URL = process.env.NODE_ENV === 'production' 
@@ -14,20 +13,32 @@ const axiosInstance = axios.create({
 });
 
 export const registerUser = async (userData) => {
-  const response = await axiosInstance.post('/register', userData);
-  return response.data;
+  try {
+    const response = await axiosInstance.post('/register', userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const loginUser = async (userData) => {
-  const response = await axiosInstance.post('/login', userData);
-  return response.data;
+  try {
+    const response = await axiosInstance.post('/login', userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getUserProfile = async (token) => {
-  const response = await axiosInstance.get('/profile', {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await axiosInstance.get('/profile', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
