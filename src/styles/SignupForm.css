@@ -60,3 +60,18 @@
 .dark-theme .input-phone-number .flag-dropdown {
   border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
 }
+
+.signup-form-container {
+  padding: 1rem;
+  margin-top: 4em;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  box-shadow: var(--chakra-shadows-lg);
+}
+
+.dark-theme .signup-form-container {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}

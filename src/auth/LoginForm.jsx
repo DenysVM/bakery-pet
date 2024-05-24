@@ -1,4 +1,3 @@
-// src/auth/LoginForm.jsx
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -74,7 +73,7 @@ const LoginForm = () => {
               type='password'
               placeholder={t('auth.passwordPlaceholder')}
               {...formik.getFieldProps('password')}
-              autoComplete="password"
+              autoComplete="current-password"
             />
             <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
           </FormControl>
