@@ -1,4 +1,3 @@
-// src/components/User/UserProfile.jsx
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { Box, Text } from '@chakra-ui/react';
@@ -7,7 +6,7 @@ import { getUserProfile } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
-  const { user, token } = useAuth();
+  const { user, token, logout } = useAuth();
   const { t } = useTranslation();
   const [profile, setProfile] = useState(user);
   const navigate = useNavigate();
@@ -19,15 +18,15 @@ const UserProfile = () => {
         setProfile(response);
       } catch (error) {
         console.error('Failed to fetch user profile', error);
+        logout(); // Вызов logout для очистки данных и перенаправления
+        navigate('/auth');
       }
     };
 
-    if (token) {
+    if (token && !profile) {
       fetchUserProfile();
-    } else {
-      navigate('/login');
     }
-  }, [token, navigate]);
+  }, [token, profile, navigate, logout]);
 
   if (!profile) {
     return <Text>{t('user.noData')}</Text>;
