@@ -4,7 +4,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/semantic-ui.css';
 import '../../styles/SignupForm.css';
 
-const PhoneInputField = ({ formik, t, bg, color, hoverBg, activeBorderColor }) => (
+const PhoneInputField = ({ formik, t, bg, color }) => (
   <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
     <FormLabel htmlFor='phone'>{t('auth.phone')}</FormLabel>
     <Box width="100%" className="input-phone-number">
@@ -28,10 +28,11 @@ const PhoneInputField = ({ formik, t, bg, color, hoverBg, activeBorderColor }) =
           height: '40px',
         }}
         buttonStyle={{ 
-          backgroundColor: bg, 
+          backgroundColor: bg,
+          borderColor: 'inherit',
+          color: 'inherit'
         }}
         dropdownStyle={{ backgroundColor: bg, color: color }}
-        dropdownContainerStyle={{ zIndex: 9999 }}
       />
     </Box>
     <FormErrorMessage>{formik.errors.phone}</FormErrorMessage>
