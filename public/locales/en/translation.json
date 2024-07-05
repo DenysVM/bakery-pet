@@ -122,6 +122,34 @@
     "cartSummary": "Cart Summary",
     "totalItems": "Total Items",
     "totalPrice": "Total Price",
-    "emptyCart": "Your cart is empty."
+    "emptyCart": "Your cart is empty.",
+    "authRequired": "You need to be logged in to proceed to checkout."
+  },
+  "checkout": {
+    "success": "Order Successful",
+    "created": "Your order has been created.",
+    "error": "Order Error",
+    "errorCreating": "There was an error creating your order.",
+    "placeOrder": "Place Order",
+    "useHomeAddress": "Use home address"
+  },
+  "order": {
+    "orderId": "Order ID",
+    "total": "Total",
+    "itemUpdated": "Item updated successfully",
+    "errorUpdating": "Error updating item",
+    "editItem": "Edit Item",
+    "quantity": "Quantity",
+    "save": "Save",
+    "cancel": "Cancel",
+    "errorFetching": "Error fetching orders",
+    "missingToken": "Authentication token is missing",
+    "noOrders": "You have no orders.",
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "deleteItem": "Delete Item",
+    "itemDeleted": "Item successfully deleted",
+    "delete": "Delete",
+    "orderDeleted": "Order successfully deleted",
+    "errorDeletingOrder": "Error deleting order"
   }
 }

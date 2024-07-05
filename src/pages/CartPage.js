@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@chakra-ui/react';
-import { CartList, CartSummary } from '../components/Cart';
+import { CartList, CartSummary, CheckoutForm } from '../components/Cart';
 
 const CartPage = () => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   return (
     <Box mt="4em" p="2">
       <CartList />
-      <CartSummary />
+      <CartSummary onCheckout={() => setIsCheckoutOpen(true)} />
+      {isCheckoutOpen && <CheckoutForm onClose={() => setIsCheckoutOpen(false)} />}
     </Box>
   );
 };

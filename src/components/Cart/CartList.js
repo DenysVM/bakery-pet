@@ -1,3 +1,4 @@
+// src/components/Cart/CartList.jsx
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { CartItem, useCart } from '../Cart';

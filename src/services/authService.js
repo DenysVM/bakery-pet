@@ -1,20 +1,8 @@
-import axios from 'axios';
-
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://bakery-pet-backend.onrender.com/api/auth'
-  : 'http://localhost:5000/api/auth';
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true,
-});
+import { axiosAuthInstance } from './api';
 
 export const registerUser = async (userData) => {
   try {
-    const response = await axiosInstance.post('/register', userData);
+    const response = await axiosAuthInstance.post('/register', userData);
     return response.data;
   } catch (error) {
     throw error;
@@ -23,7 +11,7 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (userData) => {
   try {
-    const response = await axiosInstance.post('/login', userData);
+    const response = await axiosAuthInstance.post('/login', userData);
     return response.data;
   } catch (error) {
     throw error;
@@ -32,7 +20,7 @@ export const loginUser = async (userData) => {
 
 export const getUserProfile = async (token) => {
   try {
-    const response = await axiosInstance.get('/profile', {
+    const response = await axiosAuthInstance.get('/profile', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },

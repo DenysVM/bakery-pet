@@ -123,6 +123,34 @@
     "totalItems": "Łączna liczba przedmiotów",
     "totalPrice": "Całkowita cena",
     "proceedToCheckout": "Przejdź do realizacji zamówienia",
-    "emptyCart": "Twój koszyk jest pusty."
+    "emptyCart": "Twój koszyk jest pusty.",
+    "authRequired": "Musisz być zalogowany, aby przejść do realizacji zamówienia."
+  },
+  "checkout": {
+    "success": "Zamówienie zakończone sukcesem",
+    "created": "Twoje zamówienie zostało utworzone.",
+    "error": "Błąd zamówienia",
+    "errorCreating": "Wystąpił błąd podczas tworzenia zamówienia.",
+    "placeOrder": "Złóż zamówienie",
+    "useHomeAddress": "Użyj adresu domowego"
+  },
+  "order": {
+    "orderId": "Numer zamówienia",
+    "total": "Razem",
+    "itemUpdated": "Przedmiot został pomyślnie zaktualizowany",
+    "errorUpdating": "Błąd podczas aktualizacji przedmiotu",
+    "editItem": "Edytuj przedmiot",
+    "quantity": "Ilość",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "errorFetching": "Błąd podczas pobierania zamówień",
+    "missingToken": "Brak tokenu uwierzytelniającego",
+    "noOrders": "Nie masz zamówień.",
+    "confirmDelete": "Czy na pewno chcesz usunąć tę pozycję?",
+    "deleteItem": "Usuń pozycję",
+    "itemDeleted": "Przedmiot pomyślnie usunięty",
+    "delete": "Usuń",
+    "orderDeleted": "Zamówienie zostało pomyślnie usunięte",
+    "errorDeletingOrder": "Błąd podczas usuwania zamówienia"
   }
 }

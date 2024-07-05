@@ -18,14 +18,19 @@ const CartItem = ({ item }) => {
   const handleChange = (change) => {
     const newQuantity = item.quantity + change;
     if (newQuantity > 0) {
-      updateQuantity(item.id, newQuantity);
+      updateQuantity(item.productId, newQuantity);
     } else {
-      removeFromCart(item.id);
+      removeFromCart(item.productId);
     }
   };
 
   const imageUrl = `${process.env.PUBLIC_URL}${item.imageUrl}`;
   const itemTotal = (item.price * item.quantity).toFixed(2);
+
+  if (!item.name) {
+    console.error('Item name is undefined', item); 
+    return null; 
+  }
 
   return (
     <Box display="flex" alignItems="center" p="2" borderWidth="1px" borderRadius="lg" mb="4">
@@ -55,14 +60,13 @@ const CartItem = ({ item }) => {
         as={isDesktop ? Button : IconButton}
         icon={isDesktop ? null : <MdDelete />}
         colorScheme="red"
-        onClick={() => removeFromCart(item.id)}
+        onClick={() => removeFromCart(item.productId)}
         ml="2"
         {...(isDesktop ? {} : { padding: '0', size: 'sm', boxSize: '40px' })} 
         children={isDesktop ? "Remove" : undefined}
       />
     </Box>
   );
-  
 };
 
 export default CartItem;
