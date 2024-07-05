@@ -20,7 +20,7 @@ const DeleteOrderItem = ({ isOpen, onClose, item, orderId, onDelete }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx="4">
         <ModalHeader>{t('order.confirmDelete')}</ModalHeader>
         <ModalBody>
           {t('order.deleteItem')}

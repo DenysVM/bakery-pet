@@ -59,26 +59,28 @@ const EditOrderItem = ({ isOpen, onClose, item, orderId, onSave }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx="4">
         <ModalHeader>{t('order.editItem')}</ModalHeader>
         <ModalBody>
           <FormControl>
             <FormLabel>{t('order.quantity')}</FormLabel>
-            <HStack >
-              <Button onClick={handleDecrease}>-</Button>
+            <HStack justifyContent="center" spacing={4} alignItems="center">
+              <Button onClick={handleDecrease} h="40px">-</Button>
               <Input
                 type="number"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 textAlign="center"
+                maxW="50px"
+                h="40px"
               />
-              <Button onClick={handleIncrease}>+</Button>
+              <Button onClick={handleIncrease} h="40px">+</Button>
             </HStack>
           </FormControl>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter justifyContent="center">
           <Button onClick={onClose}>{t('order.cancel')}</Button>
           <Button colorScheme="blue" ml={3} onClick={handleSave}>
             {t('order.save')}
