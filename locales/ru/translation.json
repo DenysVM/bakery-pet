@@ -2,6 +2,7 @@
   "home": "Главная",
   "products": "Продукты",
   "account": "Аккаунт",
+  "adminDashboard": "Панель администратора",
   "logout": "Выйти",
   "catalog": {
     "title": "Каталог Продуктов",
