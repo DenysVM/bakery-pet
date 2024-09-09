@@ -1,6 +1,7 @@
 {
   "home": "Home",
   "products": "Products",
+  "adminDashboard": "Admin Dashboard",
   "account": "Account",
   "logout": "Logout",
   "catalog": {

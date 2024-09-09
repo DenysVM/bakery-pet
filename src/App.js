@@ -8,6 +8,7 @@ import AccountPage from './pages/AccountPage';
 import AuthPage from './pages/AuthPage';
 import SignupPage from './pages/SignupPage';
 import CartPage from './pages/CartPage';
+import AdminDashboardPage from './pages/Admin/AdminDashboardPage';
 import './i18n/i18n';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
         </Routes>
       </Router>
     </AppProviders>

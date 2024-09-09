@@ -2,9 +2,11 @@ import React from 'react';
 import { Stack, Link, useColorModeValue } from '@chakra-ui/react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../auth/AuthContext'; // Импортируем контекст аутентификации
 
 const NavLinks = ({ onNavigate }) => {
   const { t } = useTranslation();
+  const { user } = useAuth(); // Получаем пользователя из контекста аутентификации
 
   const linkColor = useColorModeValue('gray.800', 'white');
   const activeLinkColor = useColorModeValue('blue.800', 'blue.200');
@@ -45,6 +47,32 @@ const NavLinks = ({ onNavigate }) => {
           {link.text}
         </Link>
       ))}
+
+      {/* Добавляем ссылку на админку, если роль пользователя - "admin" */}
+      {user?.role === 'admin' && (
+        <Link
+          as={RouterNavLink}
+          to="/admin"
+          onClick={onNavigate}
+          fontSize="md"
+          fontWeight="medium"
+          color={linkColor}
+          transition="all 0.3s ease-in-out"
+          _hover={{
+            transform: 'translateY(-2px)',
+            color: 'blue.500'
+          }}
+          _focus={{
+            outline: 'none',
+          }}
+          _activeLink={{
+            color: activeLinkColor,
+            fontWeight: 'bold'
+          }}
+        >
+          {t('adminDashboard')}
+        </Link>
+      )}
     </Stack>
   );
 };

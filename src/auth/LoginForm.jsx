@@ -26,7 +26,11 @@ const LoginForm = () => {
         const data = await loginUser(values);
         if (data) {
           login(data);
-          navigate('/account');
+          if (data.role === 'admin') {
+            navigate('/admin');
+          } else {
+            navigate('/account');
+          }
         } else {
           toast({
             title: t('auth.loginError'),
