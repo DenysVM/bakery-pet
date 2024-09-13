@@ -7,15 +7,26 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  const setAuthToken = useCallback((token) => {
+    if (token) {
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setToken(token);
+    } else {
+      localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
+      setToken(null);
+    }
+  }, []);
 
   const logout = useCallback((navigate) => {
-    localStorage.removeItem('token');
+    setAuthToken(null);
     setIsAuthenticated(false);
     setUser(null);
-    setToken(null);
-    delete axios.defaults.headers.common['Authorization'];
     navigate('/auth');
-  }, []);
+  }, [setAuthToken]);
 
   const fetchUserProfile = useCallback(async (token) => {
     try {
@@ -29,32 +40,34 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('Failed to fetch user profile', error);
       logout();
+    } finally {
+      setLoadingAuth(false);  
     }
   }, [logout]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
-      setToken(storedToken);
+      setAuthToken(storedToken);
       fetchUserProfile(storedToken);
+    } else {
+      setLoadingAuth(false);  
     }
-  }, [fetchUserProfile]);
+  }, [fetchUserProfile, setAuthToken]);
 
   const login = (userData) => {
     try {
-      localStorage.setItem('token', userData.token);
-      setToken(userData.token);
+      setAuthToken(userData.token);
       setUser(userData);
       setIsAuthenticated(true);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+      setLoadingAuth(false);  
     } catch (error) {
       console.error('Failed to save user to localStorage', error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, token, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, token, loadingAuth, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

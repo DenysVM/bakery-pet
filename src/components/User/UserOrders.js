@@ -11,7 +11,7 @@ import { OrderProvider, useOrder } from '../Order/OrderContext';
 
 const UserOrdersContent = () => {
   const { t } = useTranslation();
-  const { token } = useAuth();
+  const { token, loadingAuth } = useAuth();  // Добавляем loadingAuth
   const { updateOrderItems } = useOrder();
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
@@ -32,6 +32,7 @@ const UserOrdersContent = () => {
   const toast = useToast();
 
   useEffect(() => {
+    // Функция для загрузки заказов и продуктов
     const fetchOrders = async () => {
       if (!token) {
         setError(t('auth.missingToken'));
@@ -51,8 +52,11 @@ const UserOrdersContent = () => {
       }
     };
 
-    fetchOrders();
-  }, [token, t, updateOrderItems]);
+    // Проверяем завершение авторизации и наличие токена
+    if (!loadingAuth && token) {
+      fetchOrders();  // Загружаем заказы, если авторизация завершена и токен доступен
+    }
+  }, [token, t, updateOrderItems, loadingAuth]);
 
   const handleEditItem = (order, item) => {
     setSelectedOrder(order);
@@ -138,7 +142,8 @@ const UserOrdersContent = () => {
     onDeleteClose();
   };
 
-  if (loading) {
+  // Отображаем спиннер, пока идет проверка авторизации или загрузка заказов
+  if (loadingAuth || loading) {
     return (
       <Box textAlign="center" py="6">
         <Spinner size="xl" />
@@ -146,6 +151,7 @@ const UserOrdersContent = () => {
     );
   }
 
+  // Отображаем ошибку, если что-то пошло не так
   if (error) {
     return (
       <Box textAlign="center" py="6">
@@ -157,6 +163,7 @@ const UserOrdersContent = () => {
     );
   }
 
+  // Если заказов нет, показываем соответствующее сообщение
   if (orders.length === 0) {
     return (
       <Box textAlign="center" py="6">
@@ -165,6 +172,7 @@ const UserOrdersContent = () => {
     );
   }
 
+  // Основной рендер списка заказов
   return (
     <Box>
       {orders.map((order) => (

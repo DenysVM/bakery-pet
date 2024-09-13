@@ -14,6 +14,35 @@ export const createOrder = async (orderData, token) => {
   }
 };
 
+export const updateOrderStatus = async (orderId, status, token) => {
+  try {
+    const response = await axiosOrderInstance.put(`/${orderId}/status`, { status }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating order status:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
+
+export const getAllOrders = async (token) => {
+  try {
+    const response = await axiosOrderInstance.get('/all', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all orders:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
 export const getUserOrders = async (token) => {
   try {
     const response = await axiosOrderInstance.get('/', {
