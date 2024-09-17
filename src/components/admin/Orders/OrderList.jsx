@@ -16,6 +16,8 @@ import { useAuth } from '../../../auth/AuthContext';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import { OrderStatus } from './'
 import { useTranslation } from 'react-i18next';
+import { formatDate } from '../../common/formatDate';
+
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -75,7 +77,7 @@ const OrderList = () => {
     <Box>
       {orders.map((order) => (
         <Box key={order._id} p={4} borderWidth="1px" borderRadius="lg" mb={4}>
-          <Text fontWeight="bold">{t('order.orderId')}: {order._id} - {new Date(order.createdAt).toLocaleDateString()}</Text>
+          <Text fontWeight="bold">{t('order.orderId')}: {order._id} - {formatDate(order.createdAt)}</Text>
           <Text>{t('order.total')}: ${order.total.toFixed(2)}</Text>
   
 

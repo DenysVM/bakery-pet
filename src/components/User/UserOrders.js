@@ -1,13 +1,32 @@
+// src/components/UserOrders/UserOrdersContent.jsx
+
 import React, { useEffect, useState } from 'react';
-import { Box, Spinner, Alert, AlertIcon, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Spinner,
+  Alert,
+  AlertIcon,
+  Text,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { deleteOrder, getUserOrders, deleteOrderItem } from '../../services/orderService';
+import {
+  deleteOrder,
+  getUserOrders,
+  deleteOrderItem,
+} from '../../services/orderService';
 import { loadProducts } from '../../services/productService';
 import { useAuth } from '../../auth/AuthContext';
-import OrderItem from '../Order/OrderItem';
-import EditOrderItem from '../Order/EditOrderItem';
-import DeleteOrderItem from '../Order/DeleteOrderItem';
-import { OrderProvider, useOrder } from '../Order/OrderContext';
+import {
+  OrderItem,
+  EditOrderItem,
+  DeleteOrderItem,
+  OrderProvider,
+  useOrder,
+} from '../Order';
+import { formatDate } from '../../components/common/formatDate';
+
 
 const UserOrdersContent = () => {
   const { t } = useTranslation();
@@ -39,11 +58,13 @@ const UserOrdersContent = () => {
         return;
       }
       try {
-        const ordersData = await getUserOrders(token);
-        const productsData = await loadProducts();
+        const [ordersData, productsData] = await Promise.all([
+          getUserOrders(token),
+          loadProducts(),
+        ]);
         setOrders(ordersData);
         setProducts(productsData);
-        updateOrderItems(ordersData.flatMap(order => order.items));
+        updateOrderItems(ordersData.flatMap((order) => order.items));
       } catch (error) {
         setError(error.message || t('order.errorFetching'));
       } finally {
@@ -77,7 +98,10 @@ const UserOrdersContent = () => {
               items: order.items.map((item) =>
                 item._id === updatedItem._id ? updatedItem : item
               ),
-              total: order.items.reduce((sum, item) => sum + item.quantity * item.price, 0),
+              total: order.items.reduce(
+                (sum, item) => sum + item.quantity * item.price,
+                0
+              ),
             }
           : order
       )
@@ -95,12 +119,15 @@ const UserOrdersContent = () => {
         : order
     );
 
-    const orderToUpdate = updatedOrders.find(order => order._id === selectedOrder._id);
+    const orderToUpdate = updatedOrders.find(
+      (order) => order._id === selectedOrder._id
+    );
 
     if (orderToUpdate.items.length === 0) {
+      // Если в заказе больше нет товаров, удаляем заказ
       try {
         await deleteOrder(selectedOrder._id, token);
-        setOrders(updatedOrders.filter(order => order._id !== selectedOrder._id));
+        setOrders(updatedOrders.filter((order) => order._id !== selectedOrder._id));
         toast({
           title: t('order.orderDeleted'),
           status: 'success',
@@ -117,6 +144,7 @@ const UserOrdersContent = () => {
         });
       }
     } else {
+      // Иначе просто обновляем заказ
       setOrders(updatedOrders);
       try {
         await deleteOrderItem(selectedOrder._id, productId, token);
@@ -140,7 +168,7 @@ const UserOrdersContent = () => {
     onDeleteClose();
   };
 
-  // Отображаем спиннер, пока идет проверка авторизации или загрузка заказов
+  // Рендеринг загрузки или ошибки
   if (loadingAuth || loading) {
     return (
       <Box textAlign="center" py="6">
@@ -149,7 +177,6 @@ const UserOrdersContent = () => {
     );
   }
 
-  // Отображаем ошибку, если что-то пошло не так
   if (error) {
     return (
       <Box textAlign="center" py="6">
@@ -161,7 +188,6 @@ const UserOrdersContent = () => {
     );
   }
 
-  // Если заказов нет, показываем соответствующее сообщение
   if (orders.length === 0) {
     return (
       <Box textAlign="center" py="6">
@@ -176,12 +202,15 @@ const UserOrdersContent = () => {
       {orders.map((order) => (
         <Box key={order._id} borderWidth="1px" borderRadius="lg" p="4" mb="4">
           <Text fontWeight="bold" mb="2">
-            {t('order.orderId')}: {order._id} - {new Date(order.createdAt).toLocaleDateString()}
+            {t('order.orderId')}: {order._id}
           </Text>
 
-          {/* Добавляем отображение статуса заказа */}
           <Text mb="2">
-          {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
+            {t('order.date')}: {formatDate(order.createdAt)}
+          </Text>
+
+          <Text mb="2">
+            {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
           </Text>
 
           {order.items.map((item) => (

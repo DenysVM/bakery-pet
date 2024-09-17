@@ -138,6 +138,7 @@
   },
   "order": {
     "orderId": "Order ID",
+    "date": "Order date",
     "total": "Total",
     "itemUpdated": "Item updated successfully",
     "errorUpdating": "Error updating item",

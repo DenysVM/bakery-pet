@@ -139,6 +139,7 @@
   },
   "order": {
     "orderId": "Numer zamówienia",
+    "date": "Data zamówienia",
     "total": "Razem",
     "itemUpdated": "Przedmiot został pomyślnie zaktualizowany",
     "errorUpdating": "Błąd podczas aktualizacji przedmiotu",
