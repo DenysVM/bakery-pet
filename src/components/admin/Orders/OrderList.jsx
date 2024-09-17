@@ -1,35 +1,49 @@
+// src/components/Admin/Order/OrderList.jsx
+
 import React, { useEffect, useState, useCallback } from 'react';
-import { Box, Text, Spinner, Button, useToast } from '@chakra-ui/react';
-import { getAllOrders } from '../../../services/orderService'; 
-import { useAuth } from '../../../auth/AuthContext'; 
-import EditOrderStatus from './EditOrderStatus'; 
+import {
+  Box,
+  Text,
+  Spinner,
+  Button,
+  IconButton,
+  ButtonGroup,
+  useToast,
+  useBreakpointValue,
+} from '@chakra-ui/react';
+import { getAllOrders } from '../../../services/orderService';
+import { useAuth } from '../../../auth/AuthContext';
+import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import { OrderStatus } from './'
+import { useTranslation } from 'react-i18next';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { token, loadingAuth } = useAuth();  
+  const { token, loadingAuth } = useAuth();
   const toast = useToast();
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const { t } = useTranslation();
 
-  // Функция для загрузки заказов с обработкой токена
   const fetchOrders = useCallback(async () => {
     if (!token) {
-      setError('Unauthorized');
+      setError(t('auth.missingToken'));
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    setError(null);  // Сбрасываем ошибки перед новым запросом
+    setError(null);
 
     try {
       const data = await getAllOrders(token);
       setOrders(data);
     } catch (err) {
-      setError('Failed to fetch orders');
+      setError(t('order.errorFetching'));
       toast({
-        title: 'Error fetching orders',
-        description: err.message || 'Failed to fetch orders',
+        title: t('order.errorFetching'),
+        description: err.message || t('order.errorFetchingDescription'),
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -37,57 +51,75 @@ const OrderList = () => {
     } finally {
       setLoading(false);
     }
-  }, [token, toast]);
+  }, [token, toast, t]);
 
-  // Выполняем загрузку заказов, когда токен готов и авторизация завершена
   useEffect(() => {
     if (!loadingAuth && token) {
       fetchOrders();
     }
   }, [token, loadingAuth, fetchOrders]);
 
-  // Обработчик обновления заказов
-  const handleUpdate = () => {
-    fetchOrders();
-  };
-
-  // Отображение загрузки авторизации
   if (loadingAuth) {
-    return <Spinner size="xl" label="Checking authorization..." />;
+    return <Spinner size="xl" label={t('auth.checkingAuthorization')} />;
   }
 
-  // Отображение загрузки заказов
   if (loading) {
-    return <Spinner size="xl" label="Loading orders..." />;
+    return <Spinner size="xl" label={t('order.loadingOrders')} />;
   }
 
-  // Отображение ошибок
   if (error) {
     return <Text color="red.500">{error}</Text>;
   }
 
-  // Основной рендер заказов
   return (
     <Box>
       {orders.map((order) => (
         <Box key={order._id} p={4} borderWidth="1px" borderRadius="lg" mb={4}>
-          <Text fontWeight="bold">Order ID: {order._id}</Text>
-          <Text>Total: ${order.total.toFixed(2)}</Text>
-          <Text>Status: {order.status}</Text>
+          <Text fontWeight="bold">{t('order.orderId')}: {order._id} - {new Date(order.createdAt).toLocaleDateString()}</Text>
+          <Text>{t('order.total')}: ${order.total.toFixed(2)}</Text>
+  
 
-          <Box mt={2} display="flex" justifyContent="flex-end">
-            <Button size="sm" mr={2} colorScheme="blue" onClick={() => console.log('View Details')}>
-              View Details
-            </Button>
-            <Button size="sm" mr={2} colorScheme="yellow" onClick={() => console.log('Edit Order')}>
-              Edit Order
-            </Button>
-            <Button size="sm" colorScheme="red" onClick={() => console.log('Delete Order')}>
-              Delete Order
-            </Button>
+          {/* Кнопки действий */}
+          <Box mt={2} display="flex" justifyContent="flex-start">
+          <OrderStatus
+              order={order}
+              token={token}
+              onStatusUpdated={(orderId, newStatus) => {
+                setOrders((prevOrders) =>
+                  prevOrders.map((o) =>
+                    o._id === orderId ? { ...o, status: newStatus } : o
+                  )
+                );
+              }}
+            />
+            <ButtonGroup size="sm" isAttached variant="outline">
+              {isMobile ? (
+                <>
+                  <IconButton
+                    icon={<FaEye />}
+                    aria-label={t('order.viewDetails')}
+                    onClick={() => console.log('View Details')}
+                  />
+                  <IconButton
+                    icon={<FaEdit />}
+                    aria-label={t('order.editOrder')}
+                    onClick={() => console.log('Edit Order')}
+                  />
+                  <IconButton
+                    icon={<FaTrash />}
+                    aria-label={t('order.deleteOrder')}
+                    onClick={() => console.log('Delete Order')}
+                  />
+                </>
+              ) : (
+                <>
+                  <Button onClick={() => console.log('View Details')}>{t('order.viewDetails')}</Button>
+                  <Button onClick={() => console.log('Edit Order')}>{t('order.editOrder')}</Button>
+                  <Button onClick={() => console.log('Delete Order')}>{t('order.deleteOrder')}</Button>
+                </>
+              )}
+            </ButtonGroup>
           </Box>
-
-          <EditOrderStatus order={order} onUpdate={handleUpdate} />
         </Box>
       ))}
     </Box>

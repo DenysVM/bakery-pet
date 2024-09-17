@@ -92,7 +92,9 @@
       "registrationSuccess": "Регистрация успешна",
       "registrationSuccessMessage": "Вы успешно зарегистрированы!",
       "registrationError": "Ошибка регистрации",
-      "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта."
+      "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта.",
+      "missingToken": "Отсутствует токен авторизации",
+      "checkingAuthorization": "Проверка авторизации..."
     },
 
   "user": {
@@ -152,6 +154,24 @@
     "itemDeleted": "Товар успешно удален",
     "delete": "Удалить",
     "orderDeleted": "Заказ успешно удален",
-    "errorDeletingOrder": "Ошибка при удалении заказа"
+    "errorDeletingOrder": "Ошибка при удалении заказа",
+    "currentStatus": "Текущий статус",
+    "statusUpdated": "Статус обновлен",
+    "statusUpdatedDescription": "Статус заказа {{orderId}} обновлен на {{status}}",
+    "errorUpdatingStatus": "Ошибка обновления статуса",
+    "errorUpdatingStatusDescription": "Не удалось обновить статус заказа",
+    "errorFetchingDescription": "Произошла ошибка при получении заказов",
+    "loadingOrders": "Загрузка заказов...",
+    "viewDetails": "Просмотреть детали",
+    "editOrder": "Редактировать заказ",
+    "deleteOrder": "Удалить заказ",
+    "statusLabel": "Статус",
+    "status": {
+      "pending": "В ожидании",
+      "processing": "В обработке",
+      "shipped": "Отправлен",
+      "delivered": "Доставлен",
+      "cancelled": "Отменен"
+    }
   }
 }

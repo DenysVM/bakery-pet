@@ -1,6 +1,7 @@
 {
   "home": "Strona główna",
   "products": "Produkty",
+  "adminDashboard": "Panel administratora",
   "account": "Konto",
   "logout": "Wyloguj się",
   "catalog": {
@@ -91,7 +92,9 @@
       "registrationSuccess": "Rejestracja zakończona sukcesem",
       "registrationSuccessMessage": "Zostałeś pomyślnie zarejestrowany!",
       "registrationError": "Błąd rejestracji",
-      "registrationErrorMessage": "Wystąpił błąd podczas rejestracji konta."
+      "registrationErrorMessage": "Wystąpił błąd podczas rejestracji konta.",
+      "missingToken": "Brak tokenu uwierzytelniania",
+      "checkingAuthorization": "Sprawdzanie autoryzacji..."
     },
 
   "user": {
@@ -151,6 +154,24 @@
     "itemDeleted": "Przedmiot pomyślnie usunięty",
     "delete": "Usuń",
     "orderDeleted": "Zamówienie zostało pomyślnie usunięte",
-    "errorDeletingOrder": "Błąd podczas usuwania zamówienia"
+    "errorDeletingOrder": "Błąd podczas usuwania zamówienia",
+    "currentStatus": "Aktualny status",
+    "statusUpdated": "Status zaktualizowany",
+    "statusUpdatedDescription": "Status zamówienia {{orderId}} został zmieniony na {{status}}",
+    "errorUpdatingStatus": "Błąd aktualizacji statusu",
+    "errorUpdatingStatusDescription": "Nie udało się zaktualizować statusu zamówienia",
+    "errorFetchingDescription": "Wystąpił błąd podczas pobierania zamówień",
+    "loadingOrders": "Ładowanie zamówień...",
+    "viewDetails": "Zobacz szczegóły",
+    "editOrder": "Edytuj zamówienie",
+    "deleteOrder": "Usuń zamówienie",
+    "statusLabel": "Status",
+    "status": {
+      "pending": "Oczekujące",
+      "processing": "Przetwarzane",
+      "shipped": "Wysłane",
+      "delivered": "Dostarczone",
+      "cancelled": "Anulowane"
+    }
   }
 }

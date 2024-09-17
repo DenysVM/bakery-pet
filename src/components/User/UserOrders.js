@@ -11,7 +11,7 @@ import { OrderProvider, useOrder } from '../Order/OrderContext';
 
 const UserOrdersContent = () => {
   const { t } = useTranslation();
-  const { token, loadingAuth } = useAuth();  // Добавляем loadingAuth
+  const { token, loadingAuth } = useAuth();
   const { updateOrderItems } = useOrder();
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
@@ -32,7 +32,6 @@ const UserOrdersContent = () => {
   const toast = useToast();
 
   useEffect(() => {
-    // Функция для загрузки заказов и продуктов
     const fetchOrders = async () => {
       if (!token) {
         setError(t('auth.missingToken'));
@@ -52,9 +51,8 @@ const UserOrdersContent = () => {
       }
     };
 
-    // Проверяем завершение авторизации и наличие токена
     if (!loadingAuth && token) {
-      fetchOrders();  // Загружаем заказы, если авторизация завершена и токен доступен
+      fetchOrders();
     }
   }, [token, t, updateOrderItems, loadingAuth]);
 
@@ -79,7 +77,7 @@ const UserOrdersContent = () => {
               items: order.items.map((item) =>
                 item._id === updatedItem._id ? updatedItem : item
               ),
-              total: order.items.reduce((sum, item) => sum + item.quantity * item.price, 0), 
+              total: order.items.reduce((sum, item) => sum + item.quantity * item.price, 0),
             }
           : order
       )
@@ -178,8 +176,14 @@ const UserOrdersContent = () => {
       {orders.map((order) => (
         <Box key={order._id} borderWidth="1px" borderRadius="lg" p="4" mb="4">
           <Text fontWeight="bold" mb="2">
-            {t('order.orderId')}: {order._id}
+            {t('order.orderId')}: {order._id} - {new Date(order.createdAt).toLocaleDateString()}
           </Text>
+
+          {/* Добавляем отображение статуса заказа */}
+          <Text mb="2">
+          {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
+          </Text>
+
           {order.items.map((item) => (
             <OrderItem
               key={item._id}

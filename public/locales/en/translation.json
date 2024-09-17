@@ -91,7 +91,9 @@
       "registrationSuccess": "Registration Successful",
       "registrationSuccessMessage": "You have successfully registered!",
       "registrationError": "Registration Error",
-      "registrationErrorMessage": "There was an error registering your account."
+      "registrationErrorMessage": "There was an error registering your account.",
+      "missingToken": "Missing authentication token",
+      "checkingAuthorization": "Checking authorization..."
     },
   
   "user": {
@@ -151,6 +153,25 @@
     "itemDeleted": "Item successfully deleted",
     "delete": "Delete",
     "orderDeleted": "Order successfully deleted",
-    "errorDeletingOrder": "Error deleting order"
-  }
+    "errorDeletingOrder": "Error deleting order",
+    "currentStatus": "Current Status",
+    "statusUpdated": "Status updated",
+    "statusUpdatedDescription": "Order {{orderId}} status updated to {{status}}",
+    "errorUpdatingStatus": "Error updating status",
+    "errorUpdatingStatusDescription": "Failed to update order status",
+    "errorFetchingDescription": "An error occurred while fetching orders",
+    "loadingOrders": "Loading orders...",
+    "viewDetails": "View Details",
+    "editOrder": "Edit Order",
+    "deleteOrder": "Delete Order",
+    "statusLabel": "Status",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+  },
+  "changeStatus": "Change Status"
+}
 }
