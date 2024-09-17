@@ -1,6 +1,7 @@
 {
   "home": "Головна",
   "products": "Продукти",
+  "adminDashboard": "Панель адміністратора",
   "account": "Акаунт",
   "logout": "Вийти",
   "catalog": {
@@ -91,7 +92,9 @@
       "registrationSuccess": "Реєстрація успішна",
       "registrationSuccessMessage": "Ви успішно зареєстровані!",
       "registrationError": "Помилка реєстрації",
-      "registrationErrorMessage": "Сталася помилка під час реєстрації вашого акаунта."
+      "registrationErrorMessage": "Сталася помилка під час реєстрації вашого акаунта.",
+      "missingToken": "Відсутній токен автентифікації",
+      "checkingAuthorization": "Перевірка авторизації..."  
     },
   
   "user": {
@@ -136,6 +139,7 @@
   },
   "order": {
     "orderId": "Номер замовлення",
+    "date": "Дата замовлення",
     "total": "Всього",
     "itemUpdated": "Товар успішно оновлено",
     "errorUpdating": "Помилка при оновленні товару",
@@ -151,6 +155,24 @@
     "itemDeleted": "Товар успішно видалено",
     "delete": "Видалити",
     "orderDeleted": "Замовлення успішно видалено",
-    "errorDeletingOrder": "Помилка при видаленні замовлення"
+    "errorDeletingOrder": "Помилка при видаленні замовлення",
+    "currentStatus": "Поточний статус",
+    "statusUpdated": "Статус оновлено",
+    "statusUpdatedDescription": "Статус замовлення {{orderId}} змінено на {{status}}",
+    "errorUpdatingStatus": "Помилка оновлення статусу",
+    "errorUpdatingStatusDescription": "Не вдалося оновити статус замовлення",
+    "errorFetchingDescription": "Сталася помилка під час отримання замовлень",
+    "loadingOrders": "Завантаження замовлень...",
+    "viewDetails": "Переглянути деталі",
+    "editOrder": "Редагувати замовлення",
+    "deleteOrder": "Видалити замовлення",
+    "statusLabel": "Статус",
+    "status": {
+      "pending": "В очікуванні",
+      "processing": "Обробляється",
+      "shipped": "Відправлено",
+      "delivered": "Доставлено",
+      "cancelled": "Скасовано"
+    }
   }
 }
