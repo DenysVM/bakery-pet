@@ -106,6 +106,7 @@
     "email": "Email",
     "phone": "Telefon",
     "address": "Adres",
+    "city":"miasto",
     "street": "ul.",
     "houseNumber": "nr",
     "apartmentNumber": "m.",
@@ -139,6 +140,7 @@
   },
   "order": {
     "orderId": "Numer zamówienia",
+    "orderDetails": "Szczegóły zamówienia",
     "date": "Data zamówienia",
     "total": "Razem",
     "itemUpdated": "Przedmiot został pomyślnie zaktualizowany",
@@ -166,6 +168,8 @@
     "viewDetails": "Zobacz szczegóły",
     "editOrder": "Edytuj zamówienie",
     "deleteOrder": "Usuń zamówienie",
+    "items": "Skład zamówienia",
+    "invoice": "Utwórz fakturę",
     "statusLabel": "Status",
     "status": {
       "pending": "Oczekujące",

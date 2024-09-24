@@ -124,7 +124,6 @@ const UserOrdersContent = () => {
     );
 
     if (orderToUpdate.items.length === 0) {
-      // Если в заказе больше нет товаров, удаляем заказ
       try {
         await deleteOrder(selectedOrder._id, token);
         setOrders(updatedOrders.filter((order) => order._id !== selectedOrder._id));
@@ -144,7 +143,7 @@ const UserOrdersContent = () => {
         });
       }
     } else {
-      // Иначе просто обновляем заказ
+
       setOrders(updatedOrders);
       try {
         await deleteOrderItem(selectedOrder._id, productId, token);
@@ -168,7 +167,6 @@ const UserOrdersContent = () => {
     onDeleteClose();
   };
 
-  // Рендеринг загрузки или ошибки
   if (loadingAuth || loading) {
     return (
       <Box textAlign="center" py="6">

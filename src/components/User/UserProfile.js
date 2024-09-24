@@ -38,7 +38,7 @@ const UserProfile = () => {
       <Text fontSize="xl">{t('user.email')}: {profile.email}</Text>
       <Text fontSize="xl">{t('user.phone')}: {profile.phone}</Text>
       <Text fontSize="xl">
-        {t('user.address')}: {t('user.street')} {profile.address.street}, {t('user.houseNumber')} {profile.address.houseNumber}, {t('user.apartmentNumber')} {profile.address.apartmentNumber}, {profile.address.city}
+        {t('user.address')}: {t('user.city')} {profile.address.city}, {t('user.street')} {profile.address.street}, {t('user.houseNumber')} {profile.address.houseNumber}, {t('user.apartmentNumber')} {profile.address.apartmentNumber}
       </Text>
     </Box>
   );
