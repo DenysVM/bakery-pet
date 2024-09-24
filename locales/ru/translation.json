@@ -106,6 +106,7 @@
     "email": "Электронная почта",
     "phone": "Телефон",
     "address": "Адрес",
+    "city":"город",
     "street": "ул.",
     "houseNumber": "д.",
     "apartmentNumber": "кв.",
@@ -139,6 +140,7 @@
   },
   "order": {
     "orderId": "Номер заказа",
+    "orderDetails": "Детали заказа",
     "date": "Дата заказа",
     "total": "Итого",
     "itemUpdated": "Товар успешно обновлен",
@@ -167,6 +169,8 @@
     "editOrder": "Редактировать заказ",
     "deleteOrder": "Удалить заказ",
     "statusLabel": "Статус",
+    "items": "Состав заказа",
+    "invoice": "Создать накладную",
     "status": {
       "pending": "В ожидании",
       "processing": "В обработке",

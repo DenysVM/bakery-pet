@@ -1,16 +1,22 @@
 {
   "files": {
     "main.css": "/bakery-pet/static/css/main.0eb7e821.css",
-    "main.js": "/bakery-pet/static/js/main.f5fa31dc.js",
-    "static/js/453.419a5d54.chunk.js": "/bakery-pet/static/js/453.419a5d54.chunk.js",
+    "main.js": "/bakery-pet/static/js/main.a0c90715.js",
+    "static/js/781.a9f8d56f.chunk.js": "/bakery-pet/static/js/781.a9f8d56f.chunk.js",
+    "static/js/155.73857089.chunk.js": "/bakery-pet/static/js/155.73857089.chunk.js",
+    "static/js/850.a49e3888.chunk.js": "/bakery-pet/static/js/850.a49e3888.chunk.js",
+    "static/js/453.258b012d.chunk.js": "/bakery-pet/static/js/453.258b012d.chunk.js",
     "index.html": "/bakery-pet/index.html",
     "static/media/getFetch.cjs": "/bakery-pet/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.0eb7e821.css.map": "/bakery-pet/static/css/main.0eb7e821.css.map",
-    "main.f5fa31dc.js.map": "/bakery-pet/static/js/main.f5fa31dc.js.map",
-    "453.419a5d54.chunk.js.map": "/bakery-pet/static/js/453.419a5d54.chunk.js.map"
+    "main.a0c90715.js.map": "/bakery-pet/static/js/main.a0c90715.js.map",
+    "781.a9f8d56f.chunk.js.map": "/bakery-pet/static/js/781.a9f8d56f.chunk.js.map",
+    "155.73857089.chunk.js.map": "/bakery-pet/static/js/155.73857089.chunk.js.map",
+    "850.a49e3888.chunk.js.map": "/bakery-pet/static/js/850.a49e3888.chunk.js.map",
+    "453.258b012d.chunk.js.map": "/bakery-pet/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0eb7e821.css",
-    "static/js/main.f5fa31dc.js"
+    "static/js/main.a0c90715.js"
   ]
 }

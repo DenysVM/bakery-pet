@@ -105,6 +105,7 @@
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
+    "city":"city",
     "street": "St.",
     "houseNumber": "No.",
     "apartmentNumber": "Apt.",
@@ -138,6 +139,7 @@
   },
   "order": {
     "orderId": "Order ID",
+    "orderDetails": "Order details",
     "date": "Order date",
     "total": "Total",
     "itemUpdated": "Item updated successfully",
@@ -165,6 +167,8 @@
     "viewDetails": "View Details",
     "editOrder": "Edit Order",
     "deleteOrder": "Delete Order",
+    "items": "Composition of the order",
+    "invoice": "Create an invoice",
     "statusLabel": "Status",
     "status": {
       "pending": "Pending",
