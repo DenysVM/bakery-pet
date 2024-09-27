@@ -3,3 +3,4 @@ export { default as OrderDetail } from './OrderDetail';
 export { default as OrderStatus } from './OrderStatus';
 export { default as OrderDelete } from './OrderDelete';
 export { default as EditOrderStatus } from './EditOrderStatus';
+export { default as EditOrder } from './EditOrder';

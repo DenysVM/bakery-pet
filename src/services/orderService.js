@@ -98,3 +98,31 @@ export const deleteOrder = async (orderId, token) => {
     throw error;
   }
 };
+
+export const addItemToOrder = async (orderId, itemData, token) => {
+  try {
+    const response = await axiosOrderInstance.post(`/${orderId}/items`, itemData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding item to order:', error);
+    throw error;
+  }
+};
+
+export const getOrderById = async (orderId, token) => {
+  try {
+    const response = await axiosOrderInstance.get(`/${orderId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching order by ID:', error);
+    throw error;
+  }
+};

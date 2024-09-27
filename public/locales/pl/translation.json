@@ -4,6 +4,7 @@
   "adminDashboard": "Panel administratora",
   "account": "Konto",
   "logout": "Wyloguj się",
+  "add":"Dodać",
   "catalog": {
     "title": "Katalog Produktów",
     "description": "Zapoznaj się z naszym asortymentem artyzanalnych wypieków, wykonanych z miłością i dbałością o każdego klienta."
@@ -143,7 +144,7 @@
     "orderDetails": "Szczegóły zamówienia",
     "date": "Data zamówienia",
     "total": "Razem",
-    "itemUpdated": "Przedmiot został pomyślnie zaktualizowany",
+    "itemUpdated": "Zamówienia zostało pomyślnie zaktualizowany",
     "errorUpdating": "Błąd podczas aktualizacji przedmiotu",
     "editItem": "Edytuj przedmiot",
     "quantity": "Ilość",
@@ -168,6 +169,10 @@
     "viewDetails": "Zobacz szczegóły",
     "editOrder": "Edytuj zamówienie",
     "deleteOrder": "Usuń zamówienie",
+    "selectProduct":"Wybierać produkt",
+    "addProduct":"Dodać produkt",
+    "productAdded":"Produkt dodany",
+    "errorInvalidProduct":"Musisz wybrać produkt",
     "items": "Skład zamówienia",
     "invoice": "Utwórz fakturę",
     "statusLabel": "Status",

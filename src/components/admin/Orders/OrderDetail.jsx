@@ -18,44 +18,56 @@ import {
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '../../common/formatDate';
 import { generateInvoicePDF } from '../../../utils/invoiceGenerator';
-import ProductModal from '../../common/Modal/ProductModal'; 
-import BottomSheet from '../../common/BottomSheet/BottomSheet'; 
+import ProductModal from '../../common/Modal/ProductModal';
+import BottomSheet from '../../common/BottomSheet/BottomSheet';
+import EditOrder from './EditOrder'; 
 
 const OrderDetail = ({ order, onClose, products }) => {
   const { t, i18n } = useTranslation();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { isOpen, onOpen, onClose: onModalClose } = useDisclosure();
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose
+  } = useDisclosure(); 
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [orderDetails, setOrderDetails] = useState(order); 
 
-  const address = order.address || {};
+  const address = orderDetails.address || {};
   const deliveryAddress = `${t('user.city')} ${address.city || ''}, ${t('user.street')} ${address.street || ''}, ${t('user.houseNumber')} ${address.houseNumber || ''}, ${t(
     'user.apartmentNumber'
   )} ${address.apartmentNumber || ''}`;
-  const customerPhone = order.phone || t('user.noData');
+  const customerPhone = orderDetails.phone || t('user.noData');
 
-  const customerName = order.user
-    ? `${order.user.firstName} ${order.user.lastName}`
+  const customerName = orderDetails.user
+    ? `${orderDetails.user.firstName} ${orderDetails.user.lastName}`
     : t('user.noData');
-    const handleDownloadInvoice = () => {
-      generateInvoicePDF(order, products); 
-    };
+
+  const handleDownloadInvoice = () => {
+    generateInvoicePDF(orderDetails, products);
+  };
 
   const handleProductClick = (productId) => {
-    const product = products.find((p) => p.productId === productId); 
+    const product = products.find((p) => p.productId === productId);
     if (product) {
       setSelectedProduct(product);
       onOpen();
     }
   };
 
+  const handleOrderUpdate = (updatedOrder) => {
+    setOrderDetails(updatedOrder);
+  };
+
   return (
     <Box>
       <Stack spacing={4}>
         <Heading size="md">
-          {t('order.orderId')}: {order._id}
+          {t('order.orderId')}: {orderDetails._id}
         </Heading>
         <Text>
-          {t('order.date')}: {formatDate(order.createdAt)}
+          {t('order.date')}: {formatDate(orderDetails.createdAt)}
         </Text>
 
         <Heading size="sm">{t('user.profile')}</Heading>
@@ -82,9 +94,8 @@ const OrderDetail = ({ order, onClose, products }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {order.items.map((item) => {
-                const product = products.find(p => p.productId === item.productId); 
-
+              {orderDetails.items.map((item) => {
+                const product = products.find(p => p.productId === item.productId);
                 const productName = product ? product.name[i18n.language] : t('order.noProduct');
 
                 return (
@@ -109,9 +120,8 @@ const OrderDetail = ({ order, onClose, products }) => {
         ) : (
 
           <Stack spacing={4}>
-            {order.items.map((item) => {
+            {orderDetails.items.map((item) => {
               const product = products.find(p => p.productId === item.productId);
-
               const productName = product ? product.name[i18n.language] : t('order.noProduct');
 
               return (
@@ -144,15 +154,27 @@ const OrderDetail = ({ order, onClose, products }) => {
         )}
 
         <Text fontWeight="bold">
-          {t('order.total')}: ${order.total?.toFixed(2) || '0.00'}
+          {t('order.total')}: ${orderDetails.total?.toFixed(2) || '0.00'}
         </Text>
 
         <Flex justify="flex-end" mt={4}>
+
           <Button colorScheme="blue" onClick={handleDownloadInvoice}>
             {t('order.invoice')}
           </Button>
+          <Button ml={4} onClick={onEditOpen} colorScheme="teal">
+            {t('order.editOrder')}
+          </Button>
+
         </Flex>
       </Stack>
+
+      <EditOrder
+        isOpen={isEditOpen}
+        onClose={onEditClose}
+        order={orderDetails} 
+        onSave={handleOrderUpdate} 
+      />
     </Box>
   );
 };
