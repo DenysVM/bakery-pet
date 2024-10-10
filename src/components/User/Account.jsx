@@ -1,4 +1,3 @@
-// src/components/User/Account.jsx
 import React from 'react';
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +14,7 @@ const Account = () => {
 
   return (
     <Box mt="4em" p={2}>
-      <Tabs isFitted variant="enclosed">
+      <Tabs isFitted variant="enclosed" isLazy lazyBehavior="unmount">
         <TabList mb="2em">
           <Tab>{t('user.tabProfile')}</Tab>
           <Tab>{t('user.tabOrders')}</Tab>

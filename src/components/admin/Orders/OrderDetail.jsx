@@ -14,30 +14,59 @@ import {
   Stack,
   useDisclosure,
   useMediaQuery,
+  useToast,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '../../common/formatDate';
 import { generateInvoicePDF } from '../../../utils/invoiceGenerator';
 import ProductModal from '../../common/Modal/ProductModal';
 import BottomSheet from '../../common/BottomSheet/BottomSheet';
-import EditOrder from './EditOrder'; 
+import EditOrder from './EditOrder';
 
-const OrderDetail = ({ order, onClose, products }) => {
+const OrderDetail = ({ order, onClose }) => {
   const { t, i18n } = useTranslation();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const { isOpen, onOpen, onClose: onModalClose } = useDisclosure();
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
-    onClose: onEditClose
-  } = useDisclosure(); 
+    onClose: onEditClose,
+  } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [orderDetails, setOrderDetails] = useState(order); 
+  const [orderDetails, setOrderDetails] = useState(order);
+  const [totalPrice, setTotalPrice] = useState(order.total);
+  const toast = useToast();
+
+  const calculateTotalPrice = (items) => {
+    return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  };
+
+  const handleOrderUpdate = (updatedOrder) => {
+    setOrderDetails(updatedOrder);
+    const newTotalPrice = calculateTotalPrice(updatedOrder.items);
+    setTotalPrice(newTotalPrice);
+  };
+
+  const handleProductClick = (productId) => {
+    const product = orderDetails.items.find((item) => item.product._id === productId).product;
+    if (product) {
+      setSelectedProduct(product);
+      onOpen();
+    } else {
+      toast({
+        title: t('product.notFound'),
+        description: t('product.notFoundDescription'),
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   const address = orderDetails.address || {};
-  const deliveryAddress = `${t('user.city')} ${address.city || ''}, ${t('user.street')} ${address.street || ''}, ${t('user.houseNumber')} ${address.houseNumber || ''}, ${t(
-    'user.apartmentNumber'
-  )} ${address.apartmentNumber || ''}`;
+  const deliveryAddress = `${t('user.city')} ${address.city || ''}, ${t('user.street')} ${address.street || ''}, ${t(
+    'user.houseNumber'
+  )} ${address.houseNumber || ''}, ${t('user.apartmentNumber')} ${address.apartmentNumber || ''}`;
   const customerPhone = orderDetails.phone || t('user.noData');
 
   const customerName = orderDetails.user
@@ -45,19 +74,7 @@ const OrderDetail = ({ order, onClose, products }) => {
     : t('user.noData');
 
   const handleDownloadInvoice = () => {
-    generateInvoicePDF(orderDetails, products);
-  };
-
-  const handleProductClick = (productId) => {
-    const product = products.find((p) => p.productId === productId);
-    if (product) {
-      setSelectedProduct(product);
-      onOpen();
-    }
-  };
-
-  const handleOrderUpdate = (updatedOrder) => {
-    setOrderDetails(updatedOrder);
+    generateInvoicePDF(orderDetails, orderDetails.items.map(item => item.product));
   };
 
   return (
@@ -95,7 +112,7 @@ const OrderDetail = ({ order, onClose, products }) => {
             </Thead>
             <Tbody>
               {orderDetails.items.map((item) => {
-                const product = products.find(p => p.productId === item.productId);
+                const product = item.product;
                 const productName = product ? product.name[i18n.language] : t('order.noProduct');
 
                 return (
@@ -104,7 +121,7 @@ const OrderDetail = ({ order, onClose, products }) => {
                       <Text
                         fontWeight="bold"
                         cursor="pointer"
-                        onClick={() => handleProductClick(item.productId)}
+                        onClick={() => handleProductClick(product._id)}
                       >
                         {productName}
                       </Text>
@@ -118,10 +135,9 @@ const OrderDetail = ({ order, onClose, products }) => {
             </Tbody>
           </Table>
         ) : (
-
           <Stack spacing={4}>
             {orderDetails.items.map((item) => {
-              const product = products.find(p => p.productId === item.productId);
+              const product = item.product;
               const productName = product ? product.name[i18n.language] : t('order.noProduct');
 
               return (
@@ -129,7 +145,7 @@ const OrderDetail = ({ order, onClose, products }) => {
                   <Text
                     fontWeight="bold"
                     cursor="pointer"
-                    onClick={() => handleProductClick(item.productId)}
+                    onClick={() => handleProductClick(product._id)}
                   >
                     {productName}
                   </Text>
@@ -154,26 +170,25 @@ const OrderDetail = ({ order, onClose, products }) => {
         )}
 
         <Text fontWeight="bold">
-          {t('order.total')}: ${orderDetails.total?.toFixed(2) || '0.00'}
+          {t('order.total')}: ${totalPrice.toFixed(2) || '0.00'}
         </Text>
 
         <Flex justify="flex-end" mt={4}>
-
           <Button colorScheme="blue" onClick={handleDownloadInvoice}>
             {t('order.invoice')}
           </Button>
           <Button ml={4} onClick={onEditOpen} colorScheme="teal">
             {t('order.editOrder')}
           </Button>
-
         </Flex>
       </Stack>
 
       <EditOrder
         isOpen={isEditOpen}
         onClose={onEditClose}
-        order={orderDetails} 
-        onSave={handleOrderUpdate} 
+        order={orderDetails}
+        onSave={handleOrderUpdate}
+        allProducts={orderDetails.items.map((item) => item.product)}
       />
     </Box>
   );

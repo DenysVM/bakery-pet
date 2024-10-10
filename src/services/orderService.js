@@ -28,7 +28,6 @@ export const updateOrderStatus = async (orderId, status, token) => {
   }
 };
 
-
 export const getAllOrders = async (token) => {
   try {
     const response = await axiosOrderInstance.get('/all', {

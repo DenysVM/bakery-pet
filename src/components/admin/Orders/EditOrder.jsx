@@ -1,3 +1,4 @@
+// EditOrder.jsx
 import React, { useState, useEffect } from "react";
 import {
   Modal,
@@ -7,116 +8,118 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
-  FormControl,
-  FormLabel,
   useToast,
-  HStack,
-  Select,
-  Box,
-  Text,
-  Grid,
-  VStack,
+  ModalCloseButton,
+  useMediaQuery,
   IconButton,
-  ModalCloseButton
+  useDisclosure, 
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../../auth/AuthContext";
+import { FiSave } from "react-icons/fi";
+import OrderItem from "./OrderComponents/OrderItem";
+import AddProductForm from "./OrderComponents/AddProductForm";
 import {
   updateOrderItem,
-  deleteOrderItem,
   addItemToOrder,
+  deleteOrderItem,
 } from "../../../services/orderService";
-import { useAuth } from "../../../auth/AuthContext";
-import { loadProducts } from "../../../services/productService";
-import i18n from "../../../i18n/i18n";
-import { useMediaQuery } from "@chakra-ui/react";
-import { DeleteIcon, MinusIcon, CheckIcon, AddIcon } from "@chakra-ui/icons";
-import { FiSave } from 'react-icons/fi';
 
-const EditOrder = ({ isOpen, onClose, order, onSave }) => {
+const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
   const { t } = useTranslation();
   const { token } = useAuth();
   const [orderDetails, setOrderDetails] = useState(order);
-  const [availableProducts, setAvailableProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [quantities, setQuantities] = useState({});
-  const [newProductQuantity, setNewProductQuantity] = useState(1);
   const toast = useToast();
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+
+  // useDisclosure hook for controlling the AddProductForm modal
+  const {
+    isOpen: isAddProductOpen,
+    onOpen: onAddProductOpen,
+    onClose: onAddProductClose,
+  } = useDisclosure();
 
   useEffect(() => {
     if (order) {
       setOrderDetails(order);
-
-      const initialQuantities = {};
-      order.items.forEach((item) => {
-        initialQuantities[item._id] = item.quantity;
-      });
-      setQuantities(initialQuantities);
     }
-
-    const fetchProducts = async () => {
-      try {
-        const products = await loadProducts();
-        setAvailableProducts(products);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      }
-    };
-    fetchProducts();
   }, [order]);
+
+  const handleAddProduct = (productData) => {
+    setOrderDetails((prevOrderDetails) => {
+      const existingItemIndex = prevOrderDetails.items.findIndex(
+        (item) => item.product._id === productData._id
+      );
+
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...prevOrderDetails.items];
+        updatedItems[existingItemIndex].quantity += productData.quantity;
+
+        return {
+          ...prevOrderDetails,
+          items: updatedItems,
+        };
+      } else {
+        return {
+          ...prevOrderDetails,
+          items: [
+            ...prevOrderDetails.items,
+            {
+              product: { ...productData },
+              quantity: productData.quantity,
+              _id: productData._id,
+              price: productData.price,
+            },
+          ],
+        };
+      }
+    });
+    onAddProductClose(); 
+  };
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    setOrderDetails((prevOrderDetails) => ({
+      ...prevOrderDetails,
+      items: prevOrderDetails.items.map((item) =>
+        item._id === itemId ? { ...item, quantity: newQuantity } : item
+      ),
+    }));
+  };
+
+  const handleDeleteItem = (itemId) => {
+    setOrderDetails((prevOrderDetails) => ({
+      ...prevOrderDetails,
+      items: prevOrderDetails.items.filter((item) => item._id !== itemId),
+    }));
+  };
 
   const handleSave = async () => {
     try {
-      const originalItemIds = order.items.map((item) => item._id);
-      const currentItemIds = orderDetails.items.map((item) => item._id);
-
-      const deletedItemIds = originalItemIds.filter(
-        (id) => !currentItemIds.includes(id)
-      );
-
-      for (let item of orderDetails.items) {
-        if (item._id.startsWith("temp-")) {
-          await addItemToOrder(
-            orderDetails._id,
-            {
-              productId: item.productId,
-              quantity: quantities[item._id],
-            },
-            token
-          )
-        } else {
-          await updateOrderItem(
-            orderDetails._id,
-            item._id,
-            { quantity: quantities[item._id] },
-            token
-          );
+      // Add new items
+      for (const item of orderDetails.items) {
+        if (!order.items.some((existingItem) => existingItem._id === item._id)) {
+          const itemData = {
+            productId: item.product._id,
+            quantity: item.quantity,
+            price: item.price,
+          };
+  
+          await addItemToOrder(orderDetails._id, itemData, token);
         }
       }
-
-      for (let itemId of deletedItemIds) {
-        await deleteOrderItem(orderDetails._id, itemId, token);
+      // Update existing items
+      for (const item of orderDetails.items) {
+        const originalItem = order.items.find((existingItem) => existingItem._id === item._id);
+        if (originalItem && originalItem.quantity !== item.quantity) {
+          await updateOrderItem(orderDetails._id, item._id, { quantity: item.quantity }, token);
+        }
       }
-
-      const updatedItems = orderDetails.items.map((item) => ({
-        ...item,
-        quantity: quantities[item._id],
-      }));
-
-      const total = updatedItems.reduce(
-        (sum, item) => sum + item.quantity * item.price,
-        0
-      );
-
-      const updatedOrderDetails = {
-        ...orderDetails,
-        items: updatedItems,
-        total,
-      };
-
-      setOrderDetails(updatedOrderDetails);
-
+      // Delete removed items
+      for (const originalItem of order.items) {
+        if (!orderDetails.items.some((item) => item._id === originalItem._id)) {
+          await deleteOrderItem(orderDetails._id, originalItem._id, token);
+        }
+      }
       toast({
         title: t("order.itemUpdated"),
         status: "success",
@@ -125,7 +128,7 @@ const EditOrder = ({ isOpen, onClose, order, onSave }) => {
       });
 
       if (onSave) {
-        onSave(updatedOrderDetails);
+        onSave(orderDetails);
       }
 
       onClose();
@@ -140,241 +143,62 @@ const EditOrder = ({ isOpen, onClose, order, onSave }) => {
     }
   };
 
-  const handleDeleteItem = (itemId) => {
-    setOrderDetails((prevOrderDetails) => ({
-      ...prevOrderDetails,
-      items: prevOrderDetails.items.filter((item) => item._id !== itemId),
-    }));
-    setQuantities((prevQuantities) => {
-      const updatedQuantities = { ...prevQuantities };
-      delete updatedQuantities[itemId];
-      return updatedQuantities;
-    });
-  };
-
-  const handleIncrease = (itemId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [itemId]: (prevQuantities[itemId] || 1) + 1,
-    }));
-  };
-
-  const handleDecrease = (itemId) => {
-    if (quantities[itemId] > 1) {
-      setQuantities((prevQuantities) => ({
-        ...prevQuantities,
-        [itemId]: prevQuantities[itemId] - 1,
-      }));
-    }
-  };
-
-  const handleQuantityChange = (itemId, value) => {
-    const newValue = Math.max(1, Number(value));
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [itemId]: Number(newValue),
-    }));
-  };
-
-  const handleAddProduct = () => {
-    if (!selectedProduct || newProductQuantity < 1) {
-      toast({
-        title: t("order.errorInvalidProduct"),
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    const product = availableProducts.find(
-      (p) => p.productId === selectedProduct
-    );
-    if (!product) {
-      toast({
-        title: t("order.errorInvalidProduct"),
-        status: "error",
-        duration: 2000,
-      });
-      return;
-    }
-
-    const newItem = {
-      _id: `temp-${Date.now()}`,
-      productId: selectedProduct,
-      quantity: newProductQuantity,
-      price: product.price,
-    };
-
-    setOrderDetails((prevOrderDetails) => ({
-      ...prevOrderDetails,
-      items: [...prevOrderDetails.items, newItem],
-    }));
-
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [newItem._id]: newProductQuantity,
-    }));
-
-    toast({
-      title: t("order.productAdded"),
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-    });
-  };
+  // Compute existing products in the order
+  const existingProducts = orderDetails.items.reduce(
+    (acc, item) => ({ ...acc, [item.product._id]: true }),
+    {}
+  );
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay />
-      <ModalContent mx="4">
-        <ModalHeader>
-          {t("order.editOrder")} <ModalCloseButton />
-        </ModalHeader>
-        <ModalBody>
-          {orderDetails.items.map((item, index) => {
-            const product =
-              availableProducts.find((p) => p.productId === item.productId) ||
-              {};
-
-            const productName = product.name
-              ? product.name[i18n.language]
-              : t("order.noProduct");
-
-            return (
-              <Box key={item._id} mb="4">
-                <Grid templateColumns="2fr 1fr 1fr" alignItems="center" gap={4}>
-                  <Text>{productName}</Text>
-                  <HStack>
-                    <Button onClick={() => handleDecrease(item._id)} h="40px">
-                      -
-                    </Button>
-                    <Input
-                      type="number"
-                      value={quantities[item._id] || 1}
-                      onChange={(e) =>
-                        handleQuantityChange(item._id, e.target.value)
-                      }
-                      textAlign="center"
-                      w={`${
-                        (quantities[item._id]?.toString().length || 1) + 2
-                      }ch`}
-                      minW="50px"
-                      sx={{ boxSizing: "border-box" }}
-                    />
-                    <Button onClick={() => handleIncrease(item._id)} h="40px">
-                      +
-                    </Button>
-                  </HStack>
-                  {isLargerThan768 ? (
-                    <Button
-                      onClick={() => handleDeleteItem(item._id)}
-                      colorScheme="red"
-                    >
-                      {t("order.delete")}
-                    </Button>
-                  ) : (
-                    <IconButton
-                      aria-label={t("order.delete")}
-                      icon={<DeleteIcon />}
-                      onClick={() => handleDeleteItem(item._id)}
-                      colorScheme="red"
-                    />
-                  )}
-                </Grid>
-              </Box>
-            );
-          })}
-
-          <FormControl mt={4}>
-            <FormLabel>{t("order.addProduct")}</FormLabel>
-            <VStack align="start" spacing={4}>
-              <Select
-                placeholder={t("order.selectProduct")}
-                onChange={(e) => setSelectedProduct(e.target.value)}
-              >
-                {availableProducts.map((product) => (
-                  <option key={product.productId} value={product.productId}>
-                    {product.name[i18n.language]}
-                  </option>
-                ))}
-              </Select>
-              <HStack>
-                {isLargerThan768 ? (
-                  <Button
-                    onClick={() =>
-                      setNewProductQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-                    }
-                  >
-                    -
-                  </Button>
-                ) : (
-                  <IconButton
-                    aria-label={t("decrease")}
-                    icon={<MinusIcon />}
-                    onClick={() =>
-                      setNewProductQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-                    }
-                  />
-                )}
-
-                <Input
-                  type="number"
-                  min="1"
-                  value={newProductQuantity}
-                  onChange={(e) =>
-                    setNewProductQuantity(Number(e.target.value))
-                  }
-                  maxW="60px"
-                  textAlign="center"
-                />
-
-                {isLargerThan768 ? (
-                  <Button
-                    onClick={() => setNewProductQuantity((prev) => prev + 1)}
-                  >
-                    +
-                  </Button>
-                ) : (
-                  <IconButton
-                    aria-label={t("increase")}
-                    icon={<AddIcon />}
-                    onClick={() => setNewProductQuantity((prev) => prev + 1)}
-                  />
-                )}
-
-                {isLargerThan768 ? (
-                  <Button onClick={handleAddProduct} colorScheme="green">
-                    {t("add")}
-                  </Button>
-                ) : (
-                  <IconButton
-                    aria-label={t("add")}
-                    icon={<CheckIcon />}
-                    onClick={handleAddProduct}
-                    colorScheme="green"
-                  />
-                )}
-              </HStack>
-            </VStack>
-          </FormControl>
-        </ModalBody>
-        <ModalFooter>
-          {isLargerThan768 ? (
-            <Button colorScheme="blue" ml={3} onClick={handleSave}>
-              {t("order.save")}
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent mx="4">
+          <ModalHeader>
+            {t("order.editOrder")}
+            <ModalCloseButton />
+          </ModalHeader>
+          <ModalBody>
+            {orderDetails.items.map((item) => (
+              <OrderItem
+                key={item._id}
+                item={item}
+                orderDetails={orderDetails}
+                setOrderDetails={setOrderDetails}
+                onQuantityChange={handleQuantityChange}
+                onDelete={handleDeleteItem}
+              />
+            ))}
+            {/* Add 'Add Product' button */}
+            <Button mt={4} onClick={onAddProductOpen}>
+              {t("order.addProduct")}
             </Button>
-          ) : (
-            <IconButton
-              aria-label={t("order.save")}
-              icon={<FiSave />}
-              onClick={handleSave}
-              colorScheme="blue"
-            />
-          )}
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          </ModalBody>
+          <ModalFooter>
+            {isLargerThan768 ? (
+              <Button colorScheme="blue" onClick={handleSave}>
+                {t("order.save")}
+              </Button>
+            ) : (
+              <IconButton
+                aria-label={t("order.save")}
+                icon={<FiSave />}
+                onClick={handleSave}
+                colorScheme="blue"
+              />
+            )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* AddProductForm Modal */}
+      <AddProductForm
+        isOpen={isAddProductOpen}
+        onClose={onAddProductClose}
+        onAddProduct={handleAddProduct}
+        existingProducts={existingProducts}
+      />
+    </>
   );
 };
 

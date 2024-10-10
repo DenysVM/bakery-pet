@@ -1,10 +1,11 @@
 {
   "home": "Home",
   "products": "Products",
+  "users": "Customers",
   "adminDashboard": "Admin Dashboard",
   "account": "Account",
   "logout": "Logout",
-  "add":"Add",
+  "add": "Add",
   "catalog": {
     "title": "Product Catalog",
     "description": "Discover our assortment of artisanal baked goods, made with love and care for every customer."
@@ -14,11 +15,11 @@
     "description": "Our bakery was founded in 2010 with one simple mission: to share the joy of homemade baking with everyone. Since then, we've been using only natural ingredients and traditional methods of preparation so that each piece was filled with warmth and care. Enjoy the aroma of fresh bread, colorful pastries, and sweet treats created with love by our craftsmen."
   },
   "contacts": {
-  "socialMedia": "Follow Us",
-  "address": "Address",
-  "phone": "Phone",
-  "email": "Email"
-},
+    "socialMedia": "Follow Us",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email"
+  },
 
   "productCard": {
     "addToCart": "Add to Cart",
@@ -48,55 +49,55 @@
     "resetFilters": "Reset Filters"
   },
 
-    "sort": {
+  "sort": {
     "sortBy": "Sort By",
     "selectOption": "Select option",
     "price": "Price",
     "calories": "Calories"
   },
 
-    "auth": {
-      "required": "Required",
-      "invalidEmail": "Invalid email address",
-      "passwordMin": "Password must be at least 8 characters long",
-      "invalidPhone": "Invalid phone number",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "email": "Email",
-      "password": "Password",
-      "phone": "Phone",
-      "address": {
-        "label":"Address",
-        "street": "Street",
-        "houseNumber": "House Number",
-        "apartmentNumber": "Apartment Number",
-        "city": "City"
-      },
-      "firstNamePlaceholder": "Your first name",
-      "lastNamePlaceholder": "Your last name",
-      "emailPlaceholder": "Your email",
-      "passwordPlaceholder": "Your password",
-      "phonePlaceholder": "Your phone number",
-      "addressPlaceholder": {
-        "street": "Your street",
-        "houseNumber": "Your house number",
-        "apartmentNumber": "Your apartment number",
-        "city": "Your city"
-      },
-      "register": "Register",
-      "login": "Login",
-      "loginPrompt": "Don't have an account?",
-      "loginError": "Login Error",
-      "noSuchUser": "No such user found",
-      "invalidCredentials": "Invalid email or password",
-      "registrationSuccess": "Registration Successful",
-      "registrationSuccessMessage": "You have successfully registered!",
-      "registrationError": "Registration Error",
-      "registrationErrorMessage": "There was an error registering your account.",
-      "missingToken": "Missing authentication token",
-      "checkingAuthorization": "Checking authorization..."
+  "auth": {
+    "required": "Required",
+    "invalidEmail": "Invalid email address",
+    "passwordMin": "Password must be at least 8 characters long",
+    "invalidPhone": "Invalid phone number",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "address": {
+      "label": "Address",
+      "street": "Street",
+      "houseNumber": "House Number",
+      "apartmentNumber": "Apartment Number",
+      "city": "City"
     },
-  
+    "firstNamePlaceholder": "Your first name",
+    "lastNamePlaceholder": "Your last name",
+    "emailPlaceholder": "Your email",
+    "passwordPlaceholder": "Your password",
+    "phonePlaceholder": "Your phone number",
+    "addressPlaceholder": {
+      "street": "Your street",
+      "houseNumber": "Your house number",
+      "apartmentNumber": "Your apartment number",
+      "city": "Your city"
+    },
+    "register": "Register",
+    "login": "Login",
+    "loginPrompt": "Don't have an account?",
+    "loginError": "Login Error",
+    "noSuchUser": "No such user found",
+    "invalidCredentials": "Invalid email or password",
+    "registrationSuccess": "Registration Successful",
+    "registrationSuccessMessage": "You have successfully registered!",
+    "registrationError": "Registration Error",
+    "registrationErrorMessage": "There was an error registering your account.",
+    "missingToken": "Missing authentication token",
+    "checkingAuthorization": "Checking authorization..."
+  },
+
   "user": {
     "profile": "Profile",
     "orders": "Orders",
@@ -106,7 +107,7 @@
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
-    "city":"city",
+    "city": "city",
     "street": "St.",
     "houseNumber": "No.",
     "apartmentNumber": "Apt.",
@@ -168,10 +169,10 @@
     "viewDetails": "View Details",
     "editOrder": "Edit Order",
     "deleteOrder": "Delete Order",
-    "selectProduct":"Select product",
-    "addProduct":"Add Product",
-    "productAdded":"Product added",
-    "errorInvalidProduct":"You have to select product",
+    "selectProduct": "Select product",
+    "addProduct": "Add Product",
+    "productAdded": "Product added",
+    "errorInvalidProduct": "You have to select product",
     "items": "Composition of the order",
     "invoice": "Create an invoice",
     "statusLabel": "Status",
@@ -181,7 +182,13 @@
       "shipped": "Shipped",
       "delivered": "Delivered",
       "cancelled": "Cancelled"
-  },
-  "changeStatus": "Change Status"
-}
+    },
+    "confirmDeleteTitle": "Delete Confirmation",
+    "confirmDeleteMessage": "Are you sure you want to delete this order?",
+    "deleted": "Order Deleted",
+    "deletedSuccessfully": "Order was successfully deleted",
+    "errorDeleting": "Error Deleting Order",
+    "errorDeletingDescription": "Failed to delete order. Please try again later.",
+    "changeStatus": "Change Status"
+  }
 }

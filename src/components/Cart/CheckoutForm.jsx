@@ -119,7 +119,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
     <Box className={`signup-form-container ${colorMode === 'dark' ? 'dark-theme' : ''}`}>
       <form onSubmit={formik.handleSubmit}>
         <VStack spacing={4}>
-          <Checkbox isChecked={useHomeAddress} onChange={handleCheckboxChange}>
+          <Checkbox id="useHomeAddress" isChecked={useHomeAddress} onChange={handleCheckboxChange}>
             {t('checkout.useHomeAddress')}
           </Checkbox>
           <PhoneInputField {...commonProps} />

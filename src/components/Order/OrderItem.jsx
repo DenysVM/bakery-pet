@@ -9,7 +9,7 @@ const OrderItem = ({ item, isEditable, onEditItem, onDeleteItem, products }) => 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   
-  const product = products.find(p => p.productId === item.productId);
+  const product = products.find(p => p._id === item.productId);
 
   if (!product) {
     console.error('Product not found for item', item);

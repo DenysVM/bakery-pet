@@ -12,7 +12,7 @@ const CartList = () => {
     <Box>
       {cartItems.length > 0 ? (
         cartItems.map(item => (
-          <CartItem key={item.id} item={item} />
+          <CartItem key={item.productId} item={item} />
         ))
       ) : (
         <Box textAlign="center" py="6">

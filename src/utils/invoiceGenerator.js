@@ -40,14 +40,25 @@ export const generateInvoicePDF = (order, products) => {
   const validProducts = Array.isArray(products) ? products : [];
 
   const items = order.items?.map((item) => {
-    const product = validProducts.find((p) => p.productId  === item.productId);
+    // Получаем информацию о продукте
+    let product = item.product;
 
-    const productName = product ? product.name[i18n.language] : t('order.noProduct');
+    // Если item.product отсутствует, пытаемся найти продукт в массиве products
+    if (!product) {
+      const productId = item.productId?._id || item.productId;
+      product = validProducts.find((p) => p._id === productId);
+    }
+
+    // Получаем название продукта
+    const productName = product && product.name
+      ? product.name[i18n.language] || product.name['en'] || t('order.noProduct')
+      : t('order.noProduct');
+
     return [
       productName,
       item.quantity,
-      item.price.toFixed(2),
-      (item.price * item.quantity).toFixed(2),
+      item.price?.toFixed(2) || '0.00',
+      (item.price * item.quantity)?.toFixed(2) || '0.00',
     ];
   }) || [];
 

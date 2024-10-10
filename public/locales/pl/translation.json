@@ -1,6 +1,7 @@
 {
   "home": "Strona główna",
   "products": "Produkty",
+  "users": "Klienci",
   "adminDashboard": "Panel administratora",
   "account": "Konto",
   "logout": "Wyloguj się",
@@ -182,6 +183,12 @@
       "shipped": "Wysłane",
       "delivered": "Dostarczone",
       "cancelled": "Anulowane"
-    }
+    },
+    "confirmDeleteTitle": "Potwierdzenie usunięcia",
+    "confirmDeleteMessage": "Czy na pewno chcesz usunąć to zamówienie?",
+    "deleted": "Zamówienie usunięte",
+    "deletedSuccessfully": "Zamówienie zostało pomyślnie usunięte",
+    "errorDeleting": "Błąd podczas usuwania zamówienia",
+    "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później."
   }
 }

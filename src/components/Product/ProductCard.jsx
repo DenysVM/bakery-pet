@@ -15,8 +15,8 @@ const ProductCard = ({ product }) => {
   const color = useColorModeValue('gray.800', 'white');
   const imageUrl = `${process.env.PUBLIC_URL}${product.imageUrl}`;
   const { addToCart, cartItems } = useCart();
-  const isInCart = cartItems.some(item => item.id === product.id);
-  const cartQuantity = cartItems.reduce((total, item) => (item.id === product.id ? total + item.quantity : total), 0);
+  const isInCart = cartItems.some(item => item.productId === product._id);
+const cartQuantity = cartItems.reduce((total, item) => (item.productId === product._id ? total + item.quantity : total), 0);
   const buttonStyles = {
     colorScheme: "blue",
     variant: "outline",

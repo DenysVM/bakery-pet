@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+// src/components/Order/OrderProvider.js
+
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 const OrderContext = createContext();
 
@@ -19,9 +21,9 @@ export const OrderProvider = ({ children }) => {
     localStorage.setItem('orderItems', JSON.stringify(orderItems));
   }, [orderItems]);
 
-  const updateOrderItems = (items) => {
+  const updateOrderItems = useCallback((items) => {
     setOrderItems(items);
-  };
+  }, []);
 
   return (
     <OrderContext.Provider value={{ orderItems, updateOrderItems }}>

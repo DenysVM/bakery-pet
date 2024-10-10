@@ -8,6 +8,11 @@ const ORDER_API_URL = process.env.NODE_ENV === 'production'
   ? 'https://bakery-pet-backend.onrender.com/api/orders'
   : 'http://localhost:5000/api/orders';
 
+  const PRODUCT_API_URL = process.env.NODE_ENV === 'production'
+  ? 'https://bakery-pet-backend.onrender.com/api/products'
+  : 'http://localhost:5000/api/products';
+
+
 export const axiosAuthInstance = axios.create({
   baseURL: AUTH_API_URL,
   headers: {
@@ -23,3 +28,12 @@ export const axiosOrderInstance = axios.create({
   },
   withCredentials: true,
 });
+
+export const axiosProductInstance = axios.create({
+  baseURL: PRODUCT_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
+});
+

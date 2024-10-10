@@ -16,19 +16,17 @@ import {
   getUserOrders,
   deleteOrderItem,
 } from '../../services/orderService';
-import { loadProducts } from '../../services/productService';
+import { getAllProducts } from '../../services/productService';
 import { useAuth } from '../../auth/AuthContext';
 import {
   OrderItem,
   EditOrderItem,
   DeleteOrderItem,
-  OrderProvider,
   useOrder,
 } from '../Order';
 import { formatDate } from '../../components/common/formatDate';
 
-
-const UserOrdersContent = () => {
+const UserOrders = () => {
   const { t } = useTranslation();
   const { token, loadingAuth } = useAuth();
   const { updateOrderItems } = useOrder();
@@ -50,32 +48,55 @@ const UserOrdersContent = () => {
   } = useDisclosure();
   const toast = useToast();
 
+  const missingTokenError = t('auth.missingToken');
+  const orderErrorFetching = t('order.errorFetching');
+
   useEffect(() => {
     const fetchOrders = async () => {
       if (!token) {
-        setError(t('auth.missingToken'));
+        setError(missingTokenError);
         setLoading(false);
         return;
       }
       try {
-        const [ordersData, productsData] = await Promise.all([
-          getUserOrders(token),
-          loadProducts(),
-        ]);
+        // Получаем заказы пользователя
+        const ordersData = await getUserOrders(token);
+  
+        // Извлекаем уникальные идентификаторы продуктов из заказов
+        const productIds = [
+          ...new Set(
+            ordersData.flatMap((order) =>
+              order.items.map((item) =>
+                item.productId ? item.productId._id || item.productId : null
+              )
+            )
+          ),
+        ].filter((id) => id !== null);
+  
+        // Получаем продукты по их идентификаторам
+        const productsData = await getAllProducts(productIds);
+  
         setOrders(ordersData);
         setProducts(productsData);
         updateOrderItems(ordersData.flatMap((order) => order.items));
       } catch (error) {
-        setError(error.message || t('order.errorFetching'));
+        setError(error.message || orderErrorFetching);
       } finally {
         setLoading(false);
       }
     };
-
+  
     if (!loadingAuth && token) {
       fetchOrders();
     }
-  }, [token, t, updateOrderItems, loadingAuth]);
+  }, [
+    token,
+    loadingAuth,
+    updateOrderItems,
+    missingTokenError,
+    orderErrorFetching,
+  ]);
+  
 
   const handleEditItem = (order, item) => {
     setSelectedOrder(order);
@@ -143,7 +164,6 @@ const UserOrdersContent = () => {
         });
       }
     } else {
-
       setOrders(updatedOrders);
       try {
         await deleteOrderItem(selectedOrder._id, productId, token);
@@ -194,7 +214,6 @@ const UserOrdersContent = () => {
     );
   }
 
-  // Основной рендер списка заказов
   return (
     <Box>
       {orders.map((order) => (
@@ -248,11 +267,5 @@ const UserOrdersContent = () => {
     </Box>
   );
 };
-
-const UserOrders = () => (
-  <OrderProvider>
-    <UserOrdersContent />
-  </OrderProvider>
-);
 
 export default UserOrders;

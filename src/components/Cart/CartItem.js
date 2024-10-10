@@ -1,5 +1,7 @@
+// src/components/Cart/CartItem.js
+
 import React from 'react';
-import { Box, Text, Image, Button, Input, IconButton, useDisclosure, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text, Image, Button, Input, IconButton, useDisclosure, useMediaQuery, FormControl, FormLabel } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import { useCart } from '../Cart';
 import { useTranslation } from 'react-i18next';
@@ -28,8 +30,8 @@ const CartItem = ({ item }) => {
   const itemTotal = (item.price * item.quantity).toFixed(2);
 
   if (!item.name) {
-    console.error('Item name is undefined', item); 
-    return null; 
+    console.error('Item name is undefined', item);
+    return null;
   }
 
   return (
@@ -45,15 +47,20 @@ const CartItem = ({ item }) => {
       )}
       <Box display="flex" alignItems="center">
         <Button onClick={() => handleChange(-1)} size="sm">-</Button>
-        <Input 
-          type="number"
-          value={item.quantity}
-          onChange={(e) => handleChange(parseInt(e.target.value) - item.quantity)}
-          width="40px"
-          mx="2"
-          padding="0px"
-          textAlign="center"
-        />
+        <FormControl>
+          <FormLabel htmlFor={`quantity-${item.productId}`}>
+          </FormLabel>
+          <Input
+            id={`quantity-${item.productId}`}
+            type="number"
+            value={item.quantity}
+            onChange={(e) => handleChange(parseInt(e.target.value) - item.quantity)}
+            width="40px"
+            mx="2"
+            padding="0px"
+            textAlign="center"
+          />
+        </FormControl>
         <Button onClick={() => handleChange(1)} size="sm">+</Button>
       </Box>
       <Button
@@ -62,7 +69,7 @@ const CartItem = ({ item }) => {
         colorScheme="red"
         onClick={() => removeFromCart(item.productId)}
         ml="2"
-        {...(isDesktop ? {} : { padding: '0', size: 'sm', boxSize: '40px' })} 
+        {...(isDesktop ? {} : { padding: '0', size: 'sm', boxSize: '40px' })}
         children={isDesktop ? "Remove" : undefined}
       />
     </Box>

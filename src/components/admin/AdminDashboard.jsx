@@ -3,14 +3,16 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { OrderList } from './Orders';
 import { ProductList } from './Products';
 import { UserList } from './Users';
+import { useTranslation } from "react-i18next";
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   return (
     <Tabs variant="enclosed" isFitted>
       <TabList>
-        <Tab>Orders</Tab>
-        <Tab>Products</Tab>
-        <Tab>Users</Tab>
+        <Tab>{t('user.tabOrders')}</Tab>
+        <Tab>{t('products')}</Tab>
+        <Tab>{t('users')}</Tab>
       </TabList>
 
       <TabPanels>
