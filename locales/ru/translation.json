@@ -2,37 +2,38 @@
   "home": "Главная",
   "products": "Продукты",
   "account": "Аккаунт",
+  "users": "Клиенты",
   "adminDashboard": "Панель администратора",
   "logout": "Выйти",
-  "add":"Добавить",
+  "add": "Добавить",
   "catalog": {
     "title": "Каталог Продуктов",
     "description": "Ознакомьтесь с нашим ассортиментом артизанской выпечки, сделанной с любовью и заботой о каждом клиенте."
   },
-   "story": {
+  "story": {
     "title": "Наша История",
     "description": "Наша пекарня была основана в 2010 году с одной простой миссией: делиться радостью домашней выпечки с каждым. С тех пор мы используем только натуральные ингредиенты и традиционные методы приготовления, чтобы каждый кусочек был наполнен теплом и заботой. Наслаждайтесь ароматом свежего хлеба, красочными пирожными и сладкими угощениями, созданными с любовью нашими мастерами."
   },
   "contacts": {
-  "socialMedia": "Мы в соцсетях",
-  "address": "Адрес",
-  "phone": "Телефон",
-  "email": "Электронная почта"
-},
+    "socialMedia": "Мы в соцсетях",
+    "address": "Адрес",
+    "phone": "Телефон",
+    "email": "Электронная почта"
+  },
 
-"productCard": {
-  "addToCart": "Добавить в корзину",
-  "inCart": "В корзине",
-  "details": "Подробнее...",
-  "pictureOf": "Изображение {{name}}",
-  "price": "Цена",
-  "composition": "Состав",
-  "calories": "Калорийность",
-  "carbohydrates": "Углеводы",
-  "protein": "Белки",
-  "fat": "Жиры",
-  "close": "Закрыть"
-},
+  "productCard": {
+    "addToCart": "Добавить в корзину",
+    "inCart": "В корзине",
+    "details": "Подробнее...",
+    "pictureOf": "Изображение {{name}}",
+    "price": "Цена",
+    "composition": "Состав",
+    "calories": "Калорийность",
+    "carbohydrates": "Углеводы",
+    "protein": "Белки",
+    "fat": "Жиры",
+    "close": "Закрыть"
+  },
 
   "filters": {
     "priceRange": "Ценовой диапазон",
@@ -47,7 +48,7 @@
     "pastry": "Выпечка",
     "cake": "Торт",
     "resetFilters": "Сбросить фильтры"
-},
+  },
 
   "sort": {
     "sortBy": "Сортировать по",
@@ -56,47 +57,47 @@
     "calories": "Калории"
   },
 
-    "auth": {
-      "required": "Обязательно",
-      "invalidEmail": "Некорректный адрес электронной почты",
-      "passwordMin": "Пароль должен содержать не менее 8 символов",
-      "invalidPhone": "Некорректный номер телефона",
-      "firstName": "Имя",
-      "lastName": "Фамилия",
-      "email": "Электронная почта",
-      "password": "Пароль",
-      "phone": "Телефон",
-      "address": {
-        "label": "Адрес",
-        "street": "Улица",
-        "houseNumber": "Номер дома",
-        "apartmentNumber": "Номер квартиры",
-        "city": "Город"
-      },
-      "firstNamePlaceholder": "Ваше имя",
-      "lastNamePlaceholder": "Ваша фамилия",
-      "emailPlaceholder": "Ваша электронная почта",
-      "passwordPlaceholder": "Ваш пароль",
-      "phonePlaceholder": "Ваш номер телефона",
-      "addressPlaceholder": {
-        "street": "Ваша улица",
-        "houseNumber": "Номер дома",
-        "apartmentNumber": "Номер квартиры",
-        "city": "Ваш город"
-      },
-      "register": "Регистрация",
-      "login": "Войти",
-      "loginPrompt": "Нет аккаунта?",
-      "loginError": "Ошибка входа",
-      "noSuchUser": "Пользователь не найден",
-      "invalidCredentials": "Неверный email или пароль",
-      "registrationSuccess": "Регистрация успешна",
-      "registrationSuccessMessage": "Вы успешно зарегистрированы!",
-      "registrationError": "Ошибка регистрации",
-      "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта.",
-      "missingToken": "Отсутствует токен авторизации",
-      "checkingAuthorization": "Проверка авторизации..."
+  "auth": {
+    "required": "Обязательно",
+    "invalidEmail": "Некорректный адрес электронной почты",
+    "passwordMin": "Пароль должен содержать не менее 8 символов",
+    "invalidPhone": "Некорректный номер телефона",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "phone": "Телефон",
+    "address": {
+      "label": "Адрес",
+      "street": "Улица",
+      "houseNumber": "Номер дома",
+      "apartmentNumber": "Номер квартиры",
+      "city": "Город"
     },
+    "firstNamePlaceholder": "Ваше имя",
+    "lastNamePlaceholder": "Ваша фамилия",
+    "emailPlaceholder": "Ваша электронная почта",
+    "passwordPlaceholder": "Ваш пароль",
+    "phonePlaceholder": "Ваш номер телефона",
+    "addressPlaceholder": {
+      "street": "Ваша улица",
+      "houseNumber": "Номер дома",
+      "apartmentNumber": "Номер квартиры",
+      "city": "Ваш город"
+    },
+    "register": "Регистрация",
+    "login": "Войти",
+    "loginPrompt": "Нет аккаунта?",
+    "loginError": "Ошибка входа",
+    "noSuchUser": "Пользователь не найден",
+    "invalidCredentials": "Неверный email или пароль",
+    "registrationSuccess": "Регистрация успешна",
+    "registrationSuccessMessage": "Вы успешно зарегистрированы!",
+    "registrationError": "Ошибка регистрации",
+    "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта.",
+    "missingToken": "Отсутствует токен авторизации",
+    "checkingAuthorization": "Проверка авторизации..."
+  },
 
   "user": {
     "profile": "Профиль",
@@ -107,7 +108,7 @@
     "email": "Электронная почта",
     "phone": "Телефон",
     "address": "Адрес",
-    "city":"город",
+    "city": "город",
     "street": "ул.",
     "houseNumber": "д.",
     "apartmentNumber": "кв.",
@@ -169,10 +170,10 @@
     "viewDetails": "Просмотреть детали",
     "editOrder": "Редактировать заказ",
     "deleteOrder": "Удалить заказ",
-    "selectProduct":"Выбрать продукт",
-    "addProduct":"Добавить продукт",
-    "productAdded":"Продукт добавлен",
-    "errorInvalidProduct":"Необходимо выбрать продукт",
+    "selectProduct": "Выбрать продукт",
+    "addProduct": "Добавить продукт",
+    "productAdded": "Продукт добавлен",
+    "errorInvalidProduct": "Необходимо выбрать продукт",
     "statusLabel": "Статус",
     "items": "Состав заказа",
     "invoice": "Создать накладную",
@@ -182,6 +183,12 @@
       "shipped": "Отправлен",
       "delivered": "Доставлен",
       "cancelled": "Отменен"
-    }
+    },
+    "confirmDeleteTitle": "Подтверждение удаления",
+    "confirmDeleteMessage": "Вы уверены, что хотите удалить этот заказ?",
+    "deleted": "Заказ удален",
+    "deletedSuccessfully": "Заказ был успешно удален",
+    "errorDeleting": "Ошибка при удалении заказа",
+    "errorDeletingDescription": "Не удалось удалить заказ. Пожалуйста, попробуйте позже."
   }
 }
