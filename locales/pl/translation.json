@@ -54,7 +54,11 @@
     "sortBy": "Sortuj według",
     "selectOption": "Wybierz opcję",
     "price": "Cena",
-    "calories": "Kalorie"
+    "calories": "Kalorie",
+    "priceAsc": "Cena rosnąco",
+    "priceDesc": "Cena malejąco",
+    "caloriesAsc": "Kalorie rosnąco",
+    "caloriesDesc": "Kalorie malejąco"
   },
 
     "auth": {

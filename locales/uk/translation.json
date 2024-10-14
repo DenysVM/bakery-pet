@@ -54,7 +54,11 @@
     "sortBy": "Сортувати за",
     "selectOption": "Оберіть опцію",
     "price": "Ціна",
-    "calories": "Калорії"
+    "calories": "Калорії",
+    "priceAsc": "Ціна за зростанням",
+    "priceDesc": "Ціна за спаданням",
+    "caloriesAsc": "Калорії за зростанням",
+    "caloriesDesc": "Калорії за спаданням"
   },
 
     "auth": {

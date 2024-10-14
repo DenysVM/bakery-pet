@@ -54,7 +54,11 @@
     "sortBy": "Сортировать по",
     "selectOption": "Выберите опцию",
     "price": "Цена",
-    "calories": "Калории"
+    "calories": "Калории",
+    "priceAsc": "Цена по возрастанию",
+    "priceDesc": "Цена по убыванию",
+    "caloriesAsc": "Калории по возрастанию",
+    "caloriesDesc": "Калории по убыванию"
   },
 
   "auth": {

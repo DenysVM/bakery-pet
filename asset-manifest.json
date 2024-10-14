@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/bakery-pet/static/css/main.0eb7e821.css",
-    "main.js": "/bakery-pet/static/js/main.c139ab04.js",
-    "static/js/781.a9f8d56f.chunk.js": "/bakery-pet/static/js/781.a9f8d56f.chunk.js",
-    "static/js/155.73857089.chunk.js": "/bakery-pet/static/js/155.73857089.chunk.js",
-    "static/js/850.a49e3888.chunk.js": "/bakery-pet/static/js/850.a49e3888.chunk.js",
-    "static/js/453.258b012d.chunk.js": "/bakery-pet/static/js/453.258b012d.chunk.js",
+    "main.css": "/bakery-pet/static/css/main.1ffaaf06.css",
+    "main.js": "/bakery-pet/static/js/main.7f1e15f3.js",
+    "static/js/781.7692f188.chunk.js": "/bakery-pet/static/js/781.7692f188.chunk.js",
+    "static/js/155.d33f9606.chunk.js": "/bakery-pet/static/js/155.d33f9606.chunk.js",
+    "static/js/850.7c677ce8.chunk.js": "/bakery-pet/static/js/850.7c677ce8.chunk.js",
+    "static/js/453.419a5d54.chunk.js": "/bakery-pet/static/js/453.419a5d54.chunk.js",
     "index.html": "/bakery-pet/index.html",
     "static/media/getFetch.cjs": "/bakery-pet/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.0eb7e821.css.map": "/bakery-pet/static/css/main.0eb7e821.css.map",
-    "main.c139ab04.js.map": "/bakery-pet/static/js/main.c139ab04.js.map",
-    "781.a9f8d56f.chunk.js.map": "/bakery-pet/static/js/781.a9f8d56f.chunk.js.map",
-    "155.73857089.chunk.js.map": "/bakery-pet/static/js/155.73857089.chunk.js.map",
-    "850.a49e3888.chunk.js.map": "/bakery-pet/static/js/850.a49e3888.chunk.js.map",
-    "453.258b012d.chunk.js.map": "/bakery-pet/static/js/453.258b012d.chunk.js.map"
+    "main.1ffaaf06.css.map": "/bakery-pet/static/css/main.1ffaaf06.css.map",
+    "main.7f1e15f3.js.map": "/bakery-pet/static/js/main.7f1e15f3.js.map",
+    "781.7692f188.chunk.js.map": "/bakery-pet/static/js/781.7692f188.chunk.js.map",
+    "155.d33f9606.chunk.js.map": "/bakery-pet/static/js/155.d33f9606.chunk.js.map",
+    "850.7c677ce8.chunk.js.map": "/bakery-pet/static/js/850.7c677ce8.chunk.js.map",
+    "453.419a5d54.chunk.js.map": "/bakery-pet/static/js/453.419a5d54.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0eb7e821.css",
-    "static/js/main.c139ab04.js"
+    "static/css/main.1ffaaf06.css",
+    "static/js/main.7f1e15f3.js"
   ]
 }
