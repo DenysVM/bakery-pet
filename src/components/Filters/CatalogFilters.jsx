@@ -1,8 +1,6 @@
-// src/components/Catalog/CatalogFilters.jsx
-
 import React, { useState } from 'react';
 import { Box, Flex, FormLabel, Input, Select, Button, Stack } from '@chakra-ui/react';
-import CatalogSort from '../Sort/CatalogSort';
+import CatalogSort from './CatalogSort';
 import { useTranslation } from 'react-i18next';
 
 const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
@@ -23,12 +21,12 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
       type: 'reset',
       values: { minPrice: '', maxPrice: '', minCalories: '', maxCalories: '', category: '' }
     });
-    onSortChange({ target: { value: '' } });
+    onSortChange(''); 
   };
 
   return (
     <Flex direction={{ base: "column", md: "row" }} align="center" wrap="wrap" gap="4" mb="4">
-      <Stack direction={{ base: "column", md: "row" }} spacing="4" width="full">
+      <Stack direction={{ base: "column", md: "row" }} spacing="4" width="full" align="flex-end">
         <Box flex={{ base: "1", md: "2" }}>
           <FormLabel htmlFor="minPrice">{t('filters.priceRange')}:</FormLabel>
           <Flex>
@@ -101,7 +99,11 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
             <option value="cake">{t('filters.cake')}</option>
           </Select>
         </Box>
-        <CatalogSort onSortChange={onSortChange} sortCriteria={sortCriteria} />
+        <Box flex="1">
+          <FormLabel htmlFor="sort">{t('filters.sortBy')}:</FormLabel>
+          <CatalogSort onSortChange={onSortChange} sortCriteria={sortCriteria} />
+        </Box>
+
         <Button 
           colorScheme="blue" 
           onClick={resetFilters} 

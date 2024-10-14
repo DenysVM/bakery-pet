@@ -38,32 +38,19 @@ const Catalog = () => {
     fetchProducts();
   }, []);
 
-  const handleFiltersChange = ({ type, value }) => {
-    if (type === 'reset') {
-      setFilteredProducts(products);
-      setSortCriteria('');
-      setFilterParams({
-        minPrice: null,
-        maxPrice: null,
-        minCalories: null,
-        maxCalories: null,
-        category: '',
-      });
-      setVisibleCount(ITEMS_PER_PAGE);
-      return;
-    }
-
-    const newFilterParams = { ...filterParams, [type]: Number(value) || null };
-    setFilterParams(newFilterParams);
-
+  useEffect(() => {
     let updatedFilteredProducts = products.filter(product => {
-      return (
-        (!newFilterParams.minPrice || product.price >= newFilterParams.minPrice) &&
-        (!newFilterParams.maxPrice || product.price <= newFilterParams.maxPrice) &&
-        (!newFilterParams.minCalories || product.calories >= newFilterParams.minCalories) &&
-        (!newFilterParams.maxCalories || product.calories <= newFilterParams.maxCalories) &&
-        (newFilterParams.category === '' || product.category === newFilterParams.category)
-      );
+      const categoryMatch = filterParams.category === '' || product.category === filterParams.category;
+
+      const priceMatch =
+        (!filterParams.minPrice || product.price >= Number(filterParams.minPrice)) &&
+        (!filterParams.maxPrice || product.price <= Number(filterParams.maxPrice));
+
+      const calorieMatch =
+        (!filterParams.minCalories || product.calories >= Number(filterParams.minCalories)) &&
+        (!filterParams.maxCalories || product.calories <= Number(filterParams.maxCalories));
+
+      return categoryMatch && priceMatch && calorieMatch;
     });
 
     if (sortCriteria) {
@@ -72,32 +59,53 @@ const Catalog = () => {
 
     setFilteredProducts(updatedFilteredProducts);
     setVisibleCount(ITEMS_PER_PAGE);
-  };
-
-  const handleSortChange = (e) => {
-    const newSortCriteria = e.target.value;
-    setSortCriteria(newSortCriteria);
-
-    const sortedProducts = sortProducts(filteredProducts, newSortCriteria);
-    setFilteredProducts(sortedProducts);
-  };
+  }, [products, filterParams, sortCriteria]);
 
   const sortProducts = (products, criteria) => {
     return [...products].sort((a, b) => {
-      if (criteria === 'price') {
+      if (criteria === 'price_asc') {
         return a.price - b.price;
-      } else if (criteria === 'calories') {
+      } else if (criteria === 'price_desc') {
+        return b.price - a.price;
+      } else if (criteria === 'calories_asc') {
         return a.calories - b.calories;
+      } else if (criteria === 'calories_desc') {
+        return b.calories - a.calories;
       }
       return 0;
     });
   };
 
-  const handleLoadMore = () => {
-    setVisibleCount(prevCount => prevCount + ITEMS_PER_PAGE);
+  const handleFiltersChange = ({ type, value }) => {
+    if (type === 'reset') {
+      setFilterParams({
+        minPrice: null,
+        maxPrice: null,
+        minCalories: null,
+        maxCalories: null,
+        category: '',
+      });
+      setSortCriteria('');
+      return;
+    }
+
+    const newFilterParams = {
+      ...filterParams,
+      [type]: type === 'category' ? value : value ? Number(value) : null,
+    };
+
+    setFilterParams(newFilterParams);
   };
 
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
+  const handleSortChange = (sortOption) => {
+    setSortCriteria(sortOption); 
+  };
+
+  const handleLoadMore = () => {
+    setVisibleCount(prevCount => prevCount + ITEMS_PER_PAGE); 
+  };
+
+  const visibleProducts = filteredProducts.slice(0, visibleCount); 
 
   if (loading) {
     return (
@@ -124,7 +132,6 @@ const Catalog = () => {
         onFiltersChange={handleFiltersChange}
         onSortChange={handleSortChange}
         sortCriteria={sortCriteria}
-        onResetFilters={() => handleFiltersChange({ type: 'reset' })}
       />
       <Box>
         <ProductsGrid products={visibleProducts} />
