@@ -32,7 +32,6 @@ const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
   const toast = useToast();
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
-  // useDisclosure hook for controlling the AddProductForm modal
   const {
     isOpen: isAddProductOpen,
     onOpen: onAddProductOpen,

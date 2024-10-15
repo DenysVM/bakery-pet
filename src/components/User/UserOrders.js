@@ -59,25 +59,19 @@ const UserOrders = () => {
         return;
       }
       try {
-        // Получаем заказы пользователя
+
         const ordersData = await getUserOrders(token);
   
-        // Извлекаем уникальные идентификаторы продуктов из заказов
-        const productIds = [
-          ...new Set(
-            ordersData.flatMap((order) =>
-              order.items.map((item) =>
-                item.productId ? item.productId._id || item.productId : null
-              )
-            )
-          ),
-        ].filter((id) => id !== null);
-  
-        // Получаем продукты по их идентификаторам
-        const productsData = await getAllProducts(productIds);
+        const productIds = ordersData.flatMap((order) =>
+          order.items
+            .map((item) => item.product?._id || item.productId)
+            .filter((id) => id !== undefined && typeof id === "string")
+        );
+
+        const products = await getAllProducts(productIds);
   
         setOrders(ordersData);
-        setProducts(productsData);
+        setProducts(products);
         updateOrderItems(ordersData.flatMap((order) => order.items));
       } catch (error) {
         setError(error.message || orderErrorFetching);
@@ -89,13 +83,7 @@ const UserOrders = () => {
     if (!loadingAuth && token) {
       fetchOrders();
     }
-  }, [
-    token,
-    loadingAuth,
-    updateOrderItems,
-    missingTokenError,
-    orderErrorFetching,
-  ]);
+  }, [token, loadingAuth, updateOrderItems, missingTokenError, orderErrorFetching]);
   
 
   const handleEditItem = (order, item) => {
@@ -110,17 +98,17 @@ const UserOrders = () => {
     onDeleteOpen();
   };
 
-  const handleSaveEdit = (updatedItem) => {
+  const handleSaveEdit = (updatedOrder) => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
-        order._id === selectedOrder._id
+        order._id === updatedOrder._id
           ? {
               ...order,
               items: order.items.map((item) =>
-                item._id === updatedItem._id ? updatedItem : item
+                updatedOrder.items.find((updatedItem) => updatedItem._id === item._id) || item
               ),
-              total: order.items.reduce(
-                (sum, item) => sum + item.quantity * item.price,
+              total: updatedOrder.items.reduce(
+                (sum, updatedItem) => sum + updatedItem.quantity * updatedItem.price,
                 0
               ),
             }
@@ -129,8 +117,10 @@ const UserOrders = () => {
     );
     onEditClose();
   };
-
+  
+  
   const handleConfirmDelete = async (productId) => {
+    // Обновляем локальное состояние заказов с удаленным элементом
     const updatedOrders = orders.map((order) =>
       order._id === selectedOrder._id
         ? {
@@ -139,11 +129,12 @@ const UserOrders = () => {
           }
         : order
     );
-
+  
     const orderToUpdate = updatedOrders.find(
       (order) => order._id === selectedOrder._id
     );
-
+  
+    // Если все товары удалены, удаляем заказ
     if (orderToUpdate.items.length === 0) {
       try {
         await deleteOrder(selectedOrder._id, token);
@@ -164,7 +155,23 @@ const UserOrders = () => {
         });
       }
     } else {
-      setOrders(updatedOrders);
+      // Пересчитываем итоговую сумму заказа после удаления товара
+      const updatedTotal = orderToUpdate.items.reduce(
+        (sum, item) => sum + item.quantity * item.price,
+        0
+      );
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === selectedOrder._id
+            ? {
+                ...order,
+                items: orderToUpdate.items,
+                total: updatedTotal,
+              }
+            : order
+        )
+      );
+  
       try {
         await deleteOrderItem(selectedOrder._id, productId, token);
         toast({
@@ -183,9 +190,10 @@ const UserOrders = () => {
         });
       }
     }
-
+  
     onDeleteClose();
   };
+  
 
   if (loadingAuth || loading) {
     return (
