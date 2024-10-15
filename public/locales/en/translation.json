@@ -36,21 +36,22 @@
 
   "filters": {
     "priceRange": "Price Range",
-    "minPrice": "Min Price",
-    "maxPrice": "Max Price",
+    "minPrice": "Min",
+    "maxPrice": "Max",
     "calorieRange": "Calorie Range",
-    "minCalories": "Min Calories",
-    "maxCalories": "Max Calories",
+    "minCalories": "Min",
+    "maxCalories": "Max",
     "category": "Category",
     "all": "All",
     "bread": "Bread",
     "pastry": "Pastry",
     "cake": "Cake",
+    "sortBy": "Sort",
     "resetFilters": "Reset Filters"
   },
 
   "sort": {
-    "sortBy": "Sort By",
+    "sortBy": "Choose",
     "selectOption": "Select option",
     "price": "Price",
     "calories": "Calories",

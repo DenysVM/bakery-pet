@@ -37,12 +37,13 @@
 
   "filters": {
   "priceRange": "Zakres cenowy",
-  "minPrice": "Cena min.",
-  "maxPrice": "Cena maks.",
+  "minPrice": "Min.",
+  "maxPrice": "Maks.",
   "calorieRange": "Zakres kaloryczności",
-  "minCalories": "Kalorie min.",
-  "maxCalories": "Kalorie maks.",
+  "minCalories": "Min.",
+  "maxCalories": "Maks.",
   "category": "Kategoria",
+  "sortBy": "Sortuj",
   "all": "Wszystkie",
   "bread": "Chleb",
   "pastry": "Ciastka",
@@ -51,7 +52,7 @@
 },
 
   "sort": {
-    "sortBy": "Sortuj według",
+    "sortBy": "Wybierz",
     "selectOption": "Wybierz opcję",
     "price": "Cena",
     "calories": "Kalorie",
