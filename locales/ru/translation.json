@@ -37,21 +37,22 @@
 
   "filters": {
     "priceRange": "Ценовой диапазон",
-    "minPrice": "Мин. цена",
-    "maxPrice": "Макс. цена",
+    "minPrice": "Мин.",
+    "maxPrice": "Макс.",
     "calorieRange": "Калорийность",
-    "minCalories": "Мин. калор.",
-    "maxCalories": "Макс. калор.",
+    "minCalories": "Мин.",
+    "maxCalories": "Макс.",
     "category": "Категория",
     "all": "Все",
     "bread": "Хлеб",
     "pastry": "Выпечка",
     "cake": "Торт",
+    "sortBy": "Сортировать",
     "resetFilters": "Сбросить фильтры"
   },
 
   "sort": {
-    "sortBy": "Сортировать по",
+    "sortBy": "Выбор",
     "selectOption": "Выберите опцию",
     "price": "Цена",
     "calories": "Калории",

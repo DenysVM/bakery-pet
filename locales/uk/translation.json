@@ -37,21 +37,22 @@
 
   "filters": {
   "priceRange": "Ціновий діапазон",
-  "minPrice": "Мін. ціна",
-  "maxPrice": "Макс. ціна",
+  "minPrice": "Мін.",
+  "maxPrice": "Макс.",
   "calorieRange": "Калорійність",
-  "minCalories": "Мін. калор.",
-  "maxCalories": "Макс. калор.",
+  "minCalories": "Мін.",
+  "maxCalories": "Макс.",
   "category": "Категорія",
   "all": "Всі",
   "bread": "Хліб",
   "pastry": "Випічка",
   "cake": "Торт",
+  "sortBy": "Сортувати",
   "resetFilters": "Скинути фільтри"
 },
 
   "sort": {
-    "sortBy": "Сортувати за",
+    "sortBy": "Вибір",
     "selectOption": "Оберіть опцію",
     "price": "Ціна",
     "calories": "Калорії",
