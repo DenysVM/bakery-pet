@@ -125,6 +125,7 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
                   setCategory(e.target.value);
                   onFiltersChange({ type: "category", value: e.target.value });
                 }}
+                color="gray.600"
               >
                 <option value="">{t("filters.all")}</option>
                 <option value="bread">{t("filters.bread")}</option>

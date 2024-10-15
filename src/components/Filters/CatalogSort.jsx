@@ -7,20 +7,24 @@ const CatalogSort = ({ onSortChange, sortCriteria }) => {
 
   return (
     <Box flex="1">
-      <FormLabel htmlFor="sort-select">{t("filters.sortBy")}:</FormLabel>
-      <Select
-        id="sort-select"
-        borderLeftRadius="0"
-        value={sortCriteria}
-        onChange={(e) => onSortChange(e.target.value)}
-        placeholder={t("sort.sortBy")}       
-      >
-        <option value="price_asc">{t("sort.priceAsc")}</option>
-        <option value="price_desc">{t("sort.priceDesc")}</option>
-        <option value="calories_asc">{t("sort.caloriesAsc")}</option>
-        <option value="calories_desc">{t("sort.caloriesDesc")}</option>
-      </Select>
-    </Box>
+    <FormLabel htmlFor="sort-select" color="gray.800" _dark={{ color: "gray.100" }}>
+      {t("filters.sortBy")}:
+    </FormLabel>
+    <Select
+      id="sort-select"
+      borderLeftRadius="0"
+      value={sortCriteria}
+      onChange={(e) => onSortChange(e.target.value)}
+      placeholder={t("sort.sortBy")}
+      color="gray.600"
+    >
+      <option value="price_asc">{t("sort.priceAsc")}</option>
+      <option value="price_desc">{t("sort.priceDesc")}</option>
+      <option value="calories_asc">{t("sort.caloriesAsc")}</option>
+      <option value="calories_desc">{t("sort.caloriesDesc")}</option>
+    </Select>
+  </Box>
+  
   );
 };
 

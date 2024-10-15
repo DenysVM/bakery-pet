@@ -1,17 +1,12 @@
 import axios from 'axios';
 
-const AUTH_API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://bakery-pet-backend.onrender.com/api/auth'
-  : 'http://172.20.10.6:5000/api/auth';
+const BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://bakery-pet-backend.onrender.com' 
+  : `http://${window.location.hostname}:5000`; 
 
-const ORDER_API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://bakery-pet-backend.onrender.com/api/orders'
-  : 'http://172.20.10.6:5000/api/orders';
-
-  const PRODUCT_API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://bakery-pet-backend.onrender.com/api/products'
-  : 'http://172.20.10.6:5000/api/products';
-
+const AUTH_API_URL = `${BASE_URL}/api/auth`;
+const ORDER_API_URL = `${BASE_URL}/api/orders`;
+const PRODUCT_API_URL = `${BASE_URL}/api/products`;
 
 export const axiosAuthInstance = axios.create({
   baseURL: AUTH_API_URL,
@@ -36,4 +31,3 @@ export const axiosProductInstance = axios.create({
   },
   withCredentials: true,
 });
-
