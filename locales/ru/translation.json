@@ -22,6 +22,8 @@
   },
 
   "productCard": {
+    "category": "Категория",
+    "description": "Описание",
     "addToCart": "Добавить в корзину",
     "inCart": "В корзине",
     "details": "Подробнее...",
@@ -33,6 +35,62 @@
     "protein": "Белки",
     "fat": "Жиры",
     "close": "Закрыть"
+  },
+
+  "product": {
+    "category": "Категория",
+    "name": {
+      "en": "Название (англ.)",
+      "ru": "Название (рус.)",
+      "uk": "Название (укр.)",
+      "pl": "Название (польск.)"
+    },
+    "description": {
+      "en": "Описание (англ.)",
+      "ru": "Описание (рус.)",
+      "uk": "Описание (укр.)",
+      "pl": "Описание (польск.)"
+    },
+    "composition": {
+      "en": "Состав (англ.)",
+      "ru": "Состав (рус.)",
+      "uk": "Состав (укр.)",
+      "pl": "Состав (польск.)"
+    },
+    "calories": "Калории",
+    "price": "Цена",
+    "imageUrl": "URL изображения"
+  },
+  "productEdit": {
+    "editProduct": "Редактировать продукт",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "noChanges": "Изменений нет",
+    "noChangesDescription": "Изменения не обнаружены.",
+    "success": {
+      "productUpdated": "Продукт успешно обновлен"
+    },
+    "error": {
+      "updateProduct": "Ошибка обновления продукта",
+      "unexpected": "Произошла непредвиденная ошибка"
+    }
+  },
+  "productCreate": {
+    "createProduct": "Создать продукт",
+    "createButton": "Создать",
+    "createSuccess": "Продукт успешно создан",
+    "createError": "Ошибка при создании продукта"
+  },
+
+  "productList": {
+    "createProduct": "Создать продукт",
+    "addProduct": "Добавить продукт"
+  },
+
+  "categories": {
+    "bread": "Хлеб",
+    "pastry": "Выпечка",
+    "cake": "Торт"
   },
 
   "filters": {
@@ -48,7 +106,8 @@
     "pastry": "Выпечка",
     "cake": "Торт",
     "sortBy": "Сортировать",
-    "resetFilters": "Сбросить фильтры"
+    "resetFilters": "Сбросить фильтры",
+    "searchPlaceholder": "Введите минимум 3 символа для поиска"
   },
 
   "sort": {
@@ -128,6 +187,7 @@
   "cart": {
     "cart": "Корзина",
     "addToCart": "В корзину",
+    "delete": "Удалить",
     "details": "Подробнее",
     "price": "Цена",
     "cartSummary": "Итог по корзине",
@@ -189,6 +249,7 @@
       "delivered": "Доставлен",
       "cancelled": "Отменен"
     },
+    
     "confirmDeleteTitle": "Подтверждение удаления",
     "confirmDeleteMessage": "Вы уверены, что хотите удалить этот заказ?",
     "deleted": "Заказ удален",

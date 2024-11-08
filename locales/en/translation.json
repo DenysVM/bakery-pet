@@ -22,6 +22,8 @@
   },
 
   "productCard": {
+    "category": "Category",
+    "description": "Description",
     "addToCart": "Add to Cart",
     "inCart": "In Cart",
     "details": "Product Details",
@@ -32,6 +34,64 @@
     "fat": "Fat",
     "price": "Price",
     "close": "Close"
+  },
+
+  "product": {
+    "category": "Category",
+    "name": {
+      "en": "Name (English)",
+      "ru": "Name (Russian)",
+      "uk": "Name (Ukrainian)",
+      "pl": "Name (Polish)"
+    },
+    "description": {
+      "en": "Description (English)",
+      "ru": "Description (Russian)",
+      "uk": "Description (Ukrainian)",
+      "pl": "Description (Polish)"
+    },
+    "composition": {
+      "en": "Composition (English)",
+      "ru": "Composition (Russian)",
+      "uk": "Composition (Ukrainian)",
+      "pl": "Composition (Polish)"
+    },
+    "calories": "Calories",
+    "price": "Price",
+    "imageUrl": "Image URL",
+
+    "confirmDeleteMessage": "Are you sure you want to delete this product?",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "productEdit": {
+    "editProduct": "Edit Product",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noChanges": "No changes",
+    "noChangesDescription": "No changes were detected.",
+    "success": {
+      "productUpdated": "Product successfully updated"
+    },
+    "error": {
+      "updateProduct": "Failed to update product",
+      "unexpected": "An unexpected error occurred"
+    }
+  },
+  "productCreate": {
+    "createProduct": "Create Product",
+    "createButton": "Create"
+  },
+
+  "productList": {
+    "createProduct": "Create New Product",
+    "addProduct": "Add Product"
+  },
+
+  "categories": {
+    "bread": "Bread",
+    "pastry": "Pastry",
+    "cake": "Cake"
   },
 
   "filters": {
@@ -47,7 +107,8 @@
     "pastry": "Pastry",
     "cake": "Cake",
     "sortBy": "Sort",
-    "resetFilters": "Reset Filters"
+    "resetFilters": "Reset Filters",
+    "searchPlaceholder": "Enter at least 3 characters for search"
   },
 
   "sort": {
@@ -127,6 +188,7 @@
   "cart": {
     "cart": "Cart",
     "addToCart": "Add to Cart",
+    "delete": "Delete",
     "details": "Details",
     "price": "Price",
     "proceedToCheckout": "Proceed to Checkout",
