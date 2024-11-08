@@ -142,7 +142,6 @@ const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
     }
   };
 
-  // Compute existing products in the order
   const existingProducts = orderDetails.items.reduce(
     (acc, item) => ({ ...acc, [item.product._id]: true }),
     {}

@@ -5,7 +5,7 @@
   "adminDashboard": "Панель адміністратора",
   "account": "Акаунт",
   "logout": "Вийти",
-  "add":"Додати",
+  "add": "Додати",
   "catalog": {
     "title": "Каталог Продукції",
     "description": "Ознайомтеся з нашим асортиментом артизанської випічки, зробленої з любов'ю та турботою про кожного клієнта."
@@ -15,41 +15,103 @@
     "description": "Наша пекарня була заснована в 2010 році з однією простою місією: ділитися радістю домашньої випічки з кожним. З того часу ми використовуємо лише натуральні інгредієнти та традиційні методи приготування, щоб кожен шматочок був наповнений теплом і турботою. Насолоджуйтеся ароматом свіжого хліба, яскравими пиріжками та солодощами, створеними з любов'ю нашими майстрами."
   },
   "contacts": {
-  "socialMedia": "Ми в соцмережах",
-  "address": "Адреса",
-  "phone": "Телефон",
-  "email": "Електронна пошта"
-},
+    "socialMedia": "Ми в соцмережах",
+    "address": "Адреса",
+    "phone": "Телефон",
+    "email": "Електронна пошта"
+  },
 
-"productCard": {
-  "addToCart": "Додати до кошика",
-  "inCart": "У кошику",
-  "details": "Деталі...",
-  "pictureOf": "Зображення {{name}}",
-  "price": "Ціна",
-  "composition": "Склад",
-  "calories": "Калорійність",
-  "carbohydrates": "Вуглеводи",
-  "protein": "Білки",
-  "fat": "Жири",
-  "close": "Закрити"
-},
+  "productCard": {
+    "category": "Категорія",
+    "description": "Опис",
+    "addToCart": "Додати до кошика",
+    "inCart": "У кошику",
+    "details": "Деталі...",
+    "pictureOf": "Зображення {{name}}",
+    "price": "Ціна",
+    "composition": "Склад",
+    "calories": "Калорійність",
+    "carbohydrates": "Вуглеводи",
+    "protein": "Білки",
+    "fat": "Жири",
+    "close": "Закрити"
+  },
+
+  "product": {
+    "category": "Категорія",
+    "name": {
+      "en": "Назва (англ.)",
+      "ru": "Назва (рос.)",
+      "uk": "Назва (укр.)",
+      "pl": "Назва (польськ.)"
+    },
+    "description": {
+      "en": "Опис (англ.)",
+      "ru": "Опис (рос.)",
+      "uk": "Опис (укр.)",
+      "pl": "Опис (польськ.)"
+    },
+    "composition": {
+      "en": "Склад (англ.)",
+      "ru": "Склад (рос.)",
+      "uk": "Склад (укр.)",
+      "pl": "Склад (польськ.)"
+    },
+    "calories": "Калорії",
+    "price": "Ціна",
+    "imageUrl": "URL зображення",
+
+    "confirmDeleteMessage": "Ви впевнені, що хочете видалити цей продукт?",
+    "cancel": "Скасувати",
+    "delete": "Видалити"
+  },
+  "productEdit": {
+    "editProduct": "Редагувати продукт",
+    "save": "Зберегти",
+    "cancel": "Відміна",
+    "noChanges": "Змін немає",
+    "noChangesDescription": "Зміни не виявлені.",
+    "success": {
+      "productUpdated": "Продукт успішно оновлено"
+    },
+    "error": {
+      "updateProduct": "Помилка оновлення продукту",
+      "unexpected": "Виникла непередбачена помилка"
+    }
+  },
+  "productCreate": {
+    "createProduct": "Створити продукт",
+    "createButton": "Створити",
+    "createSuccess": "Продукт успішно створено",
+    "createError": "Помилка при створенні продукту"
+  },
+  "productList": {
+    "createProduct": "Створити новий продукт",
+    "addProduct": "Додати продукт"
+  },
+
+  "categories": {
+    "bread": "Хліб",
+    "pastry": "Випічка",
+    "cake": "Торт"
+  },
 
   "filters": {
-  "priceRange": "Ціновий діапазон",
-  "minPrice": "Мін.",
-  "maxPrice": "Макс.",
-  "calorieRange": "Калорійність",
-  "minCalories": "Мін.",
-  "maxCalories": "Макс.",
-  "category": "Категорія",
-  "all": "Всі",
-  "bread": "Хліб",
-  "pastry": "Випічка",
-  "cake": "Торт",
-  "sortBy": "Сортувати",
-  "resetFilters": "Скинути фільтри"
-},
+    "priceRange": "Ціновий діапазон",
+    "minPrice": "Мін.",
+    "maxPrice": "Макс.",
+    "calorieRange": "Калорійність",
+    "minCalories": "Мін.",
+    "maxCalories": "Макс.",
+    "category": "Категорія",
+    "all": "Всі",
+    "bread": "Хліб",
+    "pastry": "Випічка",
+    "cake": "Торт",
+    "sortBy": "Сортувати",
+    "resetFilters": "Скинути фільтри",
+    "searchPlaceholder": "Введіть мінімум 3 символи для пошуку"
+  },
 
   "sort": {
     "sortBy": "Вибір",
@@ -62,48 +124,48 @@
     "caloriesDesc": "Калорії за спаданням"
   },
 
-    "auth": {
-      "required": "Обов'язково",
-      "invalidEmail": "Некоректна адреса електронної пошти",
-      "passwordMin": "Пароль повинен містити не менше 8 символів",
-      "invalidPhone": "Некоректний номер телефону",
-      "firstName": "Ім'я",
-      "lastName": "Прізвище",
-      "email": "Електронна пошта",
-      "password": "Пароль",
-      "phone": "Телефон",
-      "address": {
-        "label":"Адреса",
-        "street": "Вулиця",
-        "houseNumber": "Номер будинку",
-        "apartmentNumber": "Номер квартири",
-        "city": "Місто"
-      },
-      "firstNamePlaceholder": "Введіть ваше ім'я",
-      "lastNamePlaceholder": "Введіть ваше прізвище",
-      "emailPlaceholder": "Введіть вашу електронну пошту",
-      "passwordPlaceholder": "Введіть ваш пароль",
-      "phonePlaceholder": "Введіть ваш номер телефону",
-      "addressPlaceholder": {
-        "street": "Введіть вашу вулицю",
-        "houseNumber": "Введіть номер будинку",
-        "apartmentNumber": "Введіть номер квартири",
-        "city": "Введіть ваше місто"
-      },
-      "register": "Реєстрація",
-      "login": "Увійти",
-      "loginPrompt": "Не маєте акаунт?",
-      "loginError": "Помилка входу",
-      "noSuchUser": "Користувача не знайдено",
-      "invalidCredentials": "Некоректний email або пароль",
-      "registrationSuccess": "Реєстрація успішна",
-      "registrationSuccessMessage": "Ви успішно зареєстровані!",
-      "registrationError": "Помилка реєстрації",
-      "registrationErrorMessage": "Сталася помилка під час реєстрації вашого акаунта.",
-      "missingToken": "Відсутній токен автентифікації",
-      "checkingAuthorization": "Перевірка авторизації..."  
+  "auth": {
+    "required": "Обов'язково",
+    "invalidEmail": "Некоректна адреса електронної пошти",
+    "passwordMin": "Пароль повинен містити не менше 8 символів",
+    "invalidPhone": "Некоректний номер телефону",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "phone": "Телефон",
+    "address": {
+      "label": "Адреса",
+      "street": "Вулиця",
+      "houseNumber": "Номер будинку",
+      "apartmentNumber": "Номер квартири",
+      "city": "Місто"
     },
-  
+    "firstNamePlaceholder": "Введіть ваше ім'я",
+    "lastNamePlaceholder": "Введіть ваше прізвище",
+    "emailPlaceholder": "Введіть вашу електронну пошту",
+    "passwordPlaceholder": "Введіть ваш пароль",
+    "phonePlaceholder": "Введіть ваш номер телефону",
+    "addressPlaceholder": {
+      "street": "Введіть вашу вулицю",
+      "houseNumber": "Введіть номер будинку",
+      "apartmentNumber": "Введіть номер квартири",
+      "city": "Введіть ваше місто"
+    },
+    "register": "Реєстрація",
+    "login": "Увійти",
+    "loginPrompt": "Не маєте акаунт?",
+    "loginError": "Помилка входу",
+    "noSuchUser": "Користувача не знайдено",
+    "invalidCredentials": "Некоректний email або пароль",
+    "registrationSuccess": "Реєстрація успішна",
+    "registrationSuccessMessage": "Ви успішно зареєстровані!",
+    "registrationError": "Помилка реєстрації",
+    "registrationErrorMessage": "Сталася помилка під час реєстрації вашого акаунта.",
+    "missingToken": "Відсутній токен автентифікації",
+    "checkingAuthorization": "Перевірка авторизації..."
+  },
+
   "user": {
     "profile": "Профіль",
     "orders": "Замовлення",
@@ -113,7 +175,7 @@
     "email": "Електронна пошта",
     "phone": "Телефон",
     "address": "Адреса",
-    "city":"місто",
+    "city": "місто",
     "street": "вул.",
     "houseNumber": "буд.",
     "apartmentNumber": "кв.",
@@ -128,6 +190,7 @@
   "cart": {
     "cart": "Кошик",
     "addToCart": "Додати в кошик",
+    "delete": "Видалити",
     "details": "Деталі",
     "price": "Ціна",
     "cartSummary": "Підсумок кошика",
@@ -175,10 +238,10 @@
     "viewDetails": "Переглянути деталі",
     "editOrder": "Редагувати замовлення",
     "deleteOrder": "Видалити замовлення",
-    "selectProduct":"Обрати продукт",
-    "addProduct":"Додати продукт",
-    "productAdded":"Продукт додано",
-    "errorInvalidProduct":"Необхідно обрати продукт",
+    "selectProduct": "Обрати продукт",
+    "addProduct": "Додати продукт",
+    "productAdded": "Продукт додано",
+    "errorInvalidProduct": "Необхідно обрати продукт",
     "statusLabel": "Статус",
     "items": "Склад замовлення",
     "invoice": "Створити накладну",

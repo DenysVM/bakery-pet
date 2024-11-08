@@ -1,17 +1,26 @@
+// src/components/Filters/CatalogFilters.jsx
 import React, { useState } from "react";
 import {
   Box,
   Flex,
   FormLabel,
   Input,
-  Select,
   Button,
   Stack,
 } from "@chakra-ui/react";
 import CatalogSort from "./CatalogSort";
+import ProductSearch from "./ProductSearch"; 
+import CategorySelect from "../common/CategorySelect"; // Импортируем CategorySelect
 import { useTranslation } from "react-i18next";
 
-const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
+const CatalogFilters = ({
+  onFiltersChange,
+  onSortChange,
+  sortCriteria,
+  onReset,
+  onSearch,
+  searchTerm,
+}) => {
   const { t } = useTranslation();
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -24,18 +33,8 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
     setMaxPrice("");
     setMinCalories("");
     setMaxCalories("");
-    setCategory("");
-    onFiltersChange({
-      type: "reset",
-      values: {
-        minPrice: "",
-        maxPrice: "",
-        minCalories: "",
-        maxCalories: "",
-        category: "",
-      },
-    });
-    onSortChange("");
+    setCategory(""); // Сбрасываем категорию
+    onReset(); 
   };
 
   return (
@@ -47,13 +46,14 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
       mb="4"
       mt="8"
     >
+      <ProductSearch onSearch={onSearch} searchTerm={searchTerm} />
       <Stack
         direction={{ base: "column", md: "row" }}
         spacing="4"
         width="full"
         align="flex-end"
       >
-        <Box flex={{ base: "1", md: "2" }}>
+        <Box flex={{ base: "1", md: "2" }} width={{ base: "100%", md: "30%" }}>
           <FormLabel htmlFor="minPrice">{t("filters.priceRange")}:</FormLabel>
           <Flex>
             <Input
@@ -82,7 +82,7 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
           </Flex>
         </Box>
 
-        <Box flex={{ base: "1", md: "2" }}>
+        <Box flex={{ base: "1", md: "2" }} width={{ base: "100%", md: "30%" }}>
           <FormLabel htmlFor="minCalories">
             {t("filters.calorieRange")}:
           </FormLabel>
@@ -116,22 +116,16 @@ const CatalogFilters = ({ onFiltersChange, onSortChange, sortCriteria }) => {
         <Box width={{ base: "100%", md: "30%" }}>
           <Flex>
             <Box flex="1">
-              <FormLabel htmlFor="category">{t("filters.category")}:</FormLabel>
-              <Select
-                id="category"
+              <CategorySelect
                 value={category}
-                borderRightRadius="0"
                 onChange={(e) => {
                   setCategory(e.target.value);
                   onFiltersChange({ type: "category", value: e.target.value });
                 }}
+                includeAllOption
                 color="gray.600"
-              >
-                <option value="">{t("filters.all")}</option>
-                <option value="bread">{t("filters.bread")}</option>
-                <option value="pastry">{t("filters.pastry")}</option>
-                <option value="cake">{t("filters.cake")}</option>
-              </Select>
+                borderRightRadius="0"
+              />
             </Box>
 
             <Box flex="1">

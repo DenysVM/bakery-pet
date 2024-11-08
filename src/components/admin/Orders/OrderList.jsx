@@ -24,7 +24,11 @@ import {
   DrawerBody,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import { getAllOrders, getOrderById, deleteOrder } from "../../../services/orderService";
+import {
+  getAllOrders,
+  getOrderById,
+  deleteOrder,
+} from "../../../services/orderService";
 import { getUserProfile } from "../../../services/authService";
 import { getAllProducts } from "../../../services/productService";
 import { useAuth } from "../../../auth/AuthContext";
@@ -32,14 +36,14 @@ import { FaTrash, FaEye } from "react-icons/fa";
 import { OrderStatus, OrderDetail } from "./";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../../common/formatDate";
-import DeleteConfirmationDialog from "./OrderComponents/DeleteConfirmationDialog"; // Импортируем подкомпонент
+import DeleteConfirmationDialog from "./OrderComponents/DeleteConfirmationDialog";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  const [deletingOrderId, setDeletingOrderId] = useState(null); // Состояние для удаления
+  const [deletingOrderId, setDeletingOrderId] = useState(null);
   const [error, setError] = useState(null);
   const { token, loadingAuth } = useAuth();
   const toast = useToast();
@@ -47,7 +51,6 @@ const OrderList = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
 
-  // Состояния для диалога подтверждения удаления
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [orderToDelete, setOrderToDelete] = useState(null);
 
@@ -162,13 +165,11 @@ const OrderList = () => {
     }
   };
 
-  // Функция подтверждения удаления заказа
   const confirmDeleteOrder = (orderId) => {
     setOrderToDelete(orderId);
     setIsDeleteAlertOpen(true);
   };
 
-  // Функция для обновления заказа (исправляем ошибку 'handleOrderUpdate' is not defined)
   const handleOrderUpdate = (updatedOrder) => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
@@ -178,11 +179,19 @@ const OrderList = () => {
   };
 
   if (loadingAuth) {
-    return <Spinner size="xl" label={t("auth.checkingAuthorization")} />;
+    return (
+      <Box display="flex" justifyContent="center" height="100vh">
+        <Spinner size="xl" label={t("auth.checkingAuthorization")} />
+      </Box>
+    );
   }
 
   if (loading) {
-    return <Spinner size="xl" label={t("order.loadingOrders")} />;
+    return (
+      <Box display="flex" justifyContent="center" height="100vh">
+        <Spinner size="xl" label={t("order.loadingOrders")} />
+      </Box>
+    );
   }
 
   if (error) {
@@ -217,6 +226,7 @@ const OrderList = () => {
                 <>
                   <IconButton
                     icon={<FaEye />}
+                    colorScheme="primary"
                     aria-label={t("order.viewDetails")}
                     onClick={() => handleViewDetails(order)}
                     isLoading={
@@ -301,7 +311,7 @@ const OrderList = () => {
           setIsDeleteAlertOpen(false);
         }}
         isDeleting={deletingOrderId === orderToDelete}
-        t={t} 
+        t={t}
       />
     </Box>
   );

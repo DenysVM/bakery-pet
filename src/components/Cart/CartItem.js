@@ -14,6 +14,7 @@ const CartItem = ({ item }) => {
   const { i18n } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const { t } = useTranslation();
 
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -70,7 +71,7 @@ const CartItem = ({ item }) => {
         onClick={() => removeFromCart(item.productId)}
         ml="2"
         {...(isDesktop ? {} : { padding: '0', size: 'sm', boxSize: '40px' })}
-        children={isDesktop ? "Remove" : undefined}
+        children={isDesktop ? t('cart.delete'): undefined}
       />
     </Box>
   );

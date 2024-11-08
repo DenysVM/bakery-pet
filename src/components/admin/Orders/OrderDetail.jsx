@@ -15,6 +15,8 @@ import {
   useDisclosure,
   useMediaQuery,
   useToast,
+  ButtonGroup,
+  IconButton,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '../../common/formatDate';
@@ -22,6 +24,7 @@ import { generateInvoicePDF } from '../../../utils/invoiceGenerator';
 import ProductModal from '../../common/Modal/ProductModal';
 import BottomSheet from '../../common/BottomSheet/BottomSheet';
 import EditOrder from './EditOrder';
+import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 
 const OrderDetail = ({ order, onClose }) => {
   const { t, i18n } = useTranslation();
@@ -174,13 +177,33 @@ const OrderDetail = ({ order, onClose }) => {
         </Text>
 
         <Flex justify="flex-end" mt={4}>
-          <Button colorScheme="blue" onClick={handleDownloadInvoice}>
-            {t('order.invoice')}
-          </Button>
-          <Button ml={4} onClick={onEditOpen} colorScheme="teal">
-            {t('order.editOrder')}
-          </Button>
-        </Flex>
+  {isLargerThan768 ? (
+    <>
+      <Button colorScheme="blue" onClick={handleDownloadInvoice}>
+        {t('order.invoice')}
+      </Button>
+      <Button ml={4} onClick={onEditOpen} colorScheme="teal">
+        {t('order.editOrder')}
+      </Button>
+    </>
+  ) : (
+    <ButtonGroup size="sm" isAttached variant="outline">
+      <IconButton
+        icon={<DownloadIcon />}
+        aria-label={t('order.invoice')}
+        onClick={handleDownloadInvoice}
+        colorScheme="blue"
+      />
+      <IconButton
+        icon={<EditIcon />}
+        aria-label={t('order.editOrder')}
+        onClick={onEditOpen}
+        colorScheme="teal"
+      />
+    </ButtonGroup>
+  )}
+</Flex>
+
       </Stack>
 
       <EditOrder

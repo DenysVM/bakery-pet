@@ -9,6 +9,7 @@ export const generateInvoicePDF = (order, products) => {
 
   const doc = new jsPDF();
 
+  // Настройка шрифта
   try {
     doc.addFileToVFS('DejaVuSans.ttf', DejaVuSans);
     doc.addFont('DejaVuSans.ttf', 'DejaVuSans', 'normal');
@@ -17,6 +18,7 @@ export const generateInvoicePDF = (order, products) => {
     console.error('Ошибка добавления шрифта:', error);
   }
 
+  // Заголовки и основные сведения
   doc.setFontSize(18);
   doc.text(`${t('order.orderId')}: ${order._id}`, 14, 22);
 
@@ -37,19 +39,15 @@ export const generateInvoicePDF = (order, products) => {
   doc.text(`${t('user.address')}:`, 14, 62);
   doc.text(deliveryAddress, 14, 70);
 
+  // Таблица товаров
   const validProducts = Array.isArray(products) ? products : [];
-
   const items = order.items?.map((item) => {
-    // Получаем информацию о продукте
     let product = item.product;
-
-    // Если item.product отсутствует, пытаемся найти продукт в массиве products
     if (!product) {
       const productId = item.productId?._id || item.productId;
       product = validProducts.find((p) => p._id === productId);
     }
 
-    // Получаем название продукта
     const productName = product && product.name
       ? product.name[i18n.language] || product.name['en'] || t('order.noProduct')
       : t('order.noProduct');
@@ -71,7 +69,13 @@ export const generateInvoicePDF = (order, products) => {
     },
   });
 
+  // Итого
   const finalY = doc.lastAutoTable.finalY || 90;
   doc.text(`${t('order.total')}: $${order.total?.toFixed(2) || '0.00'}`, 14, finalY + 10);
-  doc.save(`Invoice_Order_${order._id}.pdf`);
+
+  // Создание Blob и открытие в новом окне
+  const blob = doc.output('blob');
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+  URL.revokeObjectURL(url);
 };
