@@ -1,5 +1,3 @@
-// src/components/UserOrders/UserOrdersContent.jsx
-
 import React, { useEffect, useState } from 'react';
 import {
   Box,
@@ -59,18 +57,21 @@ const UserOrders = () => {
         return;
       }
       try {
-
         const ordersData = await getUserOrders(token);
-  
+
         const productIds = ordersData.flatMap((order) =>
           order.items
             .map((item) => item.product?._id || item.productId)
-            .filter((id) => id !== undefined && typeof id === "string")
+            .filter((id) => id !== undefined && typeof id === 'string')
         );
 
         const products = await getAllProducts(productIds);
-  
-        setOrders(ordersData);
+
+        setOrders(
+          ordersData.filter(
+            (order) => !['cancelled', 'delivered'].includes(order.status)
+          )
+        );
         setProducts(products);
         updateOrderItems(ordersData.flatMap((order) => order.items));
       } catch (error) {
@@ -79,14 +80,14 @@ const UserOrders = () => {
         setLoading(false);
       }
     };
-  
+
     if (!loadingAuth && token) {
       fetchOrders();
     }
   }, [token, loadingAuth, updateOrderItems, missingTokenError, orderErrorFetching]);
-  
 
   const handleEditItem = (order, item) => {
+    if (order.status !== 'pending') return;
     setSelectedOrder(order);
     setSelectedItem(item);
     onEditOpen();
@@ -117,10 +118,8 @@ const UserOrders = () => {
     );
     onEditClose();
   };
-  
-  
+
   const handleConfirmDelete = async (productId) => {
-    // Обновляем локальное состояние заказов с удаленным элементом
     const updatedOrders = orders.map((order) =>
       order._id === selectedOrder._id
         ? {
@@ -129,12 +128,11 @@ const UserOrders = () => {
           }
         : order
     );
-  
+
     const orderToUpdate = updatedOrders.find(
       (order) => order._id === selectedOrder._id
     );
-  
-    // Если все товары удалены, удаляем заказ
+
     if (orderToUpdate.items.length === 0) {
       try {
         await deleteOrder(selectedOrder._id, token);
@@ -155,7 +153,6 @@ const UserOrders = () => {
         });
       }
     } else {
-      // Пересчитываем итоговую сумму заказа после удаления товара
       const updatedTotal = orderToUpdate.items.reduce(
         (sum, item) => sum + item.quantity * item.price,
         0
@@ -171,7 +168,7 @@ const UserOrders = () => {
             : order
         )
       );
-  
+
       try {
         await deleteOrderItem(selectedOrder._id, productId, token);
         toast({
@@ -190,10 +187,9 @@ const UserOrders = () => {
         });
       }
     }
-  
+
     onDeleteClose();
   };
-  
 
   if (loadingAuth || loading) {
     return (
@@ -227,7 +223,7 @@ const UserOrders = () => {
       {orders.map((order) => (
         <Box key={order._id} borderWidth="1px" borderRadius="lg" p="4" mb="4">
           <Text fontWeight="bold" mb="2">
-            {t('order.orderId')}: {order._id}
+            {t('order.orderId')}: {order.orderNumber || order._id}
           </Text>
 
           <Text mb="2">
@@ -243,7 +239,7 @@ const UserOrders = () => {
               key={item._id}
               item={item}
               orderId={order._id}
-              isEditable
+              isEditable={order.status === 'pending'}
               onEditItem={() => handleEditItem(order, item)}
               onDeleteItem={() => handleDeleteItem(order, item)}
               products={products}

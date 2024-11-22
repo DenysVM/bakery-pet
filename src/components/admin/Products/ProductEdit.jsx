@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
   Box,
-  Button,
   FormControl,
   FormLabel,
   Input,
@@ -13,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { updateProduct } from "../../../services/productService";
 import CategorySelect from "../../common/CategorySelect";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
 
 const ProductEdit = ({ product, onClose, token }) => {
   const { t } = useTranslation();
@@ -150,12 +151,37 @@ const ProductEdit = ({ product, onClose, token }) => {
         </FormControl>
       ))}
 
-      <Button colorScheme="teal" type="submit" mt={6} isLoading={isSubmitting}>
-        {t("productEdit.save")}
-      </Button>
-      <Button colorScheme="gray" onClick={onClose} mt={6} ml={3}>
-        {t("productEdit.cancel")}
-      </Button>
+      <Box
+        mt={6}
+        display="flex"
+        justifyContent="flex-end"
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems={{ base: "flex-end", md: "center" }}
+      >
+        <ResponsiveActionButtons
+          buttons={[
+            {
+              icon: <CheckIcon />,
+              label: t("productEdit.save"),
+              onClick: null, 
+              type: "submit",
+              isLoading: isSubmitting,
+              colorScheme: "teal",
+              mb: { base: 3, md: 0 }, 
+            },
+            {
+              icon: <CloseIcon />,
+              label: t("productEdit.cancel"),
+              onClick: onClose,
+              colorScheme: "gray",
+            },
+          ]}
+          size={{ base: "sm", md: "md" }}
+          variant="outline"
+          spacing={{ base: 3, md: 3 }}
+          flexDirection={{ base: "column", md: "row" }}
+        />
+      </Box>
     </Box>
   );
 };

@@ -9,7 +9,6 @@ export const generateInvoicePDF = (order, products) => {
 
   const doc = new jsPDF();
 
-  // Настройка шрифта
   try {
     doc.addFileToVFS('DejaVuSans.ttf', DejaVuSans);
     doc.addFont('DejaVuSans.ttf', 'DejaVuSans', 'normal');
@@ -18,9 +17,8 @@ export const generateInvoicePDF = (order, products) => {
     console.error('Ошибка добавления шрифта:', error);
   }
 
-  // Заголовки и основные сведения
   doc.setFontSize(18);
-  doc.text(`${t('order.orderId')}: ${order._id}`, 14, 22);
+  doc.text(`${t('order.orderId')}: ${order.orderNumber}`, 14, 22);
 
   doc.setFontSize(12);
   doc.text(`${t('order.date')}: ${formatDate(order.createdAt)}`, 14, 32);
@@ -39,7 +37,6 @@ export const generateInvoicePDF = (order, products) => {
   doc.text(`${t('user.address')}:`, 14, 62);
   doc.text(deliveryAddress, 14, 70);
 
-  // Таблица товаров
   const validProducts = Array.isArray(products) ? products : [];
   const items = order.items?.map((item) => {
     let product = item.product;
@@ -69,11 +66,9 @@ export const generateInvoicePDF = (order, products) => {
     },
   });
 
-  // Итого
   const finalY = doc.lastAutoTable.finalY || 90;
   doc.text(`${t('order.total')}: $${order.total?.toFixed(2) || '0.00'}`, 14, finalY + 10);
 
-  // Создание Blob и открытие в новом окне
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank');

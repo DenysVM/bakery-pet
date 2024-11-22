@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -25,6 +24,8 @@ import useProducts from "../../../hooks/useProducts";
 import LoadingError from "../../common/LoadingError";
 import { deleteProduct } from "../../../services/productService";
 import { useAuth } from "../../../auth/AuthContext";
+import { AddIcon } from "@chakra-ui/icons";
+import ResponsiveActionButtons from "../../common/ResponsiveActionButtons"
 
 const ProductList = () => {
   const { products, loading, error } = useProducts();
@@ -104,9 +105,19 @@ const ProductList = () => {
       />
 
       <Box display="flex" justifyContent="flex-end" mb={4}>
-        <Button colorScheme="teal" onClick={onCreateOpen}>
-          {t("productList.addProduct")}
-        </Button>
+        <ResponsiveActionButtons
+          buttons={[
+            {
+              icon: <AddIcon />,
+              label: t("productList.addProduct"),
+              onClick: onCreateOpen,
+              colorScheme: "teal",
+            },
+          ]}
+          size={{ base: "sm", md: "md" }}
+          variant="outline"
+          isAttached={false}
+        />
       </Box>
 
       <Box>

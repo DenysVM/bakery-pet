@@ -1,12 +1,23 @@
 import { axiosOrderInstance } from './api';
 
+const generateOrderNumber = () => {
+  const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, ''); 
+  const uniquePart = Date.now().toString().slice(-4); 
+  return `ORD-${datePart}-${uniquePart}`;
+};
+
 export const createOrder = async (orderData, token) => {
   try {
-    const response = await axiosOrderInstance.post('/', orderData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
+    const orderNumber = generateOrderNumber(); 
+    const response = await axiosOrderInstance.post(
+      '/',
+      { ...orderData, orderNumber },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error.response ? error.response.data : error.message);
@@ -16,17 +27,25 @@ export const createOrder = async (orderData, token) => {
 
 export const updateOrderStatus = async (orderId, status, token) => {
   try {
-    const response = await axiosOrderInstance.put(`/${orderId}/status`, { status }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axiosOrderInstance.put(
+      `/${orderId}/status`,
+      { status },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error('Error updating order status:', error.response ? error.response.data : error.message);
+    console.error(
+      'Error updating order status:',
+      error.response ? error.response.data : error.message
+    );
     throw error;
   }
 };
+
 
 export const getAllOrders = async (token) => {
   try {
@@ -42,12 +61,13 @@ export const getAllOrders = async (token) => {
   }
 };
 
-export const getUserOrders = async (token) => {
+export const getUserOrders = async (token, userId) => {
   try {
     const response = await axiosOrderInstance.get('/', {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
+      params: { userId },
     });
     return response.data;
   } catch (error) {
@@ -116,12 +136,13 @@ export const getOrderById = async (orderId, token) => {
   try {
     const response = await axiosOrderInstance.get(`/${orderId}`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data;
   } catch (error) {
-    console.error('Error fetching order by ID:', error);
+    console.error('Error fetching order by ID:', error.response?.data || error.message);
     throw error;
   }
 };
+

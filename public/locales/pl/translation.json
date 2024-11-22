@@ -184,8 +184,52 @@
     "tabOrders": "Zamówienia",
     "tabOrderHistory": "Historia zamówień",
     "noData": "Brak danych użytkownika.",
+    "backToList": "Powrót do listy",
     "logout": "Wyloguj się"
   },
+
+  "userProfile": {
+    "edit": "Edytuj profil",
+    "save": "Zapisz zmiany",
+    "cancel": "Anuluj",
+    "error": {
+      "fetch": "Nie udało się pobrać profilu użytkownika.",
+      "update": "Nie udało się zaktualizować profilu."
+    },
+    "success": {
+      "update": "Profil został pomyślnie zaktualizowany."
+    }
+  },
+
+  "userList": {
+    "heading": "Lista użytkowników",
+    "loading": "Ładowanie użytkowników...",
+    "name": "Imię",
+    "email": "Email",
+    "role": "Rola",
+    "actions": "Akcje",
+    "viewProfile": "Zobacz profil",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "deleteConfirmationTitle": "Usunięcie użytkownika",
+    "deleteConfirmationMessage": "Czy na pewno chcesz usunąć tego użytkownika?",
+    "deleteSuccess": "Użytkownik został pomyślnie usunięty",
+    "deleteError": "Błąd podczas usuwania użytkownika.",
+    "fetchError": "Błąd podczas ładowania użytkowników."
+  },
+
+  "userSearch": {
+    "label": "Wyszukaj użytkownika",
+    "placeholder": "Szukaj według imienia, emaila lub telefonu"
+  },
+
+  "userDelete": {
+    "confirmDeletion": "Potwierdź usunięcie",
+    "confirmMessage": "Czy na pewno chcesz usunąć użytkownika {{userName}}? Tej akcji nie można cofnąć.",
+    "cancel": "Anuluj",
+    "confirmDelete": "Potwierdź usunięcie"
+  },
+
   "cart": {
     "cart": "Koszyk",
     "delete": "Usuń",
@@ -231,6 +275,8 @@
     "statusUpdated": "Status zaktualizowany",
     "statusUpdatedDescription": "Status zamówienia {{orderId}} został zmieniony na {{status}}",
     "errorUpdatingStatus": "Błąd aktualizacji statusu",
+    "errorFetchingDetails": "Wystąpił błąd podczas pobierania szczegółów zamówienia.",
+    "errorFetchingDetailsDescription": "Nie udało się pobrać szczegółów zamówienia. Odśwież stronę i spróbuj ponownie.",
     "errorUpdatingStatusDescription": "Nie udało się zaktualizować statusu zamówienia",
     "errorFetchingDescription": "Wystąpił błąd podczas pobierania zamówień",
     "loadingOrders": "Ładowanie zamówień...",

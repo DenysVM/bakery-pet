@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Heading,
-  Button,
   Input,
   FormControl,
   FormLabel,
@@ -15,6 +14,8 @@ import { useAuth } from "../../../auth/AuthContext";
 import { createProduct } from "../../../services/productService";
 import { useTranslation } from "react-i18next";
 import CategorySelect from "../../common/CategorySelect";
+import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
+import { AddIcon } from "@chakra-ui/icons";
 
 const ProductCreate = ({ onClose, onProductCreated }) => {
   const { t } = useTranslation();
@@ -134,9 +135,22 @@ const ProductCreate = ({ onClose, onProductCreated }) => {
         </NumberInput>
       </FormControl>
 
-      <Button colorScheme="teal" onClick={handleSubmit}>
-        {t("productCreate.createButton")}
-      </Button>
+      <Box display="flex" justifyContent="flex-end">
+        <ResponsiveActionButtons
+          buttons={[
+            {
+              icon: <AddIcon />,
+              label: t("productCreate.createButton"),
+              onClick: handleSubmit,
+              colorScheme: "teal",
+            },
+          ]}
+          size={{ base: "sm", md: "md" }}
+          variant="solid"
+          spacing={{ base: 0, md: 3 }}
+          flexDirection={{ base: "column", md: "row" }}
+        />
+      </Box>
     </Box>
   );
 };

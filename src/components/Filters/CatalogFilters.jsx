@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import CatalogSort from "./CatalogSort";
 import ProductSearch from "./ProductSearch"; 
-import CategorySelect from "../common/CategorySelect"; // Импортируем CategorySelect
+import CategorySelect from "../common/CategorySelect";
 import { useTranslation } from "react-i18next";
 
 const CatalogFilters = ({
@@ -33,7 +33,7 @@ const CatalogFilters = ({
     setMaxPrice("");
     setMinCalories("");
     setMaxCalories("");
-    setCategory(""); // Сбрасываем категорию
+    setCategory(""); 
     onReset(); 
   };
 
@@ -143,6 +143,7 @@ const CatalogFilters = ({
           onClick={resetFilters}
           alignSelf={{ base: "center", md: "flex-end" }}
           mt="auto"
+          variant="outline"
         >
           {t("filters.resetFilters")}
         </Button>

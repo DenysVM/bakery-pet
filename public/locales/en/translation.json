@@ -164,6 +164,19 @@
     "checkingAuthorization": "Checking authorization..."
   },
 
+  "userProfile": {
+    "edit": "Edit Profile",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "error": {
+      "fetch": "Failed to fetch user profile.",
+      "update": "Failed to update profile."
+    },
+    "success": {
+      "update": "Profile updated successfully."
+    }
+  },
+
   "user": {
     "profile": "Profile",
     "orders": "Orders",
@@ -183,7 +196,37 @@
     "tabOrders": "Orders",
     "tabOrderHistory": "Order History",
     "noData": "No user data available.",
+    "backToList": "Back to List",
     "logout": "Logout"
+  },
+
+  "userSearch": {
+    "label": "Search User",
+    "placeholder": "Search by name, email or phone"
+  },
+
+  "userList": {
+    "heading": "User List",
+    "loading": "Loading users...",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "actions": "Actions",
+    "viewProfile": "View Profile",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirmationTitle": "Delete User",
+    "deleteConfirmationMessage": "Are you sure you want to delete this user?",
+    "deleteSuccess": "User successfully deleted",
+    "deleteError": "Error deleting user.",
+    "fetchError": "Error fetching users."
+  },
+
+  "userDelete": {
+    "confirmDeletion": "Confirm Deletion",
+    "confirmMessage": "Are you sure you want to delete user {{userName}}? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirmDelete": "Confirm Delete"
   },
   "cart": {
     "cart": "Cart",
@@ -250,6 +293,8 @@
       "delivered": "Delivered",
       "cancelled": "Cancelled"
     },
+    "errorFetchingDetails": "An error occurred while fetching order details.",
+    "errorFetchingDetailsDescription": "We couldn't retrieve the order details. Please refresh the page and try again.",
     "confirmDeleteTitle": "Delete Confirmation",
     "confirmDeleteMessage": "Are you sure you want to delete this order?",
     "deleted": "Order Deleted",

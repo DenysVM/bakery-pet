@@ -5,11 +5,7 @@ import {
   Box,
   Text,
   Spinner,
-  Button,
-  IconButton,
-  ButtonGroup,
   useToast,
-  useBreakpointValue,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -23,36 +19,38 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerCloseButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import {
   getAllOrders,
   getOrderById,
   deleteOrder,
 } from "../../../services/orderService";
-import { getUserProfile } from "../../../services/authService";
+import { getUser } from "../../../services/userService";
 import { getAllProducts } from "../../../services/productService";
 import { useAuth } from "../../../auth/AuthContext";
-import { FaTrash, FaEye } from "react-icons/fa";
 import { OrderStatus, OrderDetail } from "./";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../../common/formatDate";
 import DeleteConfirmationDialog from "./OrderComponents/DeleteConfirmationDialog";
+import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingDetails, setLoadingDetails] = useState(false);
   const [deletingOrderId, setDeletingOrderId] = useState(null);
   const [error, setError] = useState(null);
   const { token, loadingAuth } = useAuth();
   const toast = useToast();
-  const isMobile = useBreakpointValue({ base: true, md: false });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const [loadingOrderId, setLoadingOrderId] = useState(null);
 
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [orderToDelete, setOrderToDelete] = useState(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const fetchOrders = useCallback(async () => {
     if (!token) {
@@ -88,26 +86,31 @@ const OrderList = () => {
   }, [token, loadingAuth, fetchOrders]);
 
   const handleViewDetails = async (order) => {
-    setLoadingDetails(true);
+    setLoadingOrderId(order._id);
     setError(null);
-
+  
     try {
+      // Получаем детали заказа
       const orderDetails = await getOrderById(order._id, token);
-      const userProfile = await getUserProfile(token);
-
+  
+      // Получаем данные пользователя, связанного с заказом
+      const userProfile = await getUser(orderDetails.user, token);
+  
+      // Получаем данные о товарах в заказе
       const productIds = orderDetails.items
         .map((item) => item.productId?._id || item.productId)
         .filter((id) => id !== undefined && typeof id === "string");
-
+  
       const products = await getAllProducts(productIds);
-
+  
+      // Собираем полные данные о заказе
       const detailedOrder = {
         ...orderDetails,
-        user: userProfile,
+        user: userProfile, // Указываем данные о владельце заказа
         items: orderDetails.items.map((item) => {
           const productId = item.productId?._id || item.productId;
           const product = products.find((p) => p._id === productId);
-
+  
           return {
             ...item,
             product: product || item.productId,
@@ -115,7 +118,7 @@ const OrderList = () => {
           };
         }),
       };
-
+  
       setSelectedOrder(detailedOrder);
       onOpen();
     } catch (err) {
@@ -128,9 +131,10 @@ const OrderList = () => {
         isClosable: true,
       });
     } finally {
-      setLoadingDetails(false);
+      setLoadingOrderId(null);
     }
   };
+  
 
   const handleDeleteOrder = async (orderId) => {
     try {
@@ -173,7 +177,16 @@ const OrderList = () => {
   const handleOrderUpdate = (updatedOrder) => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
-        order._id === updatedOrder._id ? updatedOrder : order
+        order._id === updatedOrder._id
+          ? {
+              ...order,
+              ...updatedOrder,
+              total: updatedOrder.items.reduce(
+                (sum, item) => sum + item.price * item.quantity,
+                0
+              ),
+            }
+          : order
       )
     );
   };
@@ -201,15 +214,29 @@ const OrderList = () => {
   return (
     <Box>
       {orders.map((order) => (
-        <Box key={order._id} p={4} borderWidth="1px" borderRadius="lg" mb={4}>
+        <Box
+          key={order._id}
+          p={4}
+          borderWidth="1px"
+          borderRadius="lg"
+          mb={4}
+          borderColor={
+            order.status === "cancelled"
+              ? "red.500"
+              : order.status === "delivered"
+              ? "green.500"
+              : undefined
+          }
+        >
           <Text fontWeight="bold">
-            {t("order.orderId")}: {order._id} - {formatDate(order.createdAt)}
+            {t("order.orderId")}: {order.orderNumber || order._id} -{" "}
+            {formatDate(order.createdAt)}
           </Text>
           <Text>
             {t("order.total")}: ${order.total.toFixed(2)}
           </Text>
 
-          <Box mt={2} display="flex" justifyContent="flex-start">
+          <Box mt={2} display="flex" justifyContent="space-between">
             <OrderStatus
               order={order}
               token={token}
@@ -220,50 +247,36 @@ const OrderList = () => {
                   )
                 );
               }}
+            />{" "}
+          </Box>
+          <Box display="flex" justifyContent="flex-end" alignItems="center">
+            <ResponsiveActionButtons
+              buttons={[
+                {
+                  icon: <EditIcon />,
+                  label: t("order.viewDetails"),
+                  onClick: () => handleViewDetails(order),
+                  colorScheme: "blue",
+                  isLoading: loadingOrderId === order._id,
+                },
+                {
+                  icon: <DeleteIcon />,
+                  label: t("order.deleteOrder"),
+                  onClick: () => confirmDeleteOrder(order._id),
+                  colorScheme: "red",
+                  isLoading: deletingOrderId === order._id,
+                },
+              ]}
+              size={{ base: "sm", md: "md" }}
+              variant="outline"
+              spacing={{ base: 2, md: 4 }}
+              flexDirection={{ base: "column", md: "row" }}
+              isAttached={true}
             />
-            <ButtonGroup size="sm" isAttached variant="outline">
-              {isMobile ? (
-                <>
-                  <IconButton
-                    icon={<FaEye />}
-                    colorScheme="primary"
-                    aria-label={t("order.viewDetails")}
-                    onClick={() => handleViewDetails(order)}
-                    isLoading={
-                      loadingDetails && selectedOrder?._id === order._id
-                    }
-                  />
-                  <IconButton
-                    icon={<FaTrash />}
-                    aria-label={t("order.deleteOrder")}
-                    onClick={() => confirmDeleteOrder(order._id)}
-                    isLoading={deletingOrderId === order._id}
-                  />
-                </>
-              ) : (
-                <>
-                  <Button
-                    onClick={() => handleViewDetails(order)}
-                    isLoading={
-                      loadingDetails && selectedOrder?._id === order._id
-                    }
-                  >
-                    {t("order.viewDetails")}
-                  </Button>
-                  <Button
-                    onClick={() => confirmDeleteOrder(order._id)}
-                    isLoading={deletingOrderId === order._id}
-                  >
-                    {t("order.deleteOrder")}
-                  </Button>
-                </>
-              )}
-            </ButtonGroup>
           </Box>
         </Box>
       ))}
 
-      {/* Компонент OrderDetail */}
       {selectedOrder &&
         (isMobile ? (
           <Drawer isOpen={isOpen} placement="bottom" onClose={onClose}>

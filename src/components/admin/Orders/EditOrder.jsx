@@ -167,7 +167,6 @@ const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
                 onDelete={handleDeleteItem}
               />
             ))}
-            {/* Add 'Add Product' button */}
             <Button mt={4} onClick={onAddProductOpen}>
               {t("order.addProduct")}
             </Button>
@@ -189,7 +188,6 @@ const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
         </ModalContent>
       </Modal>
 
-      {/* AddProductForm Modal */}
       <AddProductForm
         isOpen={isAddProductOpen}
         onClose={onAddProductClose}

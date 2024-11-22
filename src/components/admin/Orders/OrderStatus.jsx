@@ -1,6 +1,4 @@
-// src/components/Admin/Order/OrderStatus.jsx
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Menu,
   MenuButton,
@@ -8,10 +6,10 @@ import {
   MenuItem,
   Button,
   useToast,
-} from '@chakra-ui/react';
-import { FaChevronDown } from 'react-icons/fa';
-import { updateOrderStatus } from '../../../services/orderService';
-import { useTranslation } from 'react-i18next';
+} from "@chakra-ui/react";
+import { FaChevronDown } from "react-icons/fa";
+import { updateOrderStatus } from "../../../services/orderService";
+import { useTranslation } from "react-i18next";
 
 const OrderStatus = ({ order, token, onStatusUpdated, isMobile }) => {
   const [status, setStatus] = useState(order.status);
@@ -20,39 +18,47 @@ const OrderStatus = ({ order, token, onStatusUpdated, isMobile }) => {
   const { t } = useTranslation();
 
   const statusOptions = [
-    'pending',
-    'processing',
-    'shipped',
-    'delivered',
-    'cancelled',
+    "pending",
+    "processing",
+    "shipped",
+    "delivered",
+    "cancelled",
   ];
+
+  // Устанавливаем цвет статуса
+  const statusColor =
+    status === "cancelled"
+      ? "red.500"
+      : status === "delivered"
+      ? "green.500"
+      : "inherit";
 
   const handleStatusChange = async (newStatus) => {
     if (newStatus === status) return;
 
     setIsUpdating(true);
     try {
-      await updateOrderStatus(order._id, newStatus, token);
+      const orderId = order.orderNumber || order._id;
+      await updateOrderStatus(orderId, newStatus, token);
       setStatus(newStatus);
       toast({
-        title: t('order.statusUpdated'),
-        description: t('order.statusUpdatedDescription', {
-          orderId: order._id,
+        title: t("order.statusUpdated"),
+        description: t("order.statusUpdatedDescription", {
+          orderId: orderId,
           status: t(`order.status.${newStatus}`),
         }),
-        status: 'success',
+        status: "success",
         duration: 3000,
         isClosable: true,
       });
       if (onStatusUpdated) {
-        onStatusUpdated(order._id, newStatus);
+        onStatusUpdated(orderId, newStatus);
       }
     } catch (error) {
       toast({
-        title: t('order.errorUpdatingStatus'),
-        description:
-          error.message || t('order.errorUpdatingStatusDescription'),
-        status: 'error',
+        title: t("order.errorUpdatingStatus"),
+        description: error.message || t("order.errorUpdatingStatusDescription"),
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
@@ -69,6 +75,7 @@ const OrderStatus = ({ order, token, onStatusUpdated, isMobile }) => {
         variant="outline"
         isLoading={isUpdating}
         rightIcon={<FaChevronDown />}
+        color={statusColor}
       >
         {t(`order.status.${status}`)}
       </MenuButton>

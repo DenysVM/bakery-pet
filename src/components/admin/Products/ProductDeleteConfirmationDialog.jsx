@@ -28,18 +28,19 @@ const ProductDeleteConfirmationDialog = ({
     >
       <AlertDialogOverlay>
         <AlertDialogContent mx="4">
-          <AlertDialogHeader>{t("product.confirmDeleteMessage")}</AlertDialogHeader>
+          <AlertDialogHeader>
+            {t("product.confirmDeleteMessage")}
+          </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              {t("product.cancel")}
-            </Button>
             <Button
               colorScheme="red"
               onClick={onConfirm}
-              ml={3}
               isLoading={isDeleting}
             >
               {t("product.delete")}
+            </Button>
+            <Button ref={cancelRef} onClick={onClose} ml={3}>
+              {t("product.cancel")}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
