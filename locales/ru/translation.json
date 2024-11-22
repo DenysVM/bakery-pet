@@ -59,7 +59,11 @@
     },
     "calories": "Калории",
     "price": "Цена",
-    "imageUrl": "URL изображения"
+    "imageUrl": "URL изображения",
+
+    "confirmDeleteMessage": "Вы уверены, что хотите удалить этот продукт?",
+    "cancel": "Отмена",
+    "delete": "Удалить"
   },
   "productEdit": {
     "editProduct": "Редактировать продукт",
@@ -182,8 +186,52 @@
     "tabProfile": "Профиль",
     "tabOrders": "Заказы",
     "tabOrderHistory": "История заказов",
+    "backToList": "Назад к списку",
     "logout": "Выйти"
   },
+
+  "userProfile": {
+    "edit": "Редактировать профиль",
+    "save": "Сохранить изменения",
+    "cancel": "Отмена",
+    "error": {
+      "fetch": "Не удалось загрузить профиль пользователя.",
+      "update": "Не удалось обновить профиль."
+    },
+    "success": {
+      "update": "Профиль успешно обновлён."
+    }
+  },
+
+  "userSearch": {
+    "label": "Поиск пользователя",
+    "placeholder": "Искать по имени, email или телефону"
+  },
+
+  "userList": {
+    "heading": "Список пользователей",
+    "loading": "Загрузка пользователей...",
+    "name": "Имя",
+    "email": "Электронная почта",
+    "role": "Роль",
+    "actions": "Действия",
+    "viewProfile": "Просмотреть профиль",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "deleteConfirmationTitle": "Удаление пользователя",
+    "deleteConfirmationMessage": "Вы уверены, что хотите удалить этого пользователя?",
+    "deleteSuccess": "Пользователь успешно удалён",
+    "deleteError": "Ошибка при удалении пользователя.",
+    "fetchError": "Ошибка при загрузке пользователей."
+  },
+
+  "userDelete": {
+    "confirmDeletion": "Подтверждение удаления",
+    "confirmMessage": "Вы уверены, что хотите удалить пользователя {{userName}}? Это действие нельзя отменить.",
+    "cancel": "Отмена",
+    "confirmDelete": "Подтвердить удаление"
+  },
+
   "cart": {
     "cart": "Корзина",
     "addToCart": "В корзину",
@@ -231,6 +279,8 @@
     "errorUpdatingStatus": "Ошибка обновления статуса",
     "errorUpdatingStatusDescription": "Не удалось обновить статус заказа",
     "errorFetchingDescription": "Произошла ошибка при получении заказов",
+    "errorFetchingDetails": "Произошла ошибка при получении данных заказа.",
+    "errorFetchingDetailsDescription": "Не удалось получить данные о заказе. Обновите страницу и попробуйте снова.",
     "loadingOrders": "Загрузка заказов...",
     "viewDetails": "Просмотреть детали",
     "editOrder": "Редактировать заказ",
@@ -249,7 +299,7 @@
       "delivered": "Доставлен",
       "cancelled": "Отменен"
     },
-    
+
     "confirmDeleteTitle": "Подтверждение удаления",
     "confirmDeleteMessage": "Вы уверены, что хотите удалить этот заказ?",
     "deleted": "Заказ удален",
