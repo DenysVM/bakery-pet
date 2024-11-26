@@ -45,7 +45,6 @@ const OrderDetail = ({ order, onClose, onSave }) => {
     setOrderDetails(updatedOrder);
     const newTotalPrice = calculateTotalPrice(updatedOrder.items);
     setTotalPrice(newTotalPrice);
-
     if (onSave) {
       onSave(updatedOrder);
     }

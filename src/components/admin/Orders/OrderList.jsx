@@ -224,8 +224,8 @@ const OrderList = () => {
   };
 
   const handleOrderUpdate = (updatedOrder) => {
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
+    setOrders((prevOrders) => {
+      const updatedOrders = prevOrders.map((order) =>
         order._id === updatedOrder._id
           ? {
               ...order,
@@ -236,10 +236,13 @@ const OrderList = () => {
               ),
             }
           : order
-      )
-    );
+      );
+      // Обновляем `filteredOrders` на основе новых данных
+      setFilteredOrders(updatedOrders);
+      return updatedOrders;
+    });
   };
-
+  
   if (loadingAuth) {
     return (
       <Box display="flex" justifyContent="center" height="100vh">
