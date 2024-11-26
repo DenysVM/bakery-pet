@@ -23,9 +23,10 @@ export const generateInvoicePDF = (order, products) => {
   doc.setFontSize(12);
   doc.text(`${t('order.date')}: ${formatDate(order.createdAt)}`, 14, 32);
 
-  const customerName = order.user
-    ? `${order.user.firstName} ${order.user.lastName}`
-    : t('user.noData');
+  const customerName = order.user?.deleted
+  ? `${order.userFirstName || t('user.noData')} ${order.userLastName || ''} (${t('user.deleted')})`
+  : `${order.user?.firstName || order.userFirstName || t('user.noData')} ${order.user?.lastName || order.userLastName || ''}`;
+
   const address = order.address || {};
   const deliveryAddress = `${t('user.city')} ${address.city || ''}, ${t('user.street')} ${address.street || ''}, ${t('user.houseNumber')} ${address.houseNumber || ''}, ${t(
     'user.apartmentNumber'

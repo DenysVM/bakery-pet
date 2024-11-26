@@ -1,23 +1,33 @@
 import { axiosOrderInstance } from './api';
 
 const generateOrderNumber = () => {
-  const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, ''); 
-  const uniquePart = Date.now().toString().slice(-4); 
+  const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const uniquePart = Date.now().toString().slice(-4);
   return `ORD-${datePart}-${uniquePart}`;
 };
 
-export const createOrder = async (orderData, token) => {
+export const createOrder = async (orderData, token, user) => {
   try {
     const orderNumber = generateOrderNumber(); 
+
+    // Включаем данные пользователя в запрос
+    const enrichedOrderData = {
+      ...orderData,
+      orderNumber,
+      userFirstName: user.firstName,
+      userLastName: user.lastName,
+    };
+
     const response = await axiosOrderInstance.post(
       '/',
-      { ...orderData, orderNumber },
+      enrichedOrderData,
       {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       }
     );
+
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error.response ? error.response.data : error.message);
@@ -45,7 +55,6 @@ export const updateOrderStatus = async (orderId, status, token) => {
     throw error;
   }
 };
-
 
 export const getAllOrders = async (token) => {
   try {

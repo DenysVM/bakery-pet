@@ -60,7 +60,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       };
 
       try {
-        await createOrder(orderData, token);
+        await createOrder(orderData, token, user);
         toast({
           title: t('checkout.success'),
           description: t('checkout.created'),

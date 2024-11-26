@@ -20,6 +20,7 @@ import {
   DrawerBody,
   DrawerCloseButton,
   useBreakpointValue,
+  Flex,
 } from "@chakra-ui/react";
 import {
   getAllOrders,
@@ -32,12 +33,17 @@ import { useAuth } from "../../../auth/AuthContext";
 import { OrderStatus, OrderDetail } from "./";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../../common/formatDate";
-import DeleteConfirmationDialog from "./OrderComponents/DeleteConfirmationDialog";
-import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import {
+  DeleteConfirmationDialog,
+  OrderSearch,
+  OrderFilter,
+} from "./OrderComponents";
+import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deletingOrderId, setDeletingOrderId] = useState(null);
@@ -45,7 +51,7 @@ const OrderList = () => {
   const { token, loadingAuth } = useAuth();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [loadingOrderId, setLoadingOrderId] = useState(null);
 
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
@@ -65,6 +71,7 @@ const OrderList = () => {
     try {
       const data = await getAllOrders(token);
       setOrders(data);
+      setFilteredOrders(data);
     } catch (err) {
       setError(t("order.errorFetching"));
       toast({
@@ -85,32 +92,75 @@ const OrderList = () => {
     }
   }, [token, loadingAuth, fetchOrders]);
 
+  const handleSearch = useCallback(
+    (term) => {
+      const lowerCaseTerm = term.toLowerCase();
+      setFilteredOrders(
+        orders.filter((order) =>
+          [
+            order.orderNumber,
+            order.userFirstName,
+            order.userLastName,
+            order.phone,
+          ]
+            .filter(Boolean) 
+            .some((field) => field.toLowerCase().includes(lowerCaseTerm))
+        )
+      );
+    },
+    [orders]
+  );
+  
+  const handleFilter = useCallback(
+    (date) => {
+      if (!date) {
+        setFilteredOrders(orders); // Если дата не указана, показываем все заказы
+        return;
+      }
+
+      setFilteredOrders(
+        orders.filter(
+          (order) => formatDate(order.createdAt) === formatDate(date)
+        )
+      );
+    },
+    [orders]
+  );
+
   const handleViewDetails = async (order) => {
     setLoadingOrderId(order._id);
     setError(null);
-  
+
     try {
-      // Получаем детали заказа
       const orderDetails = await getOrderById(order._id, token);
-  
-      // Получаем данные пользователя, связанного с заказом
-      const userProfile = await getUser(orderDetails.user, token);
-  
-      // Получаем данные о товарах в заказе
+
+      let userProfile;
+      try {
+        userProfile = await getUser(orderDetails.user, token);
+      } catch (error) {
+        userProfile = {
+          firstName: orderDetails.userFirstName,
+          lastName: orderDetails.userLastName,
+          deleted: true,
+        };
+        console.warn(
+          `User not found: ${orderDetails.user}. This is expected for deleted users.`
+        );
+      }
+
       const productIds = orderDetails.items
         .map((item) => item.productId?._id || item.productId)
         .filter((id) => id !== undefined && typeof id === "string");
-  
+
       const products = await getAllProducts(productIds);
-  
-      // Собираем полные данные о заказе
+
       const detailedOrder = {
         ...orderDetails,
-        user: userProfile, // Указываем данные о владельце заказа
+        user: userProfile,
         items: orderDetails.items.map((item) => {
           const productId = item.productId?._id || item.productId;
           const product = products.find((p) => p._id === productId);
-  
+
           return {
             ...item,
             product: product || item.productId,
@@ -118,7 +168,7 @@ const OrderList = () => {
           };
         }),
       };
-  
+
       setSelectedOrder(detailedOrder);
       onOpen();
     } catch (err) {
@@ -134,7 +184,6 @@ const OrderList = () => {
       setLoadingOrderId(null);
     }
   };
-  
 
   const handleDeleteOrder = async (orderId) => {
     try {
@@ -213,7 +262,24 @@ const OrderList = () => {
 
   return (
     <Box>
-      {orders.map((order) => (
+      {/* Search and Filter Components */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        mb={4}
+        gap={4}
+        alignItems={{ base: "flex-start", md: "center" }}
+        width="100%"
+      >
+        <Box flex="1" width={{ base: "100%", md: "auto" }}>
+          <OrderSearch onSearch={handleSearch} />
+        </Box>
+        <Box flex="1" width={{ base: "100%", md: "auto" }}>
+          <OrderFilter onFilter={handleFilter} locale={i18n.language} />
+        </Box>
+      </Flex>
+
+      {/* Render Order Cards */}
+      {filteredOrders.map((order) => (
         <Box
           key={order._id}
           p={4}
@@ -247,7 +313,7 @@ const OrderList = () => {
                   )
                 );
               }}
-            />{" "}
+            />
           </Box>
           <Box display="flex" justifyContent="flex-end" alignItems="center">
             <ResponsiveActionButtons

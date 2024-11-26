@@ -79,9 +79,10 @@ const OrderDetail = ({ order, onClose, onSave }) => {
 
   const customerPhone = orderDetails.phone || t("user.noData");
 
-  const customerName = orderDetails.user
-    ? `${orderDetails.user.firstName} ${orderDetails.user.lastName}`
-    : t("user.noData");
+  const customerName = orderDetails.user.deleted
+  ? `${orderDetails.userFirstName} ${orderDetails.userLastName} (${t("user.deleted")})`
+  : `${orderDetails.user.firstName} ${orderDetails.user.lastName}`;
+
 
   const handleDownloadInvoice = () => {
     generateInvoicePDF(
@@ -207,12 +208,17 @@ const OrderDetail = ({ order, onClose, onSave }) => {
                 onClick: handleDownloadInvoice,
                 colorScheme: "blue",
               },
-              {
-                icon: <EditIcon />,
-                label: t("order.editOrder"),
-                onClick: onEditOpen,
-                colorScheme: "teal",
-              },
+              
+              ...(orderDetails.user.deleted
+                ? []
+                : [
+                    {
+                      icon: <EditIcon />,
+                      label: t("order.editOrder"),
+                      onClick: onEditOpen,
+                      colorScheme: "teal",
+                    },
+                  ]),
             ]}
             size={{ base: "sm", md: "md" }}
             variant="outline"
