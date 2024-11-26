@@ -184,6 +184,7 @@
     "tabOrders": "Zamówienia",
     "tabOrderHistory": "Historia zamówień",
     "noData": "Brak danych użytkownika.",
+    "deleted": "Usunięty użytkownik",
     "backToList": "Powrót do listy",
     "logout": "Wyloguj się"
   },
@@ -302,6 +303,7 @@
     "deleted": "Zamówienie usunięte",
     "deletedSuccessfully": "Zamówienie zostało pomyślnie usunięte",
     "errorDeleting": "Błąd podczas usuwania zamówienia",
-    "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później."
+    "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później.",
+    "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru"
   }
 }

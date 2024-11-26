@@ -196,6 +196,7 @@
     "tabOrders": "Orders",
     "tabOrderHistory": "Order History",
     "noData": "No user data available.",
+    "deleted": "Deleted User",
     "backToList": "Back to List",
     "logout": "Logout"
   },
@@ -301,6 +302,8 @@
     "deletedSuccessfully": "Order was successfully deleted",
     "errorDeleting": "Error Deleting Order",
     "errorDeletingDescription": "Failed to delete order. Please try again later.",
-    "changeStatus": "Change Status"
+    "changeStatus": "Change Status",
+    "searchPlaceholder": "Search orders by user, phone, or number",
+    "filterByDate": "Filter by date"
   }
 }

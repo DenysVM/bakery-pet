@@ -181,6 +181,7 @@
     "houseNumber": "д.",
     "apartmentNumber": "кв.",
     "noData": "Нет данных пользователя.",
+    "deleted": "Удаленный пользователь",
     "currentOrders": "Текущие заказы",
     "deliveredOrders": "Доставленные заказы",
     "tabProfile": "Профиль",
@@ -305,6 +306,7 @@
     "deleted": "Заказ удален",
     "deletedSuccessfully": "Заказ был успешно удален",
     "errorDeleting": "Ошибка при удалении заказа",
-    "errorDeletingDescription": "Не удалось удалить заказ. Пожалуйста, попробуйте позже."
+    "errorDeletingDescription": "Не удалось удалить заказ. Пожалуйста, попробуйте позже.",
+    "searchPlaceholder": "Поиск заказов по пользователю, телефону или номеру"
   }
 }
