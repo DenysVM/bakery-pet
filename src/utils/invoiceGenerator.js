@@ -2,65 +2,101 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import i18n from '../i18n/i18n';
 import { formatDate } from '../components/common/formatDate';
-import DejaVuSans from '../utils/fonts/DejaVuSans-normal';
 
-export const generateInvoicePDF = (order, products) => {
+export const generateInvoicePDF = async (order, products) => {
   const t = i18n.t.bind(i18n);
+
+  const translationKeys = {
+    orderId: t('order.orderId'),
+    date: t('order.date'),
+    name: t('user.name'),
+    phone: t('user.phone'),
+    address: t('user.address'),
+    noData: t('user.noData'),
+    deleted: t('user.deleted'),
+    city: t('user.city'),
+    street: t('user.street'),
+    houseNumber: t('user.houseNumber'),
+    apartmentNumber: t('user.apartmentNumber'),
+    products: t('products'),
+    quantity: t('order.quantity'),
+    price: t('productCard.price'),
+    totalPrice: t('cart.totalPrice'),
+    total: t('order.total'),
+    noProduct: t('order.noProduct'),
+  };
 
   const doc = new jsPDF();
 
   try {
-    doc.addFileToVFS('DejaVuSans.ttf', DejaVuSans);
+    const fontBuffer = await fetch(`${process.env.PUBLIC_URL}/fonts/DejaVuSans.ttf`).then((res) =>
+      res.arrayBuffer()
+    );
+    const base64Font = arrayBufferToBase64(fontBuffer);
+    doc.addFileToVFS('DejaVuSans.ttf', base64Font);
     doc.addFont('DejaVuSans.ttf', 'DejaVuSans', 'normal');
     doc.setFont('DejaVuSans', 'normal');
   } catch (error) {
-    console.error('Ошибка добавления шрифта:', error);
+    console.error('Ошибка подключения шрифта:', error);
+    return;
   }
 
   doc.setFontSize(18);
-  doc.text(`${t('order.orderId')}: ${order.orderNumber}`, 14, 22);
+  doc.text(`${translationKeys.orderId}: ${order.orderNumber}`, 14, 22);
 
   doc.setFontSize(12);
-  doc.text(`${t('order.date')}: ${formatDate(order.createdAt)}`, 14, 32);
+  doc.text(`${translationKeys.date}: ${formatDate(order.createdAt)}`, 14, 32);
 
   const customerName = order.user?.deleted
-  ? `${order.userFirstName || t('user.noData')} ${order.userLastName || ''} (${t('user.deleted')})`
-  : `${order.user?.firstName || order.userFirstName || t('user.noData')} ${order.user?.lastName || order.userLastName || ''}`;
+    ? `${order.userFirstName || translationKeys.noData} ${order.userLastName || ''} (${translationKeys.deleted})`
+    : `${order.user?.firstName || order.userFirstName || translationKeys.noData} ${
+        order.user?.lastName || order.userLastName || ''
+      }`;
 
   const address = order.address || {};
-  const deliveryAddress = `${t('user.city')} ${address.city || ''}, ${t('user.street')} ${address.street || ''}, ${t('user.houseNumber')} ${address.houseNumber || ''}, ${t(
-    'user.apartmentNumber'
-  )} ${address.apartmentNumber || ''}`;
-  const customerPhone = order.phone || t('user.noData');
+  const deliveryAddress = `${translationKeys.city} ${address.city || ''}, ${translationKeys.street} ${
+    address.street || ''
+  }, ${translationKeys.houseNumber} ${address.houseNumber || ''}, ${
+    translationKeys.apartmentNumber
+  } ${address.apartmentNumber || ''}`;
+  const customerPhone = order.phone || translationKeys.noData;
 
-  doc.text(`${t('user.name')}: ${customerName}`, 14, 42);
-  doc.text(`${t('user.phone')}: ${customerPhone}`, 14, 52);
-  doc.text(`${t('user.address')}:`, 14, 62);
+  doc.text(`${translationKeys.name}: ${customerName}`, 14, 42);
+  doc.text(`${translationKeys.phone}: ${customerPhone}`, 14, 52);
+  doc.text(`${translationKeys.address}:`, 14, 62);
   doc.text(deliveryAddress, 14, 70);
 
   const validProducts = Array.isArray(products) ? products : [];
-  const items = order.items?.map((item) => {
-    let product = item.product;
-    if (!product) {
-      const productId = item.productId?._id || item.productId;
-      product = validProducts.find((p) => p._id === productId);
-    }
+  const items =
+    order.items?.map((item) => {
+      let product = item.product;
+      if (!product) {
+        const productId = item.productId?._id || item.productId;
+        product = validProducts.find((p) => p._id === productId);
+      }
 
-    const productName = product && product.name
-      ? product.name[i18n.language] || product.name['en'] || t('order.noProduct')
-      : t('order.noProduct');
+      const productName = product?.name
+        ? product.name[i18n.language] || product.name['en'] || translationKeys.noProduct
+        : translationKeys.noProduct;
 
-    return [
-      productName,
-      item.quantity,
-      item.price?.toFixed(2) || '0.00',
-      (item.price * item.quantity)?.toFixed(2) || '0.00',
-    ];
-  }) || [];
+      return [
+        productName,
+        item.quantity,
+        item.price?.toFixed(2) || '0.00',
+        (item.price * item.quantity)?.toFixed(2) || '0.00',
+      ];
+    }) || [];
 
   doc.autoTable({
     startY: 80,
-    head: [[t('products'), t('order.quantity'), t('productCard.price'), t('cart.totalPrice')]],
+    head: [
+      [
+        translationKeys.products,
+        translationKeys.quantity,
+        translationKeys.price,
+        translationKeys.totalPrice,
+      ],
+    ],
     body: items,
     styles: {
       font: 'DejaVuSans',
@@ -68,10 +104,20 @@ export const generateInvoicePDF = (order, products) => {
   });
 
   const finalY = doc.lastAutoTable.finalY || 90;
-  doc.text(`${t('order.total')}: $${order.total?.toFixed(2) || '0.00'}`, 14, finalY + 10);
+  doc.text(`${translationKeys.total}: $${order.total?.toFixed(2) || '0.00'}`, 14, finalY + 10);
 
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank');
   URL.revokeObjectURL(url);
 };
+
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
