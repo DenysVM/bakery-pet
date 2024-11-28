@@ -305,5 +305,12 @@
     "changeStatus": "Change Status",
     "searchPlaceholder": "Search orders by user, phone, or number",
     "filterByDate": "Filter by date"
+  },
+  "novaPoshta": {
+    "selectBranch": "Select Nova Poshta branch",
+    "branchPlaceholder": "Select branch...",
+    "branchRequired": "Nova Poshta branch is required",
+    "deliveryType": "Nova Poshta Delivery",
+    "useNovaPoshta": "Delivery by Nova Poshta"
   }
 }

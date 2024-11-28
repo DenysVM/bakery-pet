@@ -305,5 +305,13 @@
     "errorDeleting": "Błąd podczas usuwania zamówienia",
     "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później.",
     "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru"
-  }
+  },
+  "novaPoshta": {
+  "selectBranch": "Wybierz oddział Nova Poshta",
+  "branchPlaceholder": "Wybierz oddział...",
+  "branchRequired": "Wybór oddziału Nova Poshta jest wymagany",
+  "deliveryType": "Dostawa Nova Poshta",
+  "useNovaPoshta": "Dostawa przez Nova Posta"
+}
+
 }
