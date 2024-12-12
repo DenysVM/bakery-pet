@@ -116,7 +116,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       t={t}
     >
       {({ formik }) => (
-        <Box>
+        <Box p={2}>
           <form
             onSubmit={(e) => {
               e.preventDefault();

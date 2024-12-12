@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Text, useColorModeValue, useToast } from '@chakra-ui/react';
 import { useCart } from '../Cart';
 import { useTranslation } from 'react-i18next';
@@ -14,11 +14,14 @@ const CartSummary = ({ onCheckout }) => {
   const bg = useColorModeValue('gray.100', 'gray.700');
   const color = useColorModeValue('black', 'white');
 
+  const [isCheckoutVisible, setCheckoutVisible] = useState(true);
+
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
   const handleCheckout = () => {
     if (user) {
+      setCheckoutVisible(false);
       onCheckout();
     } else {
       toast({
@@ -36,10 +39,15 @@ const CartSummary = ({ onCheckout }) => {
       <Text fontSize="lg" mb="4">{t('cart.cartSummary')}</Text>
       <Text fontSize="md">{t('cart.totalItems')}: <strong>{totalItems}</strong></Text>
       <Text fontSize="md" mb="4">{t('cart.totalPrice')}: <strong>${totalPrice.toFixed(2)}</strong></Text>
-      {totalItems > 0 && (
+      {totalItems > 0 && isCheckoutVisible && (
         <Button colorScheme="blue" onClick={handleCheckout} mx="auto" display="block">
           {t('cart.proceedToCheckout')}
         </Button>
+      )}
+      {!isCheckoutVisible && (
+        <Text fontSize="sm" mt="4" textAlign="center">
+          {t('cart.selectDeliveryOption')}
+        </Text>
       )}
     </Box>
   );

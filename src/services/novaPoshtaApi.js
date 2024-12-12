@@ -1,17 +1,12 @@
-import axios from "axios";
-
-const NOVA_POSHTA_API_URL = "/api/nova-poshta/";
-const novaPoshtaApiKey = process.env.REACT_APP_NOVA_POSHTA_API_KEY;
+import { axiosNovaPoshtaInstance } from './api';
 
 export const fetchFilteredCities = async (query) => {
-
   try {
     const methodProperties = {
       FindByString: query,
     };
 
-    const response = await axios.post(NOVA_POSHTA_API_URL, {
-      apiKey: novaPoshtaApiKey,
+    const response = await axiosNovaPoshtaInstance.post('/', {
       modelName: "Address",
       calledMethod: "getCities",
       methodProperties,
@@ -24,7 +19,6 @@ export const fetchFilteredCities = async (query) => {
   }
 };
 
-
 export const fetchWarehouses = async (cityRef, searchQuery = "") => {
   try {
     const methodProperties = {
@@ -35,8 +29,7 @@ export const fetchWarehouses = async (cityRef, searchQuery = "") => {
       methodProperties.FindByString = searchQuery.trim();
     }
 
-    const response = await axios.post(NOVA_POSHTA_API_URL, {
-      apiKey: novaPoshtaApiKey,
+    const response = await axiosNovaPoshtaInstance.post('/', {
       modelName: "Address",
       calledMethod: "getWarehouses",
       methodProperties,
@@ -51,8 +44,7 @@ export const fetchWarehouses = async (cityRef, searchQuery = "") => {
 
 export const fetchWarehouseByCode = async (cityRef, warehouseCode) => {
   try {
-    const response = await axios.post(NOVA_POSHTA_API_URL, {
-      apiKey: novaPoshtaApiKey,
+    const response = await axiosNovaPoshtaInstance.post('/', {
       modelName: "Address",
       calledMethod: "getWarehouses",
       methodProperties: {

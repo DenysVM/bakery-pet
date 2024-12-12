@@ -5,7 +5,7 @@ import {
   Text,
   RadioGroup,
   Radio,
-  Stack,
+  VStack,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
@@ -27,7 +27,6 @@ const NovaPoshtaSelector = ({ isSelected, onToggle, value, onChange }) => {
 
   const handleWarehouseSelect = (warehouse) => {
     if (!warehouse) {
-      // Если warehouse равен null, просто очищаем состояние без предупреждения
       setSelectedWarehouse(null);
       onChange(null);
       return;
@@ -42,75 +41,78 @@ const NovaPoshtaSelector = ({ isSelected, onToggle, value, onChange }) => {
       setSelectedWarehouse(null);
       return;
     }
-  
+
     setSelectedWarehouse(warehouse);
     onChange(warehouse);
   };
-  
 
-  if (!isSelected) {
-    return (
+  return (
+    <VStack
+      align="stretch"
+      spacing={4}
+      p={4}
+      rounded="md"
+      width="100%"
+      maxWidth="500px"
+    >
       <Checkbox id="useNovaPoshta" isChecked={isSelected} onChange={onToggle}>
         {t("novaPoshta.useNovaPoshta")}
       </Checkbox>
-    );
-  }
 
-  return (
-    <Box minWidth="500px">
-      <Checkbox
-        id="useNovaPoshta"
-        isChecked={isSelected}
-        onChange={onToggle}
-        mb={4}
-      >
-        {t("novaPoshta.useNovaPoshta")}
-      </Checkbox>
+      {isSelected && (
+        <Box p={2}>
+          <RadioGroup
+            onChange={setSearchMethod}
+            value={searchMethod}
+            mb={4}
+            size="sm"
+          >
+            <VStack align="stretch">
+              <Radio value="byCode">{t("novaPoshta.searchByCode")}</Radio>
+              <Radio value="byCity">{t("novaPoshta.searchByCity")}</Radio>
+            </VStack>
+          </RadioGroup>
 
-      <RadioGroup onChange={setSearchMethod} value={searchMethod} mb={4}>
-        <Stack direction="row">
-          <Radio value="byCode">{t("novaPoshta.searchByCode")}</Radio>
-          <Radio value="byCity">{t("novaPoshta.searchByCity")}</Radio>
-        </Stack>
-      </RadioGroup>
-
-      {searchMethod === "byCode" && (
-        <>
-          <CitySelector
-            onCitySelect={handleCitySelect}
-            selectedCity={selectedCity}
-          />
-          {selectedCity && (
-            <WarehouseByCode
-              cityRef={selectedCity.value}
-              onWarehouseSelect={handleWarehouseSelect}
-            />
+          {searchMethod === "byCode" && (
+            <>
+              <CitySelector
+                onCitySelect={handleCitySelect}
+                selectedCity={selectedCity}
+              />
+              {selectedCity && (
+                <WarehouseByCode
+                  cityRef={selectedCity.value}
+                  onWarehouseSelect={handleWarehouseSelect}
+                />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {searchMethod === "byCity" && (
-        <>
-          <CitySelector
-            onCitySelect={handleCitySelect}
-            selectedCity={selectedCity}
-          />
-          {selectedCity && (
-            <WarehouseByAddress
-              cityRef={selectedCity.value}
-              onWarehouseSelect={handleWarehouseSelect}
-            />
+          {searchMethod === "byCity" && (
+            <>
+              <CitySelector
+                onCitySelect={handleCitySelect}
+                selectedCity={selectedCity}
+              />
+              {selectedCity && (
+                <WarehouseByAddress
+                  cityRef={selectedCity.value}
+                  onWarehouseSelect={handleWarehouseSelect}
+                />
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {selectedWarehouse && (
-        <Text mt={4}>
-          {t("novaPoshta.selectedWarehouse")}: №
-          {selectedWarehouse.warehouseIndex} - {selectedWarehouse.shortAddress}
-        </Text>
+          {selectedWarehouse && (
+            <Text mt={4} fontSize="sm">
+              {t("novaPoshta.selectedWarehouse")}: №
+              {selectedWarehouse.warehouseIndex} -{" "}
+              {selectedWarehouse.shortAddress}
+            </Text>
+          )}
+        </Box>
       )}
-    </Box>
+    </VStack>
   );
 };
 

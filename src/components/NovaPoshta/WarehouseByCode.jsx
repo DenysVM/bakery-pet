@@ -57,6 +57,7 @@ const WarehouseByCode = ({ cityRef, onWarehouseSelect }) => {
         onKeyPress={handleKeyPress}
         mb={4}
         pr="40px"
+        width="100%"
       />
       {loading && <Spinner position="absolute" right="10px" top="10px" />}
       {!loading && error && !warehouse && (
