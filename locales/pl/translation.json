@@ -305,5 +305,29 @@
     "errorDeleting": "Błąd podczas usuwania zamówienia",
     "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później.",
     "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru"
+  },
+  "novaPoshta": {
+    "loading": "Ładowanie...",
+    "selectBranch": "Wybierz oddział Nova Poshta",
+    "branchPlaceholder": "Wybierz oddział...",
+    "branchRequired": "Oddział Nova Poshta jest wymagany",
+    "deliveryType": "Dostawa Nova Poshta",
+    "useNovaPoshta": "Dostawa Nova Poshta",
+    "searchCity": "Wpisz nazwę miasta...",
+    "errorFetchingCities": "Błąd ładowania miast",
+    "warehouseType": "{{type}}",
+    "postomat": "Paczkomat",
+    "branch": "Oddział",
+    "errorFetchingWarehouses": "Błąd ładowania oddziałów",
+    "searchWarehouse": "Wpisz adres lub numer oddziału...",
+    "searchByCity": "Wprowadź miasto i numer oddziału",
+    "searchByCode": "Wprowadź kod cyfrowy oddziału",
+    "placeholderCity": "Adres, numer oddziału (np. Slobozhanska, 12)",
+    "placeholderCode": "Kod cyfrowy oddziału (np. 11/329)",
+    "invalidCodeFormat": "Kod musi mieć format 'liczba/liczba', np. '11/329'.",
+    "selectedWarehouse": "Wybrana filia",
+    "errorNoWarehouse": "Nie znaleziono oddziału z podanym kodem",
+    "errorFetchingWarehouseByCode": "Błąd pobierania oddziału według kodu",
+    "warehouseIndex": "Kod oddziału"
   }
 }

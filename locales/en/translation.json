@@ -305,5 +305,29 @@
     "changeStatus": "Change Status",
     "searchPlaceholder": "Search orders by user, phone, or number",
     "filterByDate": "Filter by date"
+  },
+  "novaPoshta": {
+    "loading": "Loading...",
+    "selectBranch": "Select Nova Poshta branch",
+    "branchPlaceholder": "Select a branch...",
+    "branchRequired": "Nova Poshta branch is required",
+    "deliveryType": "Delivery via Nova Poshta",
+    "useNovaPoshta": "Delivery via Nova Poshta",
+    "searchCity": "Enter city name...",
+    "errorFetchingCities": "Error loading cities",
+    "warehouseType": "{{type}}",
+    "postomat": "Postomat",
+    "branch": "Branch",
+    "errorFetchingWarehouses": "Error loading warehouses",
+    "searchWarehouse": "Enter address or branch number...",
+    "selectedWarehouse": "Selected warehouse",
+    "errorNoWarehouse": "Branch with the given code not found",
+    "errorFetchingWarehouseByCode": "Error fetching branch by code",
+    "warehouseIndex": "Branch code",
+    "invalidCodeFormat": "The code must be in the format 'number/number', e.g., '11/329'.",
+    "searchByCity": "Enter city and branch number",
+    "searchByCode": "Enter branch digital code",
+    "placeholderCity": "Address, branch number (e.g., Slobozhanska, 12)",
+    "placeholderCode": "Branch digital code (e.g., 11/329)"
   }
 }
