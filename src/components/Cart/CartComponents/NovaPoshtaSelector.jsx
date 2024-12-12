@@ -1,57 +1,115 @@
-import React, { useState } from 'react';
-import { Select, Checkbox, Box } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import {
+  Checkbox,
+  Box,
+  Text,
+  RadioGroup,
+  Radio,
+  Stack,
+} from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import {
+  CitySelector,
+  WarehouseByAddress,
+  WarehouseByCode,
+} from "../../NovaPoshta";
 
-const NovaPoshtaSelector = ({
-  isSelected,
-  onToggle,
-  value,
-  onChange,
-}) => {
+const NovaPoshtaSelector = ({ isSelected, onToggle, value, onChange }) => {
   const { t } = useTranslation();
-  const [branches] = useState([
-    { id: 1, name: 'Branch 1' },
-    { id: 2, name: 'Branch 2' },
-    { id: 3, name: 'Branch 3' },
-  ]); // Заглушка вместо fetch
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const [searchMethod, setSearchMethod] = useState("byCode");
 
-  const handleCheckboxChange = () => {
-    onToggle();
+  const handleCitySelect = (city) => {
+    setSelectedCity(city);
+    setSelectedWarehouse(null);
   };
+
+  const handleWarehouseSelect = (warehouse) => {
+    if (!warehouse) {
+      // Если warehouse равен null, просто очищаем состояние без предупреждения
+      setSelectedWarehouse(null);
+      onChange(null);
+      return;
+    }
+
+    if (
+      typeof warehouse !== "object" ||
+      !warehouse.warehouseIndex ||
+      !warehouse.shortAddress
+    ) {
+      console.warn("Attempted to set an invalid warehouse object:", warehouse);
+      setSelectedWarehouse(null);
+      return;
+    }
+  
+    setSelectedWarehouse(warehouse);
+    onChange(warehouse);
+  };
+  
 
   if (!isSelected) {
     return (
-      <Checkbox
-        id="useNovaPoshta"
-        isChecked={isSelected}
-        onChange={handleCheckboxChange}
-      >
-        {t('novaPoshta.useNovaPoshta')}
+      <Checkbox id="useNovaPoshta" isChecked={isSelected} onChange={onToggle}>
+        {t("novaPoshta.useNovaPoshta")}
       </Checkbox>
     );
   }
 
   return (
-    <Box>
+    <Box minWidth="500px">
       <Checkbox
         id="useNovaPoshta"
         isChecked={isSelected}
-        onChange={handleCheckboxChange}
+        onChange={onToggle}
+        mb={4}
       >
-        {t('novaPoshta.useNovaPoshta')}
+        {t("novaPoshta.useNovaPoshta")}
       </Checkbox>
-      <Select
-        id="novaPoshtaBranch"
-        placeholder={t('novaPoshta.selectBranch')}
-        value={value}
-        onChange={onChange}
-      >
-        {branches.map(branch => (
-          <option key={branch.id} value={branch.name}>
-            {branch.name}
-          </option>
-        ))}
-      </Select>
+
+      <RadioGroup onChange={setSearchMethod} value={searchMethod} mb={4}>
+        <Stack direction="row">
+          <Radio value="byCode">{t("novaPoshta.searchByCode")}</Radio>
+          <Radio value="byCity">{t("novaPoshta.searchByCity")}</Radio>
+        </Stack>
+      </RadioGroup>
+
+      {searchMethod === "byCode" && (
+        <>
+          <CitySelector
+            onCitySelect={handleCitySelect}
+            selectedCity={selectedCity}
+          />
+          {selectedCity && (
+            <WarehouseByCode
+              cityRef={selectedCity.value}
+              onWarehouseSelect={handleWarehouseSelect}
+            />
+          )}
+        </>
+      )}
+
+      {searchMethod === "byCity" && (
+        <>
+          <CitySelector
+            onCitySelect={handleCitySelect}
+            selectedCity={selectedCity}
+          />
+          {selectedCity && (
+            <WarehouseByAddress
+              cityRef={selectedCity.value}
+              onWarehouseSelect={handleWarehouseSelect}
+            />
+          )}
+        </>
+      )}
+
+      {selectedWarehouse && (
+        <Text mt={4}>
+          {t("novaPoshta.selectedWarehouse")}: №
+          {selectedWarehouse.warehouseIndex} - {selectedWarehouse.shortAddress}
+        </Text>
+      )}
     </Box>
   );
 };

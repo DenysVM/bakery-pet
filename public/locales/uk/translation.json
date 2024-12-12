@@ -308,11 +308,27 @@
     "searchPlaceholder": "Пошук замовлень за користувачем, телефоном або номером"
   },
   "novaPoshta": {
-  "selectBranch": "Оберіть відділення Нової Пошти",
-  "branchPlaceholder": "Оберіть відділення...",
-  "branchRequired": "Відділення Нової Пошти є обов'язковим для вибору",
-  "deliveryType": "Доставка Новою Поштою",
-  "useNovaPoshta": "Доставка Новою поштою"
-}
-
+    "loading": "Завантаження...",
+    "selectBranch": "Оберіть відділення Нової Пошти",
+    "branchPlaceholder": "Оберіть відділення...",
+    "branchRequired": "Відділення Нової Пошти є обов'язковим",
+    "deliveryType": "Доставка Новою Поштою",
+    "useNovaPoshta": "Доставка Новою Поштою",
+    "searchCity": "Введіть назву міста...",
+    "errorFetchingCities": "Помилка завантаження міст",
+    "warehouseType": "{{type}}",
+    "postomat": "Поштомат",
+    "branch": "Відділення",
+    "errorFetchingWarehouses": "Помилка завантаження відділень",
+    "searchWarehouse": "Введіть адресу або номер відділення...",
+    "searchByCity": "Введіть місто та номер відділення",
+    "searchByCode": "Введіть цифровий код відділення",
+    "placeholderCity": "Адреса, номер відділення (наприклад, Слобожанська, 12)",
+    "placeholderCode": "Цифровий код відділення (наприклад, 11/329)",
+    "invalidCodeFormat": "Код повинен бути у форматі 'число/число', наприклад, '11/329'.",
+    "selectedWarehouse": "Вибране відділення",
+    "errorNoWarehouse": "Відділення з вказаним кодом не знайдено",
+    "errorFetchingWarehouseByCode": "Помилка завантаження відділення за кодом",
+    "warehouseIndex": "Код відділення"
+  }
 }

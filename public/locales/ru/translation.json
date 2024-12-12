@@ -310,10 +310,27 @@
     "searchPlaceholder": "Поиск заказов по пользователю, телефону или номеру"
   },
   "novaPoshta": {
+    "loading": "Загрузка...",
     "selectBranch": "Выберите отделение Новой Почты",
     "branchPlaceholder": "Выберите отделение...",
     "branchRequired": "Отделение Новой Почты обязательно для выбора",
     "deliveryType": "Доставка Новой Почтой",
-    "useNovaPoshta": "Доставка Новой почтой"
+    "useNovaPoshta": "Доставка Новой почтой",
+    "searchCity": "Введите название города...",
+    "errorFetchingCities": "Ошибка загрузки городов",
+    "warehouseType": "{{type}}",
+    "postomat": "Почтомат",
+    "branch": "Отделение",
+    "errorFetchingWarehouses": "Ошибка загрузки отделений",
+    "searchWarehouse": "Введите адрес или номер отделения...",
+    "searchByCity": "Введите город и номер отделения",
+    "searchByCode": "Введите цифровой код отделения",
+    "placeholderCity": "Адрес, номер отделения (например, Слобожанская, 12)",
+    "placeholderCode": "Цифровой код отделения (например, 11/329)",
+    "invalidCodeFormat": "Код должен быть в формате 'число/число', например, '11/329'.",
+    "selectedWarehouse": "Выбранное отделение",
+    "errorNoWarehouse": "Отделение с указанным кодом не найдено",
+    "errorFetchingWarehouseByCode": "Ошибка загрузки отделения по цифровому коду",
+    "warehouseIndex": "Цифровой код отделения"
   }
 }

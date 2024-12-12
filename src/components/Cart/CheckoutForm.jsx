@@ -128,7 +128,9 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
                 isSelected={useNovaPoshta}
                 onToggle={() => handleNovaPoshtaChange(formik)}
                 value={formik.values.novaPoshtaBranch}
-                onChange={formik.handleChange}
+                onChange={(warehouse) =>
+                  formik.setFieldValue("novaPoshtaBranch", warehouse)
+                }
               />
 
               <Checkbox
@@ -141,7 +143,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
 
               {!useNovaPoshta && <AddressFields formik={formik} t={t} />}
 
-              <Button mt={4} colorScheme="teal" type="submit" width="full">
+              <Button mt={4} colorScheme="teal" type="submit">
                 {t("checkout.placeOrder")}
               </Button>
             </VStack>
