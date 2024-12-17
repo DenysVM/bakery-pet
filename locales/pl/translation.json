@@ -299,6 +299,16 @@
       "delivered": "Dostarczone",
       "cancelled": "Anulowane"
     },
+    "delivery": {
+      "Nova Poshta": "Nova Poshta",
+      "Home": "Dostawa na adres",
+      "Manual": "Odbiór osobisty",
+      "undefined": "Nie określono"
+    },
+    "deliveryType": "Metoda dostawy",
+    "novaPoshtaBranch": "Oddział Nova Poshta",
+    "homeDelivery": "Dostawa na adres",
+    "manualDelivery": "Odbiór osobisty",
     "confirmDeleteTitle": "Potwierdzenie usunięcia",
     "confirmDeleteMessage": "Czy na pewno chcesz usunąć to zamówienie?",
     "deleted": "Zamówienie usunięte",
