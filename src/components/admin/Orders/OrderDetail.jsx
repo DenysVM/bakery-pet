@@ -68,20 +68,13 @@ const OrderDetail = ({ order, onClose, onSave }) => {
     }
   };
 
-  const address = orderDetails.address || {};
-  
-  const deliveryAddress = `${t("user.city")} ${address.city || ""}, ${t(
-    "user.street"
-  )} ${address.street || ""}, ${t("user.houseNumber")} ${
-    address.houseNumber || ""
-  }, ${t("user.apartmentNumber")} ${address.apartmentNumber || ""}`;
-
   const customerPhone = orderDetails.phone || t("user.noData");
 
   const customerName = orderDetails.user.deleted
-  ? `${orderDetails.userFirstName} ${orderDetails.userLastName} (${t("user.deleted")})`
-  : `${orderDetails.user.firstName} ${orderDetails.user.lastName}`;
-
+    ? `${orderDetails.userFirstName} ${orderDetails.userLastName} (${t(
+        "user.deleted"
+      )})`
+    : `${orderDetails.user.firstName} ${orderDetails.user.lastName}`;
 
   const handleDownloadInvoice = () => {
     generateInvoicePDF(
@@ -109,7 +102,24 @@ const OrderDetail = ({ order, onClose, onSave }) => {
         </Text>
 
         <Heading size="sm">{t("user.address")}</Heading>
-        <Text>{deliveryAddress}</Text>
+        {orderDetails.deliveryType === "Nova Poshta" &&
+        orderDetails.novaPoshtaDelivery?.label ? (
+          <Text>
+            {t("order.novaPoshtaBranch")}:{" "}
+            {orderDetails.novaPoshtaDelivery.label}
+          </Text>
+        ) : orderDetails.deliveryType === "Home" &&
+          orderDetails.homeDelivery ? (
+          <Text>
+            {t("user.city")}: {orderDetails.homeDelivery.city},{" "}
+            {t("user.street")}: {orderDetails.homeDelivery.street},{" "}
+            {t("user.houseNumber")}: {orderDetails.homeDelivery.houseNumber},{" "}
+            {t("user.apartmentNumber")}:{" "}
+            {orderDetails.homeDelivery.apartmentNumber}
+          </Text>
+        ) : (
+          <Text>{t("order.noAddress")}</Text>
+        )}
 
         <Heading size="sm">{t("order.items")}</Heading>
 
@@ -198,6 +208,23 @@ const OrderDetail = ({ order, onClose, onSave }) => {
           {t("order.total")}: ${totalPrice.toFixed(2) || "0.00"}
         </Text>
 
+        {orderDetails.deliveryType === "Nova Poshta" && (
+          <Box mt={4}>
+            <Heading size="sm" mb={2}>
+              {t("order.trackingNumber")}
+            </Heading>
+            <input
+              type="text"
+              placeholder={t("order.enterTrackingNumber")}
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+              }}
+            />
+          </Box>
+        )}
         <Box display="flex" justifyContent="flex-end" mt={4}>
           <ResponsiveActionButtons
             buttons={[
@@ -207,7 +234,7 @@ const OrderDetail = ({ order, onClose, onSave }) => {
                 onClick: handleDownloadInvoice,
                 colorScheme: "blue",
               },
-              
+
               ...(orderDetails.user.deleted
                 ? []
                 : [

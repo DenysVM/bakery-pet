@@ -103,14 +103,14 @@ const OrderList = () => {
             order.userLastName,
             order.phone,
           ]
-            .filter(Boolean) 
+            .filter(Boolean)
             .some((field) => field.toLowerCase().includes(lowerCaseTerm))
         )
       );
     },
     [orders]
   );
-  
+
   const handleFilter = useCallback(
     (date) => {
       if (!date) {
@@ -190,9 +190,13 @@ const OrderList = () => {
       setDeletingOrderId(orderId);
       await deleteOrder(orderId, token);
 
-      setOrders((prevOrders) =>
-        prevOrders.filter((order) => order._id !== orderId)
-      );
+      setOrders((prevOrders) => {
+        const updatedOrders = prevOrders.filter(
+          (order) => order._id !== orderId
+        );
+        setFilteredOrders(updatedOrders); // Синхронно обновляем filteredOrders
+        return updatedOrders;
+      });
 
       toast({
         title: t("order.deleted"),
@@ -242,7 +246,7 @@ const OrderList = () => {
       return updatedOrders;
     });
   };
-  
+
   if (loadingAuth) {
     return (
       <Box display="flex" justifyContent="center" height="100vh">

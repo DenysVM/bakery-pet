@@ -305,7 +305,17 @@
     "errorDeletingDescription": "Failed to delete order. Please try again later.",
     "changeStatus": "Change Status",
     "searchPlaceholder": "Search orders by user, phone, or number",
-    "filterByDate": "Filter by date"
+    "filterByDate": "Filter by date",
+    "deliveryType": "Delivery Method",
+    "novaPoshtaBranch": "Nova Poshta Branch",
+    "homeDelivery": "Home Delivery",
+    "manualDelivery": "Manual Pickup",
+    "delivery": {
+      "Nova Poshta": "Nova Poshta",
+      "Home": "Home Delivery",
+      "Manual": "Manual Pickup",
+      "undefined": "Not specified"
+    }
   },
   "novaPoshta": {
     "loading": "Loading...",

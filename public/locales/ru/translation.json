@@ -308,7 +308,19 @@
     "deletedSuccessfully": "Заказ был успешно удален",
     "errorDeleting": "Ошибка при удалении заказа",
     "errorDeletingDescription": "Не удалось удалить заказ. Пожалуйста, попробуйте позже.",
-    "searchPlaceholder": "Поиск заказов по пользователю, телефону или номеру"
+    "searchPlaceholder": "Поиск заказов по пользователю, телефону или номеру",
+    "deliveryType": "Способ доставки",
+    "novaPoshtaBranch": "Отделение Новой Почты",
+    "homeDelivery": "Адресная доставка",
+    "manualDelivery": "Самовывоз",
+    "delivery": {
+      "Nova Poshta": "Новая Почта",
+      "Home": "Адресная доставка",
+      "Manual": "Самовывоз",
+      "undefined": "Не указан"
+    },
+    "trackingNumber": "Номер накладной",
+    "enterTrackingNumber": "Введите номер накладной"
   },
   "novaPoshta": {
     "loading": "Загрузка...",

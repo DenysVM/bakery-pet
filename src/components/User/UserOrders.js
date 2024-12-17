@@ -104,15 +104,15 @@ const UserOrders = () => {
       prevOrders.map((order) =>
         order._id === updatedOrder._id
           ? {
-              ...order,
-              items: order.items.map((item) =>
-                updatedOrder.items.find((updatedItem) => updatedItem._id === item._id) || item
-              ),
-              total: updatedOrder.items.reduce(
-                (sum, updatedItem) => sum + updatedItem.quantity * updatedItem.price,
-                0
-              ),
-            }
+            ...order,
+            items: order.items.map((item) =>
+              updatedOrder.items.find((updatedItem) => updatedItem._id === item._id) || item
+            ),
+            total: updatedOrder.items.reduce(
+              (sum, updatedItem) => sum + updatedItem.quantity * updatedItem.price,
+              0
+            ),
+          }
           : order
       )
     );
@@ -123,9 +123,9 @@ const UserOrders = () => {
     const updatedOrders = orders.map((order) =>
       order._id === selectedOrder._id
         ? {
-            ...order,
-            items: order.items.filter((item) => item._id !== productId),
-          }
+          ...order,
+          items: order.items.filter((item) => item._id !== productId),
+        }
         : order
     );
 
@@ -161,10 +161,10 @@ const UserOrders = () => {
         prevOrders.map((order) =>
           order._id === selectedOrder._id
             ? {
-                ...order,
-                items: orderToUpdate.items,
-                total: updatedTotal,
-              }
+              ...order,
+              items: orderToUpdate.items,
+              total: updatedTotal,
+            }
             : order
         )
       );
@@ -233,6 +233,16 @@ const UserOrders = () => {
           <Text mb="2">
             {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
           </Text>
+
+          <Text mb="2">
+            {t('order.deliveryType')}: {t(`order.delivery.${order.deliveryType}`)}
+          </Text>
+
+          {order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label && (
+            <Text mb="2">
+              {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
+            </Text>
+          )}
 
           {order.items.map((item) => (
             <OrderItem

@@ -8,9 +8,8 @@ const generateOrderNumber = () => {
 
 export const createOrder = async (orderData, token, user) => {
   try {
-    const orderNumber = generateOrderNumber(); 
+    const orderNumber = generateOrderNumber();
 
-    // Включаем данные пользователя в запрос
     const enrichedOrderData = {
       ...orderData,
       orderNumber,
@@ -23,7 +22,7 @@ export const createOrder = async (orderData, token, user) => {
       enrichedOrderData,
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );

@@ -108,7 +108,15 @@ const OrderHistory = () => {
           <Text mb="2">
             {t('order.date')}: {formatDate(order.createdAt)}
           </Text>
+          <Text mb="2">
+            {t('order.deliveryType')}: {t(`order.delivery.${order.deliveryType}`)}
+          </Text>
 
+          {order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label && (
+            <Text mb="2">
+              {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
+            </Text>
+          )}
           <Text
             mb="2"
             color={order.status === 'cancelled'

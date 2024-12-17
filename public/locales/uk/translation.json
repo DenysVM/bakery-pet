@@ -300,6 +300,16 @@
       "delivered": "Доставлено",
       "cancelled": "Скасовано"
     },
+    "deliveryType": "Спосіб доставки",
+    "novaPoshtaBranch": "Відділення Нової Пошти",
+    "homeDelivery": "Адресна доставка",
+    "manualDelivery": "Самовивіз",
+    "delivery": {
+      "Nova Poshta": "Нова Пошта",
+      "Home": "Адресна доставка",
+      "Manual": "Самовивіз",
+      "undefined": "Не вказано"
+    },
     "confirmDeleteTitle": "Підтвердження видалення",
     "confirmDeleteMessage": "Ви впевнені, що хочете видалити це замовлення?",
     "deleted": "Замовлення видалено",

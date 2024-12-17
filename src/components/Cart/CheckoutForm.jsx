@@ -16,6 +16,26 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
   const [useNovaPoshta, setUseNovaPoshta] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
+    const deliveryDetails = useNovaPoshta
+      ? {
+          novaPoshtaDelivery: {
+            novaPoshtaBranch: values.novaPoshtaBranch.label,
+            label: values.novaPoshtaBranch.label,
+            value: values.novaPoshtaBranch.value,
+            shortAddress: values.novaPoshtaBranch.shortAddress,
+            category: values.novaPoshtaBranch.category,
+            warehouseIndex: values.novaPoshtaBranch.warehouseIndex,
+          },
+        }
+      : {
+          homeDelivery: {
+            street: values.address.street,
+            houseNumber: values.address.houseNumber,
+            apartmentNumber: values.address.apartmentNumber,
+            city: values.address.city,
+          },
+        };
+  
     const orderData = {
       user: user._id,
       items: cartItems.map((item) => ({
@@ -23,25 +43,16 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
         quantity: item.quantity,
         price: item.price,
       })),
-      address: useNovaPoshta
-        ? { novaPoshtaBranch: values.novaPoshtaBranch }
-        : useHomeAddress
-        ? user.address
-        : values.address,
+      deliveryType: useNovaPoshta ? "Nova Poshta" : "Home",
+      ...deliveryDetails, 
       phone: user.phone,
-      total: cartItems.reduce(
-        (sum, item) => sum + item.quantity * item.price,
-        0
-      ),
-      deliveryType: useNovaPoshta
-        ? "Nova Poshta"
-        : useHomeAddress
-        ? "Home"
-        : "Manual",
+      total: cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0),
+      userFirstName: user.firstName,
+      userLastName: user.lastName,
     };
-
+  
     try {
-      await createOrder(orderData, token, user);
+      await createOrder(orderData, token, user); 
       toast({
         title: t("checkout.success"),
         description: t("checkout.created"),
@@ -54,10 +65,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       onSuccess();
       if (onClose) onClose();
     } catch (error) {
-      console.error(
-        "Error creating order:",
-        error.response ? error.response.data : error.message
-      );
+      console.error("Error creating order:", error.response ? error.response.data : error.message);
       toast({
         title: t("checkout.error"),
         description: t("checkout.errorCreating"),
@@ -67,6 +75,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       });
     }
   };
+  
 
   const handleHomeAddressChange = (formik) => {
     setUseHomeAddress((prev) => {
@@ -124,19 +133,22 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
             }}
           >
             <VStack spacing={4}>
-              <NovaPoshtaSelector
-                isSelected={useNovaPoshta}
-                onToggle={() => handleNovaPoshtaChange(formik)}
-                value={formik.values.novaPoshtaBranch}
-                onChange={(warehouse) =>
-                  formik.setFieldValue("novaPoshtaBranch", warehouse)
-                }
-              />
+              <Box alignSelf="flex-start" width="100%">
+                <NovaPoshtaSelector
+                  isSelected={useNovaPoshta}
+                  onToggle={() => handleNovaPoshtaChange(formik)}
+                  value={formik.values.novaPoshtaBranch}
+                  onChange={(warehouse) =>
+                    formik.setFieldValue("novaPoshtaBranch", warehouse)
+                  }
+                />
+              </Box>
 
               <Checkbox
                 id="useHomeAddress"
                 isChecked={useHomeAddress}
                 onChange={() => handleHomeAddressChange(formik)}
+                style={{ alignSelf: "flex-start" }}
               >
                 {t("checkout.useHomeAddress")}
               </Checkbox>

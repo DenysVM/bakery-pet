@@ -12,12 +12,13 @@ export const generateInvoicePDF = async (order, products) => {
     name: t('user.name'),
     phone: t('user.phone'),
     address: t('user.address'),
-    noData: t('user.noData'),
-    deleted: t('user.deleted'),
+    novaPoshtaBranch: t('order.novaPoshtaBranch'),
     city: t('user.city'),
     street: t('user.street'),
     houseNumber: t('user.houseNumber'),
     apartmentNumber: t('user.apartmentNumber'),
+    noData: t('user.noData'),
+    deleted: t('user.deleted'),
     products: t('products'),
     quantity: t('order.quantity'),
     price: t('productCard.price'),
@@ -53,13 +54,20 @@ export const generateInvoicePDF = async (order, products) => {
         order.user?.lastName || order.userLastName || ''
       }`;
 
-  const address = order.address || {};
-  const deliveryAddress = `${translationKeys.city} ${address.city || ''}, ${translationKeys.street} ${
-    address.street || ''
-  }, ${translationKeys.houseNumber} ${address.houseNumber || ''}, ${
-    translationKeys.apartmentNumber
-  } ${address.apartmentNumber || ''}`;
   const customerPhone = order.phone || translationKeys.noData;
+
+  const deliveryAddress =
+    order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label
+      ? `${translationKeys.novaPoshtaBranch}: ${order.novaPoshtaDelivery.label}`
+      : order.deliveryType === 'Home' && order.homeDelivery
+      ? `${translationKeys.city}: ${order.homeDelivery.city || translationKeys.noData}, ${
+          translationKeys.street
+        }: ${order.homeDelivery.street || translationKeys.noData}, ${translationKeys.houseNumber}: ${
+          order.homeDelivery.houseNumber || translationKeys.noData
+        }, ${translationKeys.apartmentNumber}: ${
+          order.homeDelivery.apartmentNumber || translationKeys.noData
+        }`
+      : translationKeys.noData;
 
   doc.text(`${translationKeys.name}: ${customerName}`, 14, 42);
   doc.text(`${translationKeys.phone}: ${customerPhone}`, 14, 52);

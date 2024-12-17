@@ -47,14 +47,7 @@ const NovaPoshtaSelector = ({ isSelected, onToggle, value, onChange }) => {
   };
 
   return (
-    <VStack
-      align="stretch"
-      spacing={4}
-      p={4}
-      rounded="md"
-      width="100%"
-      maxWidth="500px"
-    >
+    <VStack align="stretch" rounded="md" width="100%">
       <Checkbox id="useNovaPoshta" isChecked={isSelected} onChange={onToggle}>
         {t("novaPoshta.useNovaPoshta")}
       </Checkbox>

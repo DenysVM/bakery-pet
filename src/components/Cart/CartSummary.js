@@ -35,22 +35,27 @@ const CartSummary = ({ onCheckout }) => {
   };
 
   return (
-    <Box p="4" bg={bg} color={color} mb="4" rounded="md" boxShadow="base">
-      <Text fontSize="lg" mb="4">{t('cart.cartSummary')}</Text>
-      <Text fontSize="md">{t('cart.totalItems')}: <strong>{totalItems}</strong></Text>
-      <Text fontSize="md" mb="4">{t('cart.totalPrice')}: <strong>${totalPrice.toFixed(2)}</strong></Text>
-      {totalItems > 0 && isCheckoutVisible && (
-        <Button colorScheme="blue" onClick={handleCheckout} mx="auto" display="block">
-          {t('cart.proceedToCheckout')}
-        </Button>
+    <>
+      {totalItems > 0 && (
+        <Box p="4" bg={bg} color={color} mb="4" rounded="md" boxShadow="base">
+          <Text fontSize="lg" mb="4">{t('cart.cartSummary')}</Text>
+          <Text fontSize="md">{t('cart.totalItems')}: <strong>{totalItems}</strong></Text>
+          <Text fontSize="md" mb="4">{t('cart.totalPrice')}: <strong>${totalPrice.toFixed(2)}</strong></Text>
+          {isCheckoutVisible && (
+            <Button colorScheme="blue" onClick={handleCheckout} mx="auto" display="block">
+              {t('cart.proceedToCheckout')}
+            </Button>
+          )}
+          {!isCheckoutVisible && (
+            <Text fontSize="sm" mt="4" textAlign="center" fontWeight="semibold">
+              {t('cart.selectDeliveryOption')}
+            </Text>
+          )}
+        </Box>
       )}
-      {!isCheckoutVisible && (
-        <Text fontSize="sm" mt="4" textAlign="center">
-          {t('cart.selectDeliveryOption')}
-        </Text>
-      )}
-    </Box>
+    </>
   );
+  
 };
 
 export default CartSummary;
