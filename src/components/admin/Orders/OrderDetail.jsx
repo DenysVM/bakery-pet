@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../../../auth/AuthContext";
 import {
   Box,
   Text,
@@ -22,6 +23,8 @@ import BottomSheet from "../../common/BottomSheet/BottomSheet";
 import EditOrder from "./EditOrder";
 import { DownloadIcon, EditIcon } from "@chakra-ui/icons";
 import ResponsiveActionButtons from "../../common/ResponsiveActionButtons";
+import TrackingNumberInput from "./OrderComponents/TrackingNumberInput";
+import { updateOrder } from "../../../services/orderService";
 
 const OrderDetail = ({ order, onClose, onSave }) => {
   const { t, i18n } = useTranslation();
@@ -36,6 +39,8 @@ const OrderDetail = ({ order, onClose, onSave }) => {
   const [orderDetails, setOrderDetails] = useState(order);
   const [totalPrice, setTotalPrice] = useState(order.total);
   const toast = useToast();
+
+  const { token } = useAuth();
 
   const calculateTotalPrice = (items) => {
     return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -83,6 +88,19 @@ const OrderDetail = ({ order, onClose, onSave }) => {
     );
   };
 
+  const handleSaveTrackingNumber = async (orderId, itemId, itemData, token) => {
+    await updateOrder(orderId, itemId, itemData, token);
+
+    const updatedOrder = {
+      ...orderDetails,
+      novaPoshtaDelivery: {
+        ...orderDetails.novaPoshtaDelivery,
+        trackingNumber: itemData.trackingNumber,
+      },
+    };
+    handleOrderUpdate(updatedOrder);
+  };
+
   return (
     <Box>
       <Stack spacing={4}>
@@ -119,6 +137,20 @@ const OrderDetail = ({ order, onClose, onSave }) => {
           </Text>
         ) : (
           <Text>{t("order.noAddress")}</Text>
+        )}
+
+        {orderDetails.deliveryType === "Nova Poshta" && (
+          <Box>
+            <TrackingNumberInput
+              orderId={orderDetails._id}
+              itemId={orderDetails.novaPoshtaDelivery?.itemId}
+              existingTrackingNumber={
+                orderDetails.novaPoshtaDelivery?.trackingNumber
+              }
+              onSave={handleSaveTrackingNumber}
+              token={token}
+            />
+          </Box>
         )}
 
         <Heading size="sm">{t("order.items")}</Heading>
@@ -208,23 +240,6 @@ const OrderDetail = ({ order, onClose, onSave }) => {
           {t("order.total")}: ${totalPrice.toFixed(2) || "0.00"}
         </Text>
 
-        {orderDetails.deliveryType === "Nova Poshta" && (
-          <Box mt={4}>
-            <Heading size="sm" mb={2}>
-              {t("order.trackingNumber")}
-            </Heading>
-            <input
-              type="text"
-              placeholder={t("order.enterTrackingNumber")}
-              style={{
-                width: "100%",
-                padding: "8px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-              }}
-            />
-          </Box>
-        )}
         <Box display="flex" justifyContent="flex-end" mt={4}>
           <ResponsiveActionButtons
             buttons={[

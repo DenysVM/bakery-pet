@@ -84,16 +84,25 @@ export const getUserOrders = async (token, userId) => {
   }
 };
 
-export const updateOrderItem = async (orderId, itemId, itemData, token) => {
+export const updateOrder = async (orderId, itemId, itemData, token) => {
   try {
-    const response = await axiosOrderInstance.put(`/${orderId}/items/${itemId}`, itemData, {
+    // Формируем URL в зависимости от наличия itemId
+    const url = itemId
+      ? `/${orderId}/items/${itemId}` // Для обновления конкретного товара
+      : `/${orderId}/items`;         // Для обновления трекинг-номера или других данных заказа
+
+    const response = await axiosOrderInstance.put(url, itemData, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
+
     return response.data;
   } catch (error) {
-    console.error('Error updating order item:', error.response ? error.response.data : error.message);
+    console.error(
+      "Error updating order item:",
+      error.response ? error.response.data : error.message
+    );
     throw error;
   }
 };

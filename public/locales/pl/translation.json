@@ -339,6 +339,19 @@
     "selectedWarehouse": "Wybrana filia",
     "errorNoWarehouse": "Nie znaleziono oddziału z podanym kodem",
     "errorFetchingWarehouseByCode": "Błąd pobierania oddziału według kodu",
-    "warehouseIndex": "Kod oddziału"
+    "warehouseIndex": "Kod oddziału",
+    "trackingNumber": "Numer przesyłki",
+    "noTrackingNumber": "Brak numeru śledzenia",
+    "deliveryStatus": "Status dostawy",
+    "deliveryStatus.Unknown": "Nieznany",
+    "statusUpdated": "Status zamówienia zaktualizowany",
+    "statusUpdatedDescription": "Status zamówienia {{orderId}} został zmieniony na {{status}}",
+    "errorUpdatingStatus": "Błąd podczas aktualizacji statusu",
+    "errorUpdatingStatusDescription": "Nie udało się zaktualizować statusu zamówienia",
+    "editTrackingNumber": "Edytuj Numer",
+    "trackingNumberUpdated": "Numer przesyłki zaktualizowany",
+    "trackingNumberSuccess": "Numer przesyłki został zapisany pomyślnie",
+    "invalidTrackingNumber": "Nieprawidłowy numer przesyłki",
+    "trackingNumberInvalidFormat": "Numer przesyłki musi składać się z 14 cyfr"
   }
 }

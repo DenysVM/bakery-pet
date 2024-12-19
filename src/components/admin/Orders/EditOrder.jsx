@@ -17,10 +17,9 @@ import {
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../../auth/AuthContext";
 import { FiSave } from "react-icons/fi";
-import OrderItem from "./OrderComponents/OrderItem";
-import AddProductForm from "./OrderComponents/AddProductForm";
+import {OrderItem, AddProductForm} from "./OrderComponents";
 import {
-  updateOrderItem,
+  updateOrder,
   addItemToOrder,
   deleteOrderItem,
 } from "../../../services/orderService";
@@ -110,7 +109,7 @@ const EditOrder = ({ isOpen, onClose, order, allProducts, onSave }) => {
       for (const item of orderDetails.items) {
         const originalItem = order.items.find((existingItem) => existingItem._id === item._id);
         if (originalItem && originalItem.quantity !== item.quantity) {
-          await updateOrderItem(orderDetails._id, item._id, { quantity: item.quantity }, token);
+          await updateOrder(orderDetails._id, item._id, { quantity: item.quantity }, token);
         }
       }
       // Delete removed items

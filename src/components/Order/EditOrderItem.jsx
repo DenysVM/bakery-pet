@@ -14,7 +14,7 @@ import {
   HStack
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { updateOrderItem } from '../../services/orderService';
+import { updateOrder } from '../../services/orderService';
 import { useAuth } from '../../auth/AuthContext';
 
 const EditOrderItem = ({ isOpen, onClose, item, orderId, onSave }) => {
@@ -31,7 +31,7 @@ const EditOrderItem = ({ isOpen, onClose, item, orderId, onSave }) => {
 
   const handleSave = async () => {
     try {
-      const updatedItem = await updateOrderItem(orderId, item._id, { quantity }, token);
+      const updatedItem = await updateOrder(orderId, item._id, { quantity }, token);
       onSave(updatedItem);
       toast({
         title: t('order.itemUpdated'),
