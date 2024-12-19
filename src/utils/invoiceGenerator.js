@@ -72,7 +72,10 @@ export const generateInvoicePDF = async (order, products) => {
   doc.text(`${translationKeys.name}: ${customerName}`, 14, 42);
   doc.text(`${translationKeys.phone}: ${customerPhone}`, 14, 52);
   doc.text(`${translationKeys.address}:`, 14, 62);
-  doc.text(deliveryAddress, 14, 70);
+
+  // Добавление переноса длинных строк
+  const splitAddress = doc.splitTextToSize(deliveryAddress, 180);
+  doc.text(splitAddress, 14, 70);
 
   const validProducts = Array.isArray(products) ? products : [];
   const items =
@@ -96,7 +99,7 @@ export const generateInvoicePDF = async (order, products) => {
     }) || [];
 
   doc.autoTable({
-    startY: 80,
+    startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 80,
     head: [
       [
         translationKeys.products,
@@ -116,8 +119,19 @@ export const generateInvoicePDF = async (order, products) => {
 
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
-  window.open(url, '_blank');
+  
+  const win = window.open(url, '_blank');
+  
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Invoice_${order.orderNumber}.pdf`;
+    link.click();
+  }
+
   URL.revokeObjectURL(url);
+  
 };
 
 function arrayBufferToBase64(buffer) {
