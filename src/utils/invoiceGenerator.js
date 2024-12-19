@@ -42,17 +42,16 @@ export const generateInvoicePDF = async (order, products) => {
     return;
   }
 
-  doc.setFontSize(18);
-  doc.text(`${translationKeys.orderId}: ${order.orderNumber}`, 14, 22);
+  doc.setFontSize(14);
+  doc.text(`${translationKeys.orderId}: ${order.orderNumber}`, 12, 22);
 
   doc.setFontSize(12);
-  doc.text(`${translationKeys.date}: ${formatDate(order.createdAt)}`, 14, 32);
+  doc.text(`${translationKeys.date}: ${formatDate(order.createdAt)}`, 12, 32);
 
   const customerName = order.user?.deleted
     ? `${order.userFirstName || translationKeys.noData} ${order.userLastName || ''} (${translationKeys.deleted})`
-    : `${order.user?.firstName || order.userFirstName || translationKeys.noData} ${
-        order.user?.lastName || order.userLastName || ''
-      }`;
+    : `${order.user?.firstName || order.userFirstName || translationKeys.noData} ${order.user?.lastName || order.userLastName || ''
+    }`;
 
   const customerPhone = order.phone || translationKeys.noData;
 
@@ -60,22 +59,29 @@ export const generateInvoicePDF = async (order, products) => {
     order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label
       ? `${translationKeys.novaPoshtaBranch}: ${order.novaPoshtaDelivery.label}`
       : order.deliveryType === 'Home' && order.homeDelivery
-      ? `${translationKeys.city}: ${order.homeDelivery.city || translationKeys.noData}, ${
-          translationKeys.street
-        }: ${order.homeDelivery.street || translationKeys.noData}, ${translationKeys.houseNumber}: ${
-          order.homeDelivery.houseNumber || translationKeys.noData
-        }, ${translationKeys.apartmentNumber}: ${
-          order.homeDelivery.apartmentNumber || translationKeys.noData
+        ? `${translationKeys.city}: ${order.homeDelivery.city || translationKeys.noData}, ${translationKeys.street
+        }: ${order.homeDelivery.street || translationKeys.noData}, ${translationKeys.houseNumber}: ${order.homeDelivery.houseNumber || translationKeys.noData
+        }, ${translationKeys.apartmentNumber}: ${order.homeDelivery.apartmentNumber || translationKeys.noData
         }`
-      : translationKeys.noData;
+        : translationKeys.noData;
 
-  doc.text(`${translationKeys.name}: ${customerName}`, 14, 42);
-  doc.text(`${translationKeys.phone}: ${customerPhone}`, 14, 52);
-  doc.text(`${translationKeys.address}:`, 14, 62);
+  doc.text(`${translationKeys.name}: ${customerName}`, 12, 42);
+  doc.text(`${translationKeys.phone}: ${customerPhone}`, 12, 52);
+  doc.text(`${translationKeys.address}:`, 12, 62);
 
-  // Добавление переноса длинных строк
   const splitAddress = doc.splitTextToSize(deliveryAddress, 180);
-  doc.text(splitAddress, 14, 70);
+  doc.text(splitAddress, 14, 68);
+
+  const trackingNumber = order.novaPoshtaDelivery?.trackingNumber || null;
+
+  let nextY = 68 + splitAddress.length * 6; // Обновляем позицию Y после адреса
+
+  if (order.deliveryType === 'Nova Poshta' && trackingNumber) {
+   // Добавляем отступ для номера накладной
+    doc.text(`${t('novaPoshta.trackingNumber')}: ${trackingNumber}`, 14, nextY);
+  }
+
+  nextY += 5;
 
   const validProducts = Array.isArray(products) ? products : [];
   const items =
@@ -99,7 +105,8 @@ export const generateInvoicePDF = async (order, products) => {
     }) || [];
 
   doc.autoTable({
-    startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 80,
+    startY: nextY,
+    margin: { left: 12 },
     head: [
       [
         translationKeys.products,
@@ -119,9 +126,9 @@ export const generateInvoicePDF = async (order, products) => {
 
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
-  
+
   const win = window.open(url, '_blank');
-  
+
   if (!win || win.closed || typeof win.closed === 'undefined') {
 
     const link = document.createElement('a');
@@ -131,7 +138,7 @@ export const generateInvoicePDF = async (order, products) => {
   }
 
   URL.revokeObjectURL(url);
-  
+
 };
 
 function arrayBufferToBase64(buffer) {

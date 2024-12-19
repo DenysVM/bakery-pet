@@ -63,3 +63,20 @@ export const fetchWarehouseByCode = async (cityRef, warehouseCode) => {
     throw error;
   }
 };
+
+export const fetchDeliveryStatus = async (trackingNumber) => {
+  try {
+    const response = await axiosNovaPoshtaInstance.post('/', {
+      modelName: "TrackingDocument",
+      calledMethod: "getStatusDocuments",
+      methodProperties: {
+        Documents: [{ DocumentNumber: trackingNumber }],
+      },
+    });
+
+    return response.data.data?.[0]?.Status || "Unknown";
+  } catch (error) {
+    console.error("[NovaPoshtaAPI] Error fetching delivery status:", error);
+    throw error;
+  }
+};

@@ -20,7 +20,7 @@ const TrackingNumberInput = ({
   const toast = useToast();
 
   const handleTrackingNumberChange = (e) => {
-    const value = e.target.value.replace(/\D/g, "");
+    const value = e.target.value.replace(/\D/g, ""); // Убираем нецифровые символы
     setTrackingNumber(value);
   };
 
@@ -64,26 +64,34 @@ const TrackingNumberInput = ({
   return (
     <Box mt={4}>
       {isEditing ? (
-        <Flex align="center" gap={4} mt={2} direction="row">
-          <Input
-            value={trackingNumber}
-            onChange={handleTrackingNumberChange}
-            placeholder={t("novaPoshta.trackingNumberPlaceholder")}
-            maxLength={14}
-            pattern="\d{14}"
-          />
-          <ResponsiveActionButtons
-            buttons={[
-              {
-                icon: <EditIcon />,
-                label: t("order.save"),
-                onClick: handleSaveTrackingNumber,
-                colorScheme: "teal",
-              },
-            ]}
-            size={{ base: "sm", md: "md" }}
-          />
-        </Flex>
+        <>
+          <Text fontWeight="bold" mb={2}>
+            {t("novaPoshta.trackingNumber")}:{" "}
+            {currentTrackingNumber || t("novaPoshta.noTrackingNumber")}
+          </Text>
+          <Flex align="center" gap={4} mt={2} direction="row">
+            <Input
+              value={trackingNumber}
+              id="trackingNumber" 
+              name="trackingNumber"
+              onChange={handleTrackingNumberChange}
+              placeholder={t("novaPoshta.trackingNumberPlaceholder")}
+              maxLength={14}
+              pattern="\d{14}"
+            />
+            <ResponsiveActionButtons
+              buttons={[
+                {
+                  icon: <EditIcon />,
+                  label: t("order.save"),
+                  onClick: handleSaveTrackingNumber,
+                  colorScheme: "teal",
+                },
+              ]}
+              size={{ base: "sm", md: "md" }}
+            />
+          </Flex>
+        </>
       ) : (
         <Flex
           direction="row"
@@ -93,7 +101,8 @@ const TrackingNumberInput = ({
           wrap="wrap"
         >
           <Text fontWeight="bold">
-            {t("novaPoshta.trackingNumber")}: {currentTrackingNumber}
+            {t("novaPoshta.trackingNumber")}:{" "}
+            {currentTrackingNumber || t("novaPoshta.noTrackingNumber")}
           </Text>
           <ResponsiveActionButtons
             buttons={[

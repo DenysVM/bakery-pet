@@ -5,12 +5,14 @@ import {
   Alert,
   AlertIcon,
   Text,
+  Heading,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { getUserOrders } from '../../services/orderService';
 import { getAllProducts } from '../../services/productService';
 import { useAuth } from '../../auth/AuthContext';
 import { OrderItem } from '../Order';
+import { DeliveryStatus } from '../admin/Orders/OrderComponents';
 import { formatDate } from '../../components/common/formatDate';
 
 const OrderHistory = () => {
@@ -112,18 +114,39 @@ const OrderHistory = () => {
             {t('order.deliveryType')}: {t(`order.delivery.${order.deliveryType}`)}
           </Text>
 
-          {order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label && (
-            <Text mb="2">
-              {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
-            </Text>
+          {order.deliveryType === 'Nova Poshta' && (
+            <>
+              {order.novaPoshtaDelivery?.label && (
+                <Text mb="2">
+                  {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
+                </Text>
+              )}
+              {order.novaPoshtaDelivery?.trackingNumber && (
+                <>
+                  <Text mb="2">
+                    {t('novaPoshta.trackingNumber')}: {order.novaPoshtaDelivery.trackingNumber}
+                  </Text>
+
+                  <Box display="flex" alignItems="center" flexWrap="wrap" mb={2}>
+                    <Heading size="sm" mr={2}>
+                      {t('novaPoshta.deliveryStatus')}:
+                    </Heading>
+                    <DeliveryStatus trackingNumber={order.novaPoshtaDelivery.trackingNumber} />
+                  </Box>
+                </>
+              )}
+            </>
           )}
+
           <Text
             mb="2"
-            color={order.status === 'cancelled'
-              ? 'red.500'
-              : order.status === 'delivered'
-                ? 'green.500'
-                : undefined}
+            color={
+              order.status === 'cancelled'
+                ? 'red.500'
+                : order.status === 'delivered'
+                  ? 'green.500'
+                  : undefined
+            }
           >
             {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
           </Text>

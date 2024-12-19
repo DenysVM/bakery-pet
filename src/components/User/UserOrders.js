@@ -7,6 +7,7 @@ import {
   Text,
   useDisclosure,
   useToast,
+  Heading,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -23,6 +24,7 @@ import {
   useOrder,
 } from '../Order';
 import { formatDate } from '../../components/common/formatDate';
+import { DeliveryStatus } from '../admin/Orders/OrderComponents';
 
 const UserOrders = () => {
   const { t } = useTranslation();
@@ -238,12 +240,29 @@ const UserOrders = () => {
             {t('order.deliveryType')}: {t(`order.delivery.${order.deliveryType}`)}
           </Text>
 
-          {order.deliveryType === 'Nova Poshta' && order.novaPoshtaDelivery?.label && (
-            <Text mb="2">
-              {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
-            </Text>
-          )}
+          {order.deliveryType === 'Nova Poshta' && (
+            <>
+              {order.novaPoshtaDelivery?.label && (
+                <Text mb="2">
+                  {t('order.novaPoshtaBranch')}: {order.novaPoshtaDelivery.label}
+                </Text>
+              )}
+              {order.novaPoshtaDelivery?.trackingNumber && (
+                <>
+                  <Text mb="2">
+                    {t('novaPoshta.trackingNumber')}: {order.novaPoshtaDelivery.trackingNumber}
+                  </Text>
 
+                  <Box display="flex" alignItems="center" flexWrap="wrap" mb={2}>
+                    <Heading size="sm" mr={2}>
+                      {t("novaPoshta.deliveryStatus")}:
+                    </Heading>
+                    <DeliveryStatus trackingNumber={order.novaPoshtaDelivery.trackingNumber} />
+                  </Box>
+                </>
+              )}
+            </>
+          )}
           {order.items.map((item) => (
             <OrderItem
               key={item._id}

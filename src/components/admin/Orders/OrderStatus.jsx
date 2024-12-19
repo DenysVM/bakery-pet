@@ -7,18 +7,18 @@ import {
   Button,
   useToast,
   Box,
-  Text,
-  Heading,
   Stack,
   Flex,
+  Heading,
+  Text,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { updateOrderStatus } from "../../../services/orderService";
 import { useTranslation } from "react-i18next";
+import DeliveryStatus from "./OrderComponents/DeliveryStatus";
 
 const OrderStatus = ({ order, token, onStatusUpdated, isMobile }) => {
   const [status, setStatus] = useState(order.status);
-  const [deliveryStatus, setDeliveryStatus] = useState("Unknown"); // Заглушка
   const [isUpdating, setIsUpdating] = useState(false);
   const toast = useToast();
   const { t } = useTranslation();
@@ -84,24 +84,24 @@ const OrderStatus = ({ order, token, onStatusUpdated, isMobile }) => {
             align={{ base: "flex-start", md: "center" }}
             gap={{ md: 4 }}
           >
+            {/* Отображение номера накладной */}
             <Box display="flex" alignItems="center" flexWrap="wrap">
               <Heading size="sm" mr={2}>
                 {t("novaPoshta.trackingNumber")}:
               </Heading>
-              <Text fontWeight="bold" wordBreak="break-word" maxW="100%">
+              <Text fontWeight="semi-bold" wordBreak="break-word" maxW="100%">
                 {trackingNumber
                   ? trackingNumber
                   : t("novaPoshta.noTrackingNumber")}
               </Text>
             </Box>
 
+            {/* Подключение DeliveryStatus */}
             <Box display="flex" alignItems="center" flexWrap="wrap">
               <Heading size="sm" mr={2}>
                 {t("novaPoshta.deliveryStatus")}:
               </Heading>
-              <Text fontWeight="bold" wordBreak="break-word" maxW="100%">
-                {t(`novaPoshta.deliveryStatus.${deliveryStatus}`)}
-              </Text>
+              <DeliveryStatus trackingNumber={trackingNumber} />
             </Box>
           </Flex>
         </Box>

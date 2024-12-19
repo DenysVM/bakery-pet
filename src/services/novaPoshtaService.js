@@ -1,4 +1,4 @@
-import { fetchFilteredCities, fetchWarehouses, fetchWarehouseByCode } from "./novaPoshtaApi";
+import { fetchFilteredCities, fetchWarehouses, fetchWarehouseByCode, fetchDeliveryStatus } from "./novaPoshtaApi";
 
 export const getFormattedCities = async (query) => {
   try {
@@ -56,5 +56,19 @@ export const getWarehouseByCode = async (cityRef, warehouseCode) => {
   } catch (error) {
     console.error("[NovaPoshtaService] Error fetching warehouse by code:", error);
     throw error;
+  }
+};
+
+export const getDeliveryStatus = async (trackingNumber) => {
+  if (!trackingNumber) {
+    throw new Error("Tracking number is required.");
+  }
+
+  try {
+    const status = await fetchDeliveryStatus(trackingNumber);
+    return status;
+  } catch (error) {
+    console.error("[NovaPoshtaService] Error getting delivery status:", error);
+    throw new Error("Failed to fetch delivery status.");
   }
 };

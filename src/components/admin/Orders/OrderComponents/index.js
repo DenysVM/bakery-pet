@@ -4,3 +4,4 @@ export { default as OrderFilter } from "./OrderFilter";
 export { default as TrackingNumberInput } from "./TrackingNumberInput";
 export { default as OrderItem } from "./OrderItem";
 export { default as AddProductForm } from "./AddProductForm";
+export { default as DeliveryStatus } from "./DeliveryStatus";
