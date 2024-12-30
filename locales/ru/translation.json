@@ -253,7 +253,10 @@
     "error": "Ошибка заказа",
     "errorCreating": "Произошла ошибка при создании вашего заказа.",
     "placeOrder": "Оформить заказ",
-    "useHomeAddress": "Использовать домашний адрес"
+    "useHomeAddress": "Использовать домашний адрес",
+    "commentLabel": "Комментарий к заказу",
+    "commentPlaceholder": "Добавьте комментарий к вашему заказу",
+    "characterCount": "{{current}}/{{max}} символов"
   },
   "order": {
     "orderId": "Номер заказа",
@@ -320,7 +323,8 @@
       "undefined": "Не указан"
     },
     "trackingNumber": "Номер накладной",
-    "enterTrackingNumber": "Введите номер накладной"
+    "enterTrackingNumber": "Введите номер накладной",
+    "comment": "Комментарий"
   },
   "novaPoshta": {
     "loading": "Загрузка...",
@@ -344,6 +348,19 @@
     "selectedWarehouse": "Выбранное отделение",
     "errorNoWarehouse": "Отделение с указанным кодом не найдено",
     "errorFetchingWarehouseByCode": "Ошибка загрузки отделения по цифровому коду",
-    "warehouseIndex": "Цифровой код отделения"
+    "warehouseIndex": "Цифровой код отделения",
+    "trackingNumber": "Номер накладной",
+    "noTrackingNumber": "Трек-номер отсутствует",
+    "deliveryStatus": "Статус доставки",
+    "deliveryStatus.Unknown": "Неизвестно",
+    "statusUpdated": "Статус заказа обновлен",
+    "statusUpdatedDescription": "Статус заказа {{orderId}} изменен на {{status}}",
+    "errorUpdatingStatus": "Ошибка при обновлении статуса",
+    "errorUpdatingStatusDescription": "Не удалось обновить статус заказа",
+    "editTrackingNumber": "Редактировать номер",
+    "trackingNumberUpdated": "Номер накладной обновлен",
+    "trackingNumberSuccess": "Номер накладной успешно сохранен",
+    "invalidTrackingNumber": "Некорректный номер накладной",
+    "trackingNumberInvalidFormat": "Номер накладной должен содержать 14 цифр"
   }
 }

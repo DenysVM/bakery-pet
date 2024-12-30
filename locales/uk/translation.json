@@ -252,7 +252,10 @@
     "error": "Помилка замовлення",
     "errorCreating": "Сталася помилка при створенні вашого замовлення.",
     "placeOrder": "Оформити замовлення",
-    "useHomeAddress": "Використовувати домашню адресу"
+    "useHomeAddress": "Використовувати домашню адресу",
+    "commentLabel": "Коментар до замовлення",
+    "commentPlaceholder": "Додайте коментар до вашого замовлення",
+    "characterCount": "{{current}}/{{max}} символів"
   },
   "order": {
     "orderId": "Номер замовлення",
@@ -316,7 +319,8 @@
     "deletedSuccessfully": "Замовлення успішно видалено",
     "errorDeleting": "Помилка при видаленні замовлення",
     "errorDeletingDescription": "Не вдалося видалити замовлення. Будь ласка, спробуйте пізніше.",
-    "searchPlaceholder": "Пошук замовлень за користувачем, телефоном або номером"
+    "searchPlaceholder": "Пошук замовлень за користувачем, телефоном або номером",
+    "comment": "Коментар"
   },
   "novaPoshta": {
     "loading": "Завантаження...",
@@ -340,6 +344,19 @@
     "selectedWarehouse": "Вибране відділення",
     "errorNoWarehouse": "Відділення з вказаним кодом не знайдено",
     "errorFetchingWarehouseByCode": "Помилка завантаження відділення за кодом",
-    "warehouseIndex": "Код відділення"
+    "warehouseIndex": "Код відділення",
+    "trackingNumber": "Номер накладної",
+    "noTrackingNumber": "Трек-номер відсутній",
+    "deliveryStatus": "Статус доставки",
+    "deliveryStatus.Unknown": "Невідомо",
+    "statusUpdated": "Статус замовлення оновлено",
+    "statusUpdatedDescription": "Статус замовлення {{orderId}} змінено на {{status}}",
+    "errorUpdatingStatus": "Помилка при оновленні статусу",
+    "errorUpdatingStatusDescription": "Не вдалося оновити статус замовлення",
+    "editTrackingNumber": "Редагуй номер",
+    "trackingNumberUpdated": "Номер накладної оновлено",
+    "trackingNumberSuccess": "Номер накладної успішно збережено",
+    "invalidTrackingNumber": "Некоректний номер накладної",
+    "trackingNumberInvalidFormat": "Номер накладної повинен містити 14 цифр"
   }
 }

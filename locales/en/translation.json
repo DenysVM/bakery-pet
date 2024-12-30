@@ -249,7 +249,10 @@
     "error": "Order Error",
     "errorCreating": "There was an error creating your order.",
     "placeOrder": "Place Order",
-    "useHomeAddress": "Use home address"
+    "useHomeAddress": "Use home address",
+    "commentLabel": "Order Comment",
+    "commentPlaceholder": "Add a comment to your order",
+    "characterCount": "{{current}}/{{max}} characters"
   },
   "order": {
     "orderId": "Order ID",
@@ -315,7 +318,8 @@
       "Home": "Home Delivery",
       "Manual": "Manual Pickup",
       "undefined": "Not specified"
-    }
+    },
+    "comment": "Comment"
   },
   "novaPoshta": {
     "loading": "Loading...",
@@ -339,6 +343,20 @@
     "searchByCity": "Enter city and branch number",
     "searchByCode": "Enter branch digital code",
     "placeholderCity": "Address, branch number (e.g., Slobozhanska, 12)",
-    "placeholderCode": "Branch digital code (e.g., 11/329)"
+    "placeholderCode": "Branch digital code (e.g., 11/329)",
+    "trackingNumber": "Tracking Number",
+    "noTrackingNumber": "No tracking number available",
+    "deliveryStatus": "Delivery Status",
+    "deliveryStatus.Unknown": "Unknown",
+    "statusUpdated": "Order Status Updated",
+    "statusUpdatedDescription": "Order {{orderId}} status updated to {{status}}",
+    "errorUpdatingStatus": "Error Updating Status",
+    "errorUpdatingStatusDescription": "Failed to update the order status",
+    "editTrackingNumber": "Edit Number",
+    "trackingNumberUpdated": "Tracking Number Updated",
+    "trackingNumberSuccess": "Tracking number saved successfully",
+    "trackingNumberPlaceholder": "Enter 14 digits for the tracking number",
+    "invalidTrackingNumber": "Invalid Tracking Number",
+    "trackingNumberInvalidFormat": "Tracking number must be exactly 14 digits."
   }
 }
