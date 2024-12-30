@@ -253,7 +253,10 @@
     "error": "Ошибка заказа",
     "errorCreating": "Произошла ошибка при создании вашего заказа.",
     "placeOrder": "Оформить заказ",
-    "useHomeAddress": "Использовать домашний адрес"
+    "useHomeAddress": "Использовать домашний адрес",
+    "commentLabel": "Комментарий к заказу",
+    "commentPlaceholder": "Добавьте комментарий к вашему заказу",
+    "characterCount": "{{current}}/{{max}} символов"
   },
   "order": {
     "orderId": "Номер заказа",
@@ -320,7 +323,8 @@
       "undefined": "Не указан"
     },
     "trackingNumber": "Номер накладной",
-    "enterTrackingNumber": "Введите номер накладной"
+    "enterTrackingNumber": "Введите номер накладной",
+    "comment": "Комментарий"
   },
   "novaPoshta": {
     "loading": "Загрузка...",

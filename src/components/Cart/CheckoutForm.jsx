@@ -5,7 +5,7 @@ import { createOrder } from "../../services/orderService";
 import { useAuth } from "../../auth/AuthContext";
 import { useTranslation } from "react-i18next";
 import AddressFields from "../../auth/SignupFields/AddressFields";
-import { FormikProvider, NovaPoshtaSelector } from "./CartComponents/";
+import { FormikProvider, NovaPoshtaSelector, CheckoutComment } from "./CartComponents/";
 
 const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
   const { cartItems, clearCart } = useCart();
@@ -14,6 +14,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
   const toast = useToast();
   const [useHomeAddress, setUseHomeAddress] = useState(false);
   const [useNovaPoshta, setUseNovaPoshta] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleSubmit = async (values, { resetForm }) => {
     const deliveryDetails = useNovaPoshta
@@ -35,7 +36,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
             city: values.address.city,
           },
         };
-  
+
     const orderData = {
       user: user._id,
       items: cartItems.map((item) => ({
@@ -44,15 +45,19 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
         price: item.price,
       })),
       deliveryType: useNovaPoshta ? "Nova Poshta" : "Home",
-      ...deliveryDetails, 
+      ...deliveryDetails,
       phone: user.phone,
-      total: cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0),
+      total: cartItems.reduce(
+        (sum, item) => sum + item.quantity * item.price,
+        0
+      ),
       userFirstName: user.firstName,
       userLastName: user.lastName,
+      comment,
     };
-  
+
     try {
-      await createOrder(orderData, token, user); 
+      await createOrder(orderData, token, user);
       toast({
         title: t("checkout.success"),
         description: t("checkout.created"),
@@ -65,7 +70,10 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       onSuccess();
       if (onClose) onClose();
     } catch (error) {
-      console.error("Error creating order:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error creating order:",
+        error.response ? error.response.data : error.message
+      );
       toast({
         title: t("checkout.error"),
         description: t("checkout.errorCreating"),
@@ -75,7 +83,6 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       });
     }
   };
-  
 
   const handleHomeAddressChange = (formik) => {
     setUseHomeAddress((prev) => {
@@ -154,6 +161,8 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
               </Checkbox>
 
               {!useNovaPoshta && <AddressFields formik={formik} t={t} />}
+
+              <CheckoutComment onCommentChange={setComment} />
 
               <Button mt={4} colorScheme="teal" type="submit">
                 {t("checkout.placeOrder")}

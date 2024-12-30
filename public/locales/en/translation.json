@@ -249,7 +249,10 @@
     "error": "Order Error",
     "errorCreating": "There was an error creating your order.",
     "placeOrder": "Place Order",
-    "useHomeAddress": "Use home address"
+    "useHomeAddress": "Use home address",
+    "commentLabel": "Order Comment",
+    "commentPlaceholder": "Add a comment to your order",
+    "characterCount": "{{current}}/{{max}} characters"
   },
   "order": {
     "orderId": "Order ID",
@@ -315,7 +318,8 @@
       "Home": "Home Delivery",
       "Manual": "Manual Pickup",
       "undefined": "Not specified"
-    }
+    },
+    "comment": "Comment"
   },
   "novaPoshta": {
     "loading": "Loading...",

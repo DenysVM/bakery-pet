@@ -322,6 +322,11 @@ const OrderList = () => {
               }}
             />
           </Box>
+          {order.comment && (
+            <Text mt={2} fontStyle="italic" color="gray.600">
+              {t("order.comment")}: {order.comment}
+            </Text>
+          )}
           <Box display="flex" justifyContent="flex-end" alignItems="center">
             <ResponsiveActionButtons
               buttons={[

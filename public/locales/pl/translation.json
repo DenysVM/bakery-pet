@@ -251,7 +251,10 @@
     "error": "Błąd zamówienia",
     "errorCreating": "Wystąpił błąd podczas tworzenia zamówienia.",
     "placeOrder": "Złóż zamówienie",
-    "useHomeAddress": "Użyj adresu domowego"
+    "useHomeAddress": "Użyj adresu domowego",
+    "commentLabel": "Komentarz do zamówienia",
+    "commentPlaceholder": "Dodaj komentarz do zamówienia",
+    "characterCount": "{{current}}/{{max}} znaków"
   },
   "order": {
     "orderId": "Numer zamówienia",
@@ -315,7 +318,8 @@
     "deletedSuccessfully": "Zamówienie zostało pomyślnie usunięte",
     "errorDeleting": "Błąd podczas usuwania zamówienia",
     "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później.",
-    "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru"
+    "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru",
+     "comment": "Komentarz"
   },
   "novaPoshta": {
     "loading": "Ładowanie...",

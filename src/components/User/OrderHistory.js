@@ -150,7 +150,11 @@ const OrderHistory = () => {
           >
             {t('order.statusLabel')}: {t(`order.status.${order.status}`)}
           </Text>
-
+          {order.comment && (
+            <Text mb={2} fontStyle="italic">
+              {t("order.comment")}: {order.comment}
+            </Text>
+          )}
           {order.items.map((item) => (
             <OrderItem
               key={item._id}
