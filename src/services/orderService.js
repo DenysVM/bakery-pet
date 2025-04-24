@@ -15,6 +15,8 @@ export const createOrder = async (orderData, token, user) => {
       orderNumber,
       userFirstName: user.firstName,
       userLastName: user.lastName,
+      userEmail: user.email,
+      lang: orderData.lang || 'en',
     };
 
     const response = await axiosOrderInstance.post(

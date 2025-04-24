@@ -162,7 +162,15 @@
     "registrationError": "Błąd rejestracji",
     "registrationErrorMessage": "Wystąpił błąd podczas rejestracji konta.",
     "missingToken": "Brak tokenu uwierzytelniania",
-    "checkingAuthorization": "Sprawdzanie autoryzacji..."
+    "checkingAuthorization": "Sprawdzanie autoryzacji...",
+    "verifyEmail": {
+      "emailVerified": "Adres e-mail został potwierdzony 🎉",
+      "emailVerifiedMessage": "Możesz teraz zalogować się do swojego konta Cozy Bakery.",
+      "goToAccount": "Przejdź do konta",
+      "emailAlreadyVerified": "Adres e-mail został już potwierdzony ✅",
+      "verificationError": "Nieprawidłowy lub wygasły token",
+      "verificationErrorMessage": "Link do potwierdzenia jest już nieważny."
+    }
   },
 
   "user": {
@@ -319,7 +327,7 @@
     "errorDeleting": "Błąd podczas usuwania zamówienia",
     "errorDeletingDescription": "Nie udało się usunąć zamówienia. Proszę spróbować ponownie później.",
     "searchPlaceholder": "Wyszukaj zamówienia według użytkownika, telefonu lub numeru",
-     "comment": "Komentarz"
+    "comment": "Komentarz"
   },
   "novaPoshta": {
     "loading": "Ładowanie...",

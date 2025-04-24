@@ -6,6 +6,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { useTranslation } from "react-i18next";
 import AddressFields from "../../auth/SignupFields/AddressFields";
 import { FormikProvider, NovaPoshtaSelector, CheckoutComment } from "./CartComponents/";
+import i18n from 'i18next';
 
 const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
   const { cartItems, clearCart } = useCart();
@@ -54,6 +55,7 @@ const CheckoutForm = ({ onSuccess = () => {}, onClose }) => {
       userFirstName: user.firstName,
       userLastName: user.lastName,
       comment,
+      lang: i18n.language
     };
 
     try {

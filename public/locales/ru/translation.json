@@ -164,7 +164,15 @@
     "registrationError": "Ошибка регистрации",
     "registrationErrorMessage": "Произошла ошибка при регистрации вашего аккаунта.",
     "missingToken": "Отсутствует токен авторизации",
-    "checkingAuthorization": "Проверка авторизации..."
+    "checkingAuthorization": "Проверка авторизации...",
+    "verifyEmail": {
+      "emailVerified": "Электронная почта успешно подтверждена 🎉",
+      "emailVerifiedMessage": "Теперь вы можете войти в свой аккаунт Cozy Bakery.",
+      "goToAccount": "Перейти к аккаунту",
+      "emailAlreadyVerified": "Электронная почта уже подтверждена ✅",
+      "verificationError": "Недействительный или просроченный токен",
+      "verificationErrorMessage": "Ссылка для подтверждения более недействительна."
+    }
   },
 
   "user": {
