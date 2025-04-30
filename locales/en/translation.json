@@ -161,7 +161,15 @@
     "registrationError": "Registration Error",
     "registrationErrorMessage": "There was an error registering your account.",
     "missingToken": "Missing authentication token",
-    "checkingAuthorization": "Checking authorization..."
+    "checkingAuthorization": "Checking authorization...",
+    "verifyEmail": {
+      "emailVerified": "Email confirmed successfully 🎉",
+      "emailVerifiedMessage": "You can now log in to your Cozy Bakery account.",
+      "goToAccount": "Go to account",
+      "emailAlreadyVerified": "Email already confirmed ✅",
+      "verificationError": "Invalid or expired token",
+      "verificationErrorMessage": "The verification link is no longer valid."
+    }
   },
 
   "userProfile": {
